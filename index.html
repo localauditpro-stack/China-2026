@@ -571,7 +571,7 @@ footer .fr { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--bo
   <header>
     <div class="header-row">
       <div>
-        <div class="tag-line">// TRAVEL BRIEF v3.0 — EARLY SEPT 2025</div>
+        <div class="tag-line">// TRAVEL BRIEF v4.0 — EARLY MARCH 2026</div>
         <h1>CHINA <span>2026 TRIP</span></h1>
         <p class="subtitle">China Circuit · <em>Melbourne → Shanghai → Hong Kong</em></p>
       </div>
@@ -584,7 +584,7 @@ footer .fr { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--bo
   </header>
 
   <div class="profile-bar">
-    <div class="pi c1"><div class="lbl">Travellerss</div><div class="val">DK (32) & Cousin (36) · Melbourne</div></div>
+    <div class="pi c1"><div class="lbl">Travellers</div><div class="val">DK (32) & Cousin (36) · Melbourne</div></div>
     <div class="pi c2"><div class="lbl">Vibe</div><div class="val">Comfort-Independent · No tours</div></div>
     <div class="pi c3"><div class="lbl">Interests</div><div class="val">Architecture · Photography · Pokémon TCG · Drone</div></div>
     <div class="pi c4" id="hunt-pill-btn" onclick="openHuntOverlay()" style="cursor:pointer;border:1px solid rgba(0,232,122,0.4);background:rgba(0,232,122,0.06);transition:all 0.2s;" onmouseover="this.style.background='rgba(0,232,122,0.14)'" onmouseout="this.style.background='rgba(0,232,122,0.06)'"><div class="lbl" style="color:#00e87a;">🎴 HUNT LIST</div><div class="val" style="color:#00e87a;font-weight:700;letter-spacing:1px;">VIEW BOXES & CHASE CARDS →</div></div>
@@ -646,8 +646,7 @@ footer .fr { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--bo
       <div class="cell" style="font-size:12px;">TCG Paradise · Skyline</div>
       <div class="cell col-accom"><div class="accom-txt">MONG KOK</div></div>
     </div>
-</div>
-<div class="sec-hdr">
+  </div><div class="sec-hdr">
     <div class="sec-num">// 02</div>
     <div class="sec-title">LOGISTICS & COMFORT</div>
   </div>
@@ -699,8 +698,8 @@ footer .fr { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--bo
   </div>
 
   <footer>
-    <div class="fl">BRIEF v3.0 · SEPT 2025 · MELBOURNE ORIGIN · EXIT BEFORE GOLDEN WEEK</div>
-    <div class="fr">ARCHITECTURAL ARROW</div>
+    <div class="fl">BRIEF v4.0 · MARCH 2026 · MELBOURNE ORIGIN · EXIT BEFORE GOLDEN WEEK</div>
+    <div class="fr">TravellersURAL ARROW</div>
   </footer>
 </div>
 
@@ -791,8 +790,8 @@ function updateUI() {
     if (countEl) countEl.textContent = purchases.length;
     purchases.forEach(p => totalSpentHunt += p.price);
   });
-  const grandCostEl = document.getElementById('hunt-grand-cost');
-  if (grandCostEl) grandCostEl.textContent = '$' + totalSpentHunt.toFixed(2) + ' AUD';
+  const totalSpentEl = document.getElementById('total-spent');
+  if (totalSpentEl) totalSpentEl.textContent = '$' + Math.round(totalSpentHunt) + ' AUD';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -800,6 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateUI();
 });
 </script>
+<script>
 const CITIES = {
   shanghai: {
     phase:'PHASE I', city:'SHANG<span>HAI</span>', days:'4 DAYS · DAYS 1–4',
