@@ -501,6 +501,20 @@ h1 span { color:var(--cyan); }
 }
 .hunt-count.nonzero { color:var(--cat-pokemon); }
 
+/* ===== GRADED CARDS ===== */
+.graded-card {
+  display:grid; grid-template-columns:90px 1fr 70px;
+  gap:0; background:var(--card); border:1px solid rgba(0,245,255,0.15);
+  overflow:hidden; transition:border-color 0.18s;
+}
+.graded-card:hover { border-color:rgba(0,245,255,0.35); background:var(--card2); }
+.graded-badge {
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-family:'Share Tech Mono',monospace; font-size:8px; color:var(--cyan);
+  letter-spacing:1px; line-height:1.4; padding:8px 4px;
+  border-left:1px solid var(--border); background:rgba(0,245,255,0.04);
+}
+
 /* ===== SINGLES ===== */
 .single-card {
   display:grid; grid-template-columns:40px 1fr 110px;
@@ -1700,30 +1714,33 @@ const CITIES = {
             <span class="hunt-tier-title">PRIORITY 1 — GRADE EVERY COPY</span>
             <span class="hunt-tier-meta">PSA10: $450–1400 AUD</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px;">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">
-              <div style="background:var(--card);padding:8px 10px;">CARD</div>
-              <div style="background:var(--card);padding:8px 10px;">CODE</div>
-              <div style="background:var(--card);padding:8px 10px;">RAW AUD</div>
-              <div style="background:var(--card);padding:8px 10px;color:var(--cyan);">PSA10 AUD</div>
+          <div class="hunt-grid">
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-umbreon-vmax-alt.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>UMBRN</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Umbreon VMAX <strong>Alt Art</strong></div>
+                <div class="hunt-chinese">月亮伊布VMAX · 182/SV-P</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">$315–420 raw</span><span class="hunt-price-tag" style="color:var(--cyan);font-weight:700;">PSA10: $1100–1400</span></div>
+              </div>
+              <div class="graded-badge">🥇 AUTO<br>GRADE</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Umbreon VMAX Alt Art <span style="display:block;font-size:10px;color:var(--muted);">月亮伊布VMAX</span></div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">182/SV-P</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$315–420</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);font-weight:700;">$1100–1400</div>
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-charizard-ex-sar-151.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>CHAR</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard ex <strong>SAR (151)</strong></div>
+                <div class="hunt-chinese">喷火龙ex · 199/151C</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">$105–189 raw</span><span class="hunt-price-tag" style="color:var(--cyan);font-weight:700;">PSA10: $450–700</span></div>
+              </div>
+              <div class="graded-badge">🥇 AUTO<br>GRADE</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Charizard ex SAR (151) <span style="display:block;font-size:10px;color:var(--muted);">喷火龙ex</span></div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">199/151C</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$105–189</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);font-weight:700;">$450–700</div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Pikachu Master Ball <span style="display:block;font-size:10px;color:var(--muted);">皮卡丘大师球</span></div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">025/151C</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$200–250</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);font-weight:700;">$500–800</div>
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-pikachu-masterball.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>PIKA</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Pikachu <strong>Master Ball</strong></div>
+                <div class="hunt-chinese">皮卡丘大师球 · 025/151C</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">$200–250 raw</span><span class="hunt-price-tag" style="color:var(--cyan);font-weight:700;">PSA10: $500–800</span></div>
+              </div>
+              <div class="graded-badge">🥇 AUTO<br>GRADE</div>
             </div>
           </div>
 
@@ -1732,33 +1749,42 @@ const CITIES = {
             <span class="hunt-tier-title">GRADE IF MINT</span>
             <span class="hunt-tier-meta">PSA10: $250–550 AUD</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px;">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">
-              <div style="background:var(--card);padding:8px 10px;">CARD</div><div style="background:var(--card);padding:8px 10px;">CODE</div><div style="background:var(--card);padding:8px 10px;">RAW AUD</div><div style="background:var(--card);padding:8px 10px;color:var(--cyan);">PSA10 AUD</div>
+          <div class="hunt-grid">
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-charizard-v-alt.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>CHAR V</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard V <strong>Alt Art</strong></div>
+                <div class="hunt-chinese">喷火龙V异画 · SV4</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">$84–147 raw</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $350–550</span></div>
+              </div>
+              <div class="graded-badge">🥈 GRADE<br>IF MINT</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Charizard V Alt Art <span style="display:block;font-size:10px;color:var(--muted);">喷火龙V异画</span></div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">SV4</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$84–147</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$350–550</div>
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-charizard-vstar-alt.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>VSTAR</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard VSTAR <strong>Alt Art</strong></div>
+                <div class="hunt-chinese">喷火龙VSTAR异画 · SV5</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">$74–126 raw</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $300–500</span></div>
+              </div>
+              <div class="graded-badge">🥈 GRADE<br>IF MINT</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Charizard VSTAR Alt <span style="display:block;font-size:10px;color:var(--muted);">喷火龙VSTAR异画</span></div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">SV5</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$74–126</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$300–500</div>
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-mew-ex-sar-151.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>MEW</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Mew ex <strong>SAR (151)</strong></div>
+                <div class="hunt-chinese">梦幻ex · 205/151C</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">$63–126 raw</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $300–500</span></div>
+              </div>
+              <div class="graded-badge">🥈 GRADE<br>IF MINT</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Mew ex SAR <span style="display:block;font-size:10px;color:var(--muted);">梦幻ex</span></div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">205/151C</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$63–126</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$300–500</div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Mewtwo &amp; Mew GX <span style="display:block;font-size:10px;color:var(--muted);">超梦梦幻GX</span></div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">CSM2b</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$42–84</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$250–450</div>
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-mewtwo-mew-gx.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>MTW GX</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Mewtwo &amp; Mew <strong>GX</strong></div>
+                <div class="hunt-chinese">超梦梦幻GX · CSM2b</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">$42–84 raw</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $250–450</span></div>
+              </div>
+              <div class="graded-badge">🥈 GRADE<br>IF MINT</div>
             </div>
           </div>
 
@@ -1767,24 +1793,33 @@ const CITIES = {
             <span class="hunt-tier-title">BULK GRADE STACK</span>
             <span class="hunt-tier-meta">PSA10: $120–400 AUD each</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:24px;">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">
-              <div style="background:var(--card);padding:8px 10px;">CARD</div><div style="background:var(--card);padding:8px 10px;">CHINESE</div><div style="background:var(--card);padding:8px 10px;color:var(--cyan);">PSA10 AUD</div>
+          <div class="hunt-grid" style="margin-bottom:24px;">
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-pikachu-sir.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>PIKA SIR</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Pikachu ex <strong>SIR</strong></div>
+                <div class="hunt-chinese">皮卡丘ex · SV-P</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $250–400</span></div>
+              </div>
+              <div class="graded-badge">🥉 BULK<br>STACK</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Pikachu SIR</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">皮卡丘ex</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$250–400</div>
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-eevee.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>EEVEE SIR</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Eevee <strong>SIR</strong></div>
+                <div class="hunt-chinese">伊布ex · SV-P</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $220–380</span></div>
+              </div>
+              <div class="graded-badge">🥉 BULK<br>STACK</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Eevee SIR</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">伊布ex</div>
-              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$220–380</div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
-              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Eeveelutions Set (×8)</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">伊布家族</div>
-              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$120–250 each</div>
+            <div class="graded-card">
+              <div class="hunt-img-wrap"><img src="https://raw.githubusercontent.com/localauditpro-stack/China-2026/main/assets/cards/s-umbreon-eevee.png" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.parentNode.innerHTML='<div class=\'hunt-img-fallback\' style=\'opacity:0.4\'>EEVEE FAM</div>'" /></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Eeveelutions <strong>Set (×8)</strong></div>
+                <div class="hunt-chinese">伊布家族 · SV-P</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $120–250 each</span></div>
+              </div>
+              <div class="graded-badge">🥉 BULK<br>STACK</div>
             </div>
           </div>
 
