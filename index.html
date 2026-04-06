@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHINA 2026 — DK &amp; Karl</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050810;
+  --card: #0d1426;
+  --card2: #101828;
+  --border: #1a2540;
+  --border2: #243050;
+  --cyan: #00f5ff;
+  --magenta: #ff0080;
+  --yellow: #ffe500;
+  --green: #00ff88;
+  --orange: #ff8c00;
+  --text: #b8cce0;
+  --muted: #4a6080;
+  --white: #eef4ff;
+
+  /* CATEGORY COLOURS */
+  --cat-food:    #3b9eff;
+  --cat-pokemon: #00e87a;
+  --cat-night:   #c855ff;
+  --cat-arch:    #ff6b35;
+  --cat-drone:   #ffe500;
+  --cat-day:     #00d4ff;
+  --cat-hotel:   #ff9f43;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,245,255,0.007) 3px,rgba(0,245,255,0.007) 4px);
+  pointer-events:none; z-index:9998;
+}
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border2); }
+
+/* ===== LAYOUT ===== */
+.container { max-width:1140px; margin:0 auto; padding:0 28px; }
+
+/* ===== HEADER ===== */
+header {
+  padding:56px 0 36px; border-bottom:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+header::after {
+  content:''; position:absolute; top:-80px; right:-120px;
+  width:480px; height:480px;
+  background:radial-gradient(circle,rgba(0,245,255,0.05) 0%,transparent 65%);
+  pointer-events:none;
+}
+.tag-line {
+  font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--cyan);
+  letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; opacity:0.8;
+}
+h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(54px,9vw,100px); line-height:0.9; letter-spacing:2px; color:var(--white);
+}
+h1 span { color:var(--cyan); }
+.header-row { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:20px; }
+.header-meta { text-align:right; }
+.date-tag { font-family:'Share Tech Mono',monospace; font-size:12px; color:var(--magenta); letter-spacing:2px; }
+.days-big { font-family:'Bebas Neue',sans-serif; font-size:56px; color:var(--yellow); line-height:1; }
+.days-lbl { font-size:10px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; }
+.subtitle { margin-top:18px; font-family:'Share Tech Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:1px; }
+.subtitle em { color:var(--cyan); font-style:normal; }
+
+/* ===== PROFILE BAR ===== */
+.profile-bar {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1px; background:var(--border); border:1px solid var(--border); margin:28px 0;
+}
+.pi { background:var(--card); padding:14px 18px; position:relative; }
+.pi::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.pi.c1::before{background:var(--cyan);}
+.pi.c2::before{background:var(--magenta);}
+.pi.c3::before{background:var(--yellow);}
+.pi.c4::before{background:var(--green);}
+.pi .lbl { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:5px; }
+.pi .val { font-size:12px; color:var(--white); line-height:1.4; }
+
+/* ===== SECTION HEADER ===== */
+.sec-hdr { display:flex; align-items:center; gap:14px; margin:48px 0 20px; }
+.sec-hdr::after { content:''; flex:1; height:1px; background:linear-gradient(to right,var(--border2),transparent); }
+.sec-num { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--cyan); letter-spacing:2px; }
+.sec-title { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--white); }
+
+/* ===== PHASE TABLE ===== */
+.phase-grid { display:flex; flex-direction:column; gap:2px; }
+.phase-hdr {
+  display:grid; grid-template-columns:52px 52px 1fr 1fr 1fr; gap:2px;
+}
+.phase-hdr .hcell {
+  background:#090e1c; font-family:'Share Tech Mono',monospace; font-size:9px;
+  color:var(--muted); letter-spacing:3px; text-transform:uppercase; padding:10px 14px;
+}
+.phase-row {
+  display:grid; grid-template-columns:52px 52px 1fr 1fr 1fr;
+  gap:2px; cursor:pointer; opacity:0; animation:rowIn 0.35s ease forwards;
+}
+.phase-row:nth-child(2){animation-delay:.05s}
+.phase-row:nth-child(3){animation-delay:.10s}
+.phase-row:nth-child(4){animation-delay:.15s}
+.phase-row:nth-child(5){animation-delay:.20s}
+.phase-row:nth-child(6){animation-delay:.25s}
+.phase-row:nth-child(7){animation-delay:.30s}
+.phase-row:nth-child(8){animation-delay:.35s}
+@keyframes rowIn { to{opacity:1;} }
+
+.cell {
+  background:var(--card); padding:14px 16px; font-size:13px;
+  border:1px solid transparent; transition:all 0.18s ease;
+}
+.phase-row:hover .cell { background:#111c30; border-color:rgba(0,245,255,0.15); }
+.phase-row.active .cell { background:#0e1e38 !important; border-color:rgba(0,245,255,0.35) !important; }
+.phase-row.active .cell-id { color:var(--cyan) !important; }
+
+.cell-id {
+  font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--muted);
+  display:flex; align-items:center; justify-content:center; transition:color 0.18s;
+}
+.cell-days {
+  font-family:'Share Tech Mono',monospace; font-size:13px; font-weight:600;
+  color:var(--yellow); display:flex; align-items:center; justify-content:center;
+}
+.city-name { font-weight:500; color:var(--white); font-size:15px; }
+.city-sub { font-size:11px; color:var(--muted); margin-top:3px; }
+.accom-txt { font-size:12px; color:var(--cat-hotel); font-family:'Share Tech Mono',monospace; line-height:1.5; }
+.click-hint {
+  font-family:'Share Tech Mono',monospace; font-size:9px;
+  color:var(--cyan); letter-spacing:2px; opacity:0; transition:opacity 0.2s; margin-top:4px;
+}
+.phase-row:hover .click-hint { opacity:0.7; }
+
+/* ===== DETAIL PANEL ===== */
+#detail-overlay {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(2,5,14,0.88); backdrop-filter:blur(6px);
+  opacity:0; pointer-events:none; transition:opacity 0.3s ease;
+}
+#detail-overlay.open { opacity:1; pointer-events:all; }
+
+#detail-panel {
+  position:fixed; top:0; right:0; bottom:0;
+  width:min(720px,100vw); background:#070c1a;
+  border-left:1px solid var(--border2); z-index:600;
+  overflow-y:auto; transform:translateX(100%);
+  transition:transform 0.38s cubic-bezier(0.16,1,0.3,1);
+  display:flex; flex-direction:column;
+}
+#detail-panel.open { transform:translateX(0); }
+
+/* PANEL HEADER */
+.panel-header {
+  padding:28px 32px 20px; border-bottom:1px solid var(--border);
+  position:sticky; top:0; background:#070c1a; z-index:10;
+  display:flex; justify-content:space-between; align-items:flex-start;
+}
+.panel-phase { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--cyan); letter-spacing:3px; margin-bottom:6px; }
+.panel-city { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,6vw,52px); letter-spacing:2px; color:var(--white); line-height:0.95; }
+.panel-city span { color:var(--cyan); }
+.panel-days-badge {
+  font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--yellow);
+  border:1px solid rgba(255,229,0,0.3); padding:4px 10px; margin-top:8px; display:inline-block; letter-spacing:2px;
+}
+.close-btn {
+  background:none; border:1px solid var(--border2); color:var(--muted);
+  font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:2px;
+  padding:8px 14px; cursor:pointer; transition:all 0.2s; flex-shrink:0; margin-top:4px;
+}
+.close-btn:hover { border-color:var(--cyan); color:var(--cyan); }
+
+.panel-body { padding:0 32px 40px; flex:1; }
+
+/* ===== CATEGORY FILTER BAR ===== */
+.cat-filter-bar {
+  display:flex; flex-wrap:wrap; gap:8px;
+  padding:20px 0 16px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:24px;
+}
+.cat-btn {
+  display:flex; align-items:center; gap:7px;
+  background:var(--card); border:1px solid var(--border2);
+  padding:8px 14px; cursor:pointer; transition:all 0.2s;
+  font-family:'Share Tech Mono',monospace; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase; color:var(--muted);
+  white-space:nowrap;
+}
+.cat-btn:hover { border-color:var(--border2); color:var(--text); }
+.cat-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+.cat-btn.active { color:var(--white); }
+.cat-btn[data-cat="food"].active      { border-color:var(--cat-food);    background:rgba(59,158,255,0.1); color:var(--cat-food); }
+.cat-btn[data-cat="pokemon"].active   { border-color:var(--cat-pokemon); background:rgba(0,232,122,0.1);  color:var(--cat-pokemon); }
+.cat-btn[data-cat="nightlife"].active { border-color:var(--cat-night);   background:rgba(200,85,255,0.1); color:var(--cat-night); }
+.cat-btn[data-cat="arch"].active      { border-color:var(--cat-arch);    background:rgba(255,107,53,0.1); color:var(--cat-arch); }
+.cat-btn[data-cat="drone"].active     { border-color:var(--cat-drone);   background:rgba(255,229,0,0.08); color:var(--cat-drone); }
+.cat-btn[data-cat="day"].active       { border-color:var(--cat-day);     background:rgba(0,212,255,0.08); color:var(--cat-day); }
+.cat-btn[data-cat="hotel"].active     { border-color:var(--cat-hotel);   background:rgba(255,159,67,0.1); color:var(--cat-hotel); }
+
+/* ===== CATEGORY CONTENT ===== */
+.cat-pane { display:none; animation:paneIn 0.22s ease; }
+.cat-pane.active { display:block; }
+@keyframes paneIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== CONTENT COMPONENTS ===== */
+.block { margin-bottom:24px; }
+.block-title {
+  font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--muted);
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:12px;
+  display:flex; align-items:center; gap:8px;
+}
+.block-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* Coloured left-border based on category */
+.block-title.food  { color:var(--cat-food); }
+.block-title.food::after  { background:rgba(59,158,255,0.25); }
+.block-title.pokemon { color:var(--cat-pokemon); }
+.block-title.pokemon::after { background:rgba(0,232,122,0.25); }
+.block-title.night { color:var(--cat-night); }
+.block-title.night::after { background:rgba(200,85,255,0.25); }
+.block-title.arch  { color:var(--cat-arch); }
+.block-title.arch::after  { background:rgba(255,107,53,0.25); }
+.block-title.drone { color:var(--cat-drone); }
+.block-title.drone::after { background:rgba(255,229,0,0.2); }
+.block-title.day   { color:var(--cat-day); }
+.block-title.day::after   { background:rgba(0,212,255,0.2); }
+.block-title.hotel { color:var(--cat-hotel); }
+.block-title.hotel::after { background:rgba(255,159,67,0.25); }
+
+.spot-list { display:flex; flex-direction:column; gap:8px; }
+.spot {
+  background:var(--card); border:1px solid var(--border); padding:14px 16px;
+  display:grid; grid-template-columns:1fr auto; gap:8px; align-items:start;
+  transition:border-color 0.18s, background 0.18s;
+  position:relative; overflow:hidden;
+}
+.spot::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+}
+.spot.food-spot::before    { background:var(--cat-food); }
+.spot.pokemon-spot::before { background:var(--cat-pokemon); }
+.spot.night-spot::before   { background:var(--cat-night); }
+.spot.arch-spot::before    { background:var(--cat-arch); }
+.spot.drone-spot::before   { background:var(--cat-drone); }
+.spot.hotel-spot::before   { background:var(--cat-hotel); }
+.spot.day-spot::before     { background:var(--cat-day); }
+.spot:hover { border-color:var(--border2); background:var(--card2); }
+.spot-name { font-size:14px; color:var(--white); font-weight:500; margin-bottom:3px; }
+.spot-desc { font-size:12px; color:var(--muted); line-height:1.5; }
+.spot-badge {
+  font-family:'Share Tech Mono',monospace; font-size:9px;
+  letter-spacing:1px; padding:3px 8px; border:1px solid; white-space:nowrap; align-self:start;
+}
+.badge-must   { color:var(--magenta);  border-color:rgba(255,0,128,0.4); }
+.badge-good   { color:var(--green);    border-color:rgba(0,255,136,0.4); }
+.badge-extra  { color:var(--cyan);     border-color:rgba(0,245,255,0.3); }
+.badge-note   { color:var(--yellow);   border-color:rgba(255,229,0,0.3); }
+.badge-warn   { color:var(--magenta);  border-color:rgba(255,0,128,0.4); background:rgba(255,0,128,0.07); }
+.badge-tier1  { color:var(--cat-pokemon); border-color:rgba(0,232,122,0.4); }
+
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.info-card { background:var(--card); border:1px solid var(--border); padding:14px 16px; }
+.info-card .ic-label { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:3px; margin-bottom:6px; }
+.info-card .ic-val { font-size:13px; color:var(--text); line-height:1.4; }
+
+.tip-box {
+  background:linear-gradient(135deg,rgba(255,0,128,0.05),rgba(0,245,255,0.04));
+  border:1px solid var(--border); border-left:3px solid var(--cyan);
+  padding:16px 18px; font-size:13px; line-height:1.6; margin-bottom:12px;
+}
+.tip-box.food-tip { border-left-color:var(--cat-food); }
+.tip-box.pokemon-tip { border-left-color:var(--cat-pokemon); }
+.tip-box.hotel-tip { border-left-color:var(--cat-hotel); }
+.tip-box strong {
+  color:var(--cyan); font-family:'Share Tech Mono',monospace;
+  font-size:11px; letter-spacing:2px; display:block; margin-bottom:6px;
+}
+.tip-box.food-tip strong { color:var(--cat-food); }
+.tip-box.pokemon-tip strong { color:var(--cat-pokemon); }
+.tip-box.hotel-tip strong { color:var(--cat-hotel); }
+
+.alert-bar {
+  background:rgba(255,0,128,0.07); border:1px solid rgba(255,0,128,0.2);
+  border-left:3px solid var(--magenta); padding:12px 16px; margin-bottom:14px;
+  font-size:12px; line-height:1.5;
+}
+.alert-bar strong { color:var(--magenta); font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; display:block; margin-bottom:4px; }
+
+.vibe-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.vibe-card { background:var(--card); border:1px solid var(--border); padding:14px 16px; position:relative; overflow:hidden; }
+.vibe-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.vibe-card.v1::before{background:var(--magenta);}
+.vibe-card.v2::before{background:var(--cyan);}
+.vibe-card.v3::before{background:var(--yellow);}
+.vibe-card.v4::before{background:var(--cat-night);}
+.vibe-name { font-size:14px; color:var(--white); font-weight:500; margin-bottom:4px; }
+.vibe-type { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+.vibe-desc { font-size:12px; color:var(--muted); line-height:1.4; }
+
+.itinerary-day { margin-bottom:18px; }
+.day-label { font-family:'Bebas Neue',sans-serif; font-size:18px; color:var(--yellow); letter-spacing:2px; margin-bottom:8px; }
+.day-items { display:flex; flex-direction:column; gap:6px; padding-left:16px; border-left:2px solid var(--border2); }
+.day-item { font-size:13px; color:var(--text); position:relative; padding-left:14px; }
+.day-item::before { content:'▸'; position:absolute; left:-2px; color:var(--cat-day); font-size:10px; }
+.day-item .time { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--muted); margin-right:8px; }
+
+.sets-row { display:flex; flex-wrap:wrap; gap:6px; }
+.set-chip {
+  background:var(--card); border:1px solid rgba(0,232,122,0.2);
+  font-family:'Share Tech Mono',monospace; font-size:11px;
+  color:var(--cat-pokemon); padding:6px 12px; transition:all 0.18s;
+}
+.set-chip:hover { background:rgba(0,232,122,0.07); border-color:var(--cat-pokemon); }
+
+.pill-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.pill { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:1px; padding:4px 10px; border:1px solid var(--border2); color:var(--text); background:var(--card); }
+
+.alipay-term { font-family:'Share Tech Mono',monospace; font-size:20px; color:var(--cat-pokemon); letter-spacing:4px; display:block; margin:8px 0 4px; }
+
+/* ===== CHECKLIST ===== */
+.checklist { display:flex; flex-direction:column; gap:6px; }
+.chk-item {
+  display:flex; align-items:flex-start; gap:12px;
+  background:var(--card); border:1px solid var(--border);
+  padding:12px 14px; cursor:pointer;
+  transition:background 0.18s, border-color 0.18s;
+  user-select:none;
+}
+.chk-item:hover { background:var(--card2); border-color:var(--border2); }
+.chk-item input[type="checkbox"] { display:none; }
+.chk-box {
+  width:18px; height:18px; flex-shrink:0;
+  border:1.5px solid var(--border2); border-radius:2px;
+  display:flex; align-items:center; justify-content:center;
+  margin-top:2px; transition:all 0.18s; position:relative;
+  background:transparent;
+}
+.chk-box::after {
+  content:''; position:absolute;
+  width:10px; height:6px;
+  border-left:2px solid var(--cat-pokemon);
+  border-bottom:2px solid var(--cat-pokemon);
+  transform:rotate(-45deg) translateY(-1px);
+  opacity:0; transition:opacity 0.15s;
+}
+.chk-item input:checked ~ .chk-box {
+  background:rgba(0,232,122,0.12);
+  border-color:var(--cat-pokemon);
+}
+.chk-item input:checked ~ .chk-box::after { opacity:1; }
+.chk-label {
+  font-size:13px; color:var(--text); line-height:1.5; flex:1;
+  transition:color 0.18s;
+}
+.chk-item input:checked ~ .chk-box ~ .chk-label { color:var(--muted); text-decoration:line-through; }
+.chk-label strong { color:var(--white); font-weight:500; }
+.chk-item input:checked ~ .chk-box ~ .chk-label strong { color:var(--muted); }
+.chk-sub { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:1px; margin-left:6px; }
+
+/* ===== HUNT CARDS ===== */
+.hunt-tier-header {
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  margin:24px 0 12px; padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.hunt-tier-badge {
+  font-family:'Share Tech Mono',monospace; font-size:9px;
+  letter-spacing:2px; padding:3px 10px; border:1px solid; white-space:nowrap;
+}
+.hunt-tier-title {
+  font-family:'Bebas Neue',sans-serif; font-size:18px;
+  color:var(--white); letter-spacing:2px;
+}
+.hunt-tier-meta {
+  font-family:'Share Tech Mono',monospace; font-size:10px;
+  color:var(--muted); letter-spacing:1px; margin-left:auto;
+}
+
+.hunt-grid { display:flex; flex-direction:column; gap:8px; margin-bottom:8px; }
+
+.hunt-card {
+  display:grid; grid-template-columns:110px 1fr 72px;
+  gap:0; background:var(--card); border:1px solid var(--border);
+  overflow:hidden; transition:border-color 0.18s, background 0.18s;
+}
+.hunt-card:hover { border-color:var(--border2); background:var(--card2); }
+.hunt-card.has-count { border-color:rgba(0,232,122,0.4); background:rgba(0,232,122,0.03); }
+
+.hunt-img-wrap {
+  width:110px; height:110px; flex-shrink:0;
+  background:#080f1e; display:flex; align-items:center; justify-content:center;
+  overflow:hidden; border-right:1px solid var(--border);
+}
+.hunt-img { width:100%; height:100%; object-fit:contain; padding:6px; }
+.hunt-img-fallback {
+  font-family:'Share Tech Mono',monospace; font-size:16px;
+  color:var(--muted); text-align:center; line-height:1.3;
+}
+
+.hunt-info {
+  padding:10px 14px; display:flex; flex-direction:column;
+  justify-content:center; gap:3px; min-width:0;
+}
+.hunt-name {
+  font-size:14px; color:var(--white); line-height:1.3;
+}
+.hunt-name strong { font-weight:600; color:var(--white); }
+.hunt-chinese {
+  font-family:'Share Tech Mono',monospace; font-size:11px;
+  color:var(--cat-pokemon); letter-spacing:1px; line-height:1.5;
+}
+.hunt-notes {
+  font-size:11px; color:var(--muted); line-height:1.5; margin-top:2px;
+}
+.hunt-price-tag {
+  font-family:'Share Tech Mono',monospace; font-size:11px;
+  color:var(--yellow); margin-top:4px;
+}
+.hunt-unit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  max-height: 140px;
+  overflow-y: auto;
+  margin-bottom: 4px;
+}
+.hunt-unit-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.hunt-unit-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  width: 14px;
+  flex-shrink: 0;
+  text-align: right;
+}
+.hunt-unit-input {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  color: var(--green);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  padding: 3px 6px;
+  width: 62px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.hunt-unit-input:focus { border-color: var(--green); }
+.hunt-unit-input::placeholder { color: var(--muted); opacity: 0.4; }
+.hunt-unit-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.hunt-au-price {
+  color:var(--muted); margin-left:8px; font-size:10px;
+}
+
+.hunt-counter-col {
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  gap:6px; padding:10px 8px; min-width:110px;
+  border-left:1px solid var(--border); background:rgba(0,0,0,0.15);
+}
+.hunt-btn {
+  background:var(--card); border:1px solid var(--border2);
+  color:var(--text); font-size:16px; line-height:1;
+  width:32px; height:32px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.15s; font-family:'Share Tech Mono',monospace;
+  flex-shrink:0;
+}
+.hunt-btn:hover { background:var(--card2); }
+.hunt-plus:hover { border-color:var(--cat-pokemon); color:var(--cat-pokemon); }
+.hunt-minus:hover { border-color:var(--magenta); color:var(--magenta); }
+.hunt-count {
+  font-family:'Bebas Neue',sans-serif; font-size:28px;
+  color:var(--white); line-height:1; min-width:24px; text-align:center;
+  transition:color 0.2s;
+}
+.hunt-count.nonzero { color:var(--cat-pokemon); }
+
+/* ===== SINGLES ===== */
+.single-card {
+  display:grid; grid-template-columns:40px 1fr 110px;
+  gap:0; background:var(--card); border:1px solid var(--border);
+  overflow:hidden; transition:border-color 0.18s, background 0.18s;
+  margin-bottom:0;
+}
+.single-card:hover { border-color:rgba(255,0,128,0.3); background:var(--card2); }
+.single-card.found { border-color:rgba(0,232,122,0.4); opacity:0.75; }
+.single-toggle {
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border-right:1px solid var(--border);
+  background:rgba(255,0,128,0.04); transition:all 0.18s;
+  color:var(--magenta);
+}
+.single-toggle:hover { background:rgba(255,0,128,0.12); }
+.single-toggle.found-state { background:rgba(0,232,122,0.12); color:var(--cat-pokemon); border-color:var(--cat-pokemon); }
+.stgl-icon { font-size:18px; line-height:1; font-family:'Share Tech Mono',monospace; user-select:none; }
+.single-price-col {
+  display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start;
+  gap:4px; padding:8px 6px; min-width:110px;
+  border-left:1px solid var(--border); background:rgba(0,0,0,0.15);
+}
+.hunt-price-row {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; align-items:center;
+}
+
+/* ===== CHASE CARDS ===== */
+.chase-card {
+  display:grid; grid-template-columns:56px 100px 1fr;
+  gap:0; background:var(--card); border:1px solid var(--border);
+  overflow:hidden; transition:border-color 0.18s, background 0.18s, opacity 0.2s;
+}
+.chase-card:hover { border-color:rgba(255,0,128,0.3); }
+.chase-found-toggle {
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border-right:1px solid var(--border);
+  background:rgba(255,0,128,0.04);
+  transition:all 0.18s;
+  color:var(--magenta);
+  border-color:rgba(255,0,128,0.3);
+}
+.chase-found-toggle:hover { background:rgba(255,0,128,0.12); }
+.chase-toggle-icon {
+  font-size:22px; line-height:1; font-family:'Share Tech Mono',monospace;
+  user-select:none;
+}
+
+/* ===== LOGISTICS ===== */
+.logistics-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+.lc { background:var(--card); border:1px solid var(--border); padding:22px; position:relative; overflow:hidden; }
+.lc::after { content:''; position:absolute; bottom:-30px; right:-30px; width:70px; height:70px; border-radius:50%; background:radial-gradient(circle,rgba(0,245,255,0.04),transparent); }
+.lc .ico { font-size:22px; margin-bottom:10px; }
+.lc h3 { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--cyan); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; }
+.lc ul { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.lc li { font-size:12px; color:var(--text); line-height:1.5; padding-left:14px; position:relative; }
+.lc li::before { content:'▸'; position:absolute; left:0; color:var(--cyan); font-size:9px; }
+
+/* ===== RADAR ===== */
+.radar-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); }
+.ri { background:var(--card); padding:18px; }
+.ri .rl { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:7px; }
+.ri.warn .rl{color:var(--magenta);}
+.ri.info .rl{color:var(--cyan);}
+.ri.ok .rl{color:var(--green);}
+.ri.caut .rl{color:var(--yellow);}
+.ri p { font-size:12px; line-height:1.5; }
+
+/* ===== PRIORITY ===== */
+.priority-list { display:flex; flex-direction:column; gap:2px; }
+.prow { display:grid; grid-template-columns:44px 130px 1fr; gap:2px; cursor:pointer; }
+.prow .pc { background:var(--card); padding:14px 16px; transition:background 0.18s, border-color 0.18s; border:1px solid transparent; }
+.prow:hover .pc { background:var(--card2); border-color:var(--border2); }
+.p-num { font-family:'Bebas Neue',sans-serif; font-size:28px; display:flex; align-items:center; justify-content:center; line-height:1; }
+.p1{color:var(--cyan);} .p2{color:var(--green);} .p3{color:var(--yellow);}
+.p4{color:var(--orange);} .p5{color:#aa6600;} .p6{color:var(--muted);}
+.p-city { font-size:15px; color:var(--white); font-weight:500; display:flex; align-items:center; }
+.p-note { font-size:12px; color:var(--muted); display:flex; align-items:center; }
+.open-arrow { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--cyan); opacity:0; transition:opacity 0.18s; margin-left:auto; }
+.prow:hover .open-arrow { opacity:1; }
+
+/* ===== FOOTER ===== */
+footer { margin-top:56px; padding:24px 0; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+footer .fl { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:2px; }
+footer .fr { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--border2); letter-spacing:3px; }
+
+@media(max-width:680px){
+  .phase-hdr,.phase-row{grid-template-columns:44px 44px 1fr 1fr;}
+  .col-accom{display:none;}
+  .info-grid,.vibe-grid{grid-template-columns:1fr;}
+  #detail-panel{width:100vw;}
+  .panel-body{padding:0 18px 32px;}
+  .panel-header{padding:20px 18px 16px;}
+}
+</style>
+</head>
+<body>
+
+
+<!-- ===== HUNT OVERLAY ===== -->
+<div id="hunt-overlay" style="display:none;position:fixed;inset:0;z-index:900;background:#050810;overflow-y:auto;">
+  <div style="max-width:900px;margin:0 auto;padding:28px 24px 60px;">
+    <!-- Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;border-bottom:1px solid rgba(0,232,122,0.25);padding-bottom:18px;">
+      <div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:#00e87a;letter-spacing:3px;margin-bottom:4px;">// CHINA TRIP 2025</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;letter-spacing:3px;line-height:1;">🎴 POKÉMON HUNT LIST</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;">BOOSTER BOXES + CHASE CARDS · CN EXCLUSIVE TARGETS</div>
+      </div>
+      <button onclick="closeHuntOverlay()" style="background:rgba(255,0,128,0.12);border:1px solid rgba(255,0,128,0.4);color:#ff0080;font-family:'Share Tech Mono',monospace;font-size:13px;padding:10px 20px;cursor:pointer;letter-spacing:2px;">✕ CLOSE</button>
+    </div>
+    <!-- Inject the hunt content from Shanghai panel here -->
+    <div id="hunt-overlay-content"></div>
+  </div>
+</div>
+
+<div id="detail-overlay" onclick="closePanel()"></div>
+
+<div id="detail-panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-phase" id="panel-phase"></div>
+      <div class="panel-city" id="panel-city"></div>
+      <div class="panel-days-badge" id="panel-days"></div>
+    </div>
+    <button class="close-btn" onclick="closePanel()">✕ CLOSE</button>
+  </div>
+  <div class="panel-body">
+    <div class="cat-filter-bar" id="cat-filter-bar"></div>
+    <div id="cat-content"></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <header>
+    <div class="header-row">
+      <div>
+        <div class="tag-line">// TRAVEL BRIEF v3.1 — AUG–SEPT 2026</div>
+        <h1>CHINA<br><span>2026</span></h1>
+        <p class="subtitle">China Circuit · <em>Melbourne → Shanghai → Hong Kong</em></p>
+      </div>
+      <div class="header-meta">
+        <div class="date-tag">20 AUG — 13 SEPT 2026</div>
+        <div class="days-big">25</div>
+        <div class="days-lbl">DAY MISSION</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="profile-bar">
+    <div class="pi c1"><div class="lbl">Travellers</div><div class="val">DK (32) & Cousin (36) · Melbourne</div></div>
+    <div class="pi c2"><div class="lbl">Vibe</div><div class="val">Comfort-Independent · No tours</div></div>
+    <div class="pi c3"><div class="lbl">Interests</div><div class="val">Architecture · Photography · Pokémon TCG · Drone</div></div>
+    <div class="pi c4" id="hunt-pill-btn" onclick="openHuntOverlay()" style="cursor:pointer;border:1px solid rgba(0,232,122,0.4);background:rgba(0,232,122,0.06);transition:all 0.2s;" onmouseover="this.style.background='rgba(0,232,122,0.14)'" onmouseout="this.style.background='rgba(0,232,122,0.06)'"><div class="lbl" style="color:#00e87a;">🎴 HUNT LIST</div><div class="val" style="color:#00e87a;font-weight:700;letter-spacing:1px;">VIEW BOXES & CHASE CARDS →</div></div>
+  </div>
+
+  <div class="sec-hdr">
+    <div class="sec-num">// 01</div>
+    <div class="sec-title">PHASE MAP — CLICK A CITY</div>
+  </div>
+  <p style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:14px;">▸ CLICK ANY ROW FOR FULL CITY INTEL</p>
+
+  <div class="phase-grid">
+    <div class="phase-hdr">
+      <div class="hcell">PH</div>
+      <div class="hcell">DAYS</div>
+      <div class="hcell">LOCATION</div>
+      <div class="hcell">FOCUS</div>
+      <div class="hcell col-accom">STAY</div>
+    </div>
+
+    <div class="phase-row" onclick="openCity('shanghai',event)">
+      <div class="cell cell-id">I</div>
+      <div class="cell cell-days">5</div>
+      <div class="cell"><div class="city-name">Shanghai</div><div class="city-sub">Pokémon Hub · FFC Vibe · Rooftops · Aug 20–24</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
+      <div class="cell" style="font-size:12px;">TCG hunting · CBD nightlife · street photography</div>
+      <div class="cell col-accom"><div class="accom-txt">Jing'an District<br>or French Concession</div></div>
+    </div>
+
+    <div class="phase-row" onclick="openCity('chengdu',event)">
+      <div class="cell cell-id">II</div>
+      <div class="cell cell-days">4</div>
+      <div class="cell"><div class="city-name">Chengdu</div><div class="city-sub">Giant Pandas · Spicy Food Capital · Aug 25–28</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
+      <div class="cell" style="font-size:12px;">Pandas · Sichuan cuisine · TCG · historic lanes</div>
+      <div class="cell col-accom"><div class="accom-txt">Jinjiang District<br>or Kuanzhai Alley area</div></div>
+    </div>
+
+    <div class="phase-row" onclick="openCity('chongqing',event)">
+      <div class="cell cell-id">III</div>
+      <div class="cell cell-days">4</div>
+      <div class="cell"><div class="city-name">Chongqing</div><div class="city-sub">3D Urbanism · Underground Nightlife · Aug 29–Sep 1</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
+      <div class="cell" style="font-size:12px;">Vertical city · cyberpunk streets · hotpot</div>
+      <div class="cell col-accom"><div class="accom-txt">Jiefangbei CBD<br>or Nanshan</div></div>
+    </div>
+
+    <div class="phase-row" onclick="openCity('zhangjiajie',event)">
+      <div class="cell cell-id">IV</div>
+      <div class="cell cell-days">4</div>
+      <div class="cell"><div class="city-name">Zhangjiajie</div><div class="city-sub">"Avatar" Mountains · HSR · Sep 2–5</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
+      <div class="cell" style="font-size:12px;">Drone shots · nature · vertical drama</div>
+      <div class="cell col-accom"><div class="accom-txt">Wulingyuan Town<br>(Park Gate)</div></div>
+    </div>
+
+    <div class="phase-row" onclick="openCity('yangshuo',event)">
+      <div class="cell cell-id">V</div>
+      <div class="cell cell-days">4</div>
+      <div class="cell"><div class="city-name">Yangshuo</div><div class="city-sub">Karst Landscapes · Li River · Sep 6–9</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
+      <div class="cell" style="font-size:12px;">Landscape drone · cycling · river cruise</div>
+      <div class="cell col-accom"><div class="accom-txt">Yangshuo Town<br>or Rural Guesthouse</div></div>
+    </div>
+
+    <div class="phase-row" onclick="openCity('hongkong',event)">
+      <div class="cell cell-id">VI</div>
+      <div class="cell cell-days">4</div>
+      <div class="cell"><div class="city-name">Hong Kong</div><div class="city-sub">Final Shopping · Exit Point · Sep 10–13</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
+      <div class="cell" style="font-size:12px;">TCG paradise · skyline · departure</div>
+      <div class="cell col-accom"><div class="accom-txt">Mong Kok or<br>Tsim Sha Tsui</div></div>
+    </div>
+  </div>
+
+  <div class="sec-hdr">
+    <div class="sec-num">// 02</div>
+    <div class="sec-title">LOGISTICS & COMFORT</div>
+  </div>
+  <div class="logistics-grid">
+    <div class="lc"><div class="ico">🚄</div><h3>Transport</h3><ul>
+      <li>Primary: High-Speed Rail (HSR) network</li>
+      <li>HSR: Shanghai → Chengdu (bullet train, ~11hrs)</li>
+      <li>HSR: Chengdu → Chongqing (30 mins — world's fastest intercity)</li>
+      <li>HSR/Flight: Chongqing → Zhangjiajie (~5hrs)</li>
+      <li>HSR: Zhangjiajie → Guilin → Yangshuo (~4hrs)</li>
+      <li>HSR/Flight: Yangshuo → Hong Kong (~3hrs)</li>
+      <li>Chengdu–Chongqing is the world's busiest HSR corridor</li>
+    </ul></div>
+    <div class="lc"><div class="ico">💳</div><h3>Payments</h3><ul>
+      <li>100% digital — Alipay & WeChat Pay</li>
+      <li>Linked to Australian bank cards</li>
+      <li>Alipay search: 宝可梦卡牌 = Pokémon Cards</li>
+    </ul></div>
+    <div class="lc"><div class="ico">🌐</div><h3>Navigation</h3><ul>
+      <li>Baidu Translate for communication</li>
+      <li>Amap for navigation (better than Google in CN)</li>
+      <li>VPN recommended for Google / Instagram</li>
+    </ul></div>
+    <div class="lc"><div class="ico">⚠️</div><h3>Hard Exit</h3>
+      <p style="color:var(--magenta);font-family:'Share Tech Mono',monospace;font-size:13px;margin-bottom:6px;">EXIT BY SEPT 14</p>
+      <p style="font-size:12px;">Exit Sept 13 — well clear of Golden Week (Oct 1). No exceptions.</p>
+    </div>
+  </div>
+
+  <div class="sec-hdr">
+    <div class="sec-num">// 03</div>
+    <div class="sec-title">THE RADAR</div>
+  </div>
+  <div class="radar-grid">
+    <div class="ri warn"><div class="rl">🚁 Drone Regs</div><p>CAAC registration required >250g. No-fly: Beijing / Shanghai Bund. More freedom in Zhangjiajie & Yangshuo.</p></div>
+    <div class="ri info"><div class="rl">🗣 Language</div><p>Zero Mandarin. Rely on Baidu Translate + Amap. Younger locals in major cities understand basic English.</p></div>
+    <div class="ri ok"><div class="rl">🎴 Pokémon TCG</div><p>Focus on Simplified Chinese (CS) Exclusive Sets. Shanghai & Chongqing official gyms. Huaqiangbei for imports.</p></div>
+    <div class="ri caut"><div class="rl">🏋️ Fitness</div><p>High verticality in Zhangjiajie & Chongqing. Leg-day heavy. Frequent massage recovery strongly recommended.</p></div>
+  </div>
+
+  <div class="sec-hdr">
+    <div class="sec-num">// 04</div>
+    <div class="sec-title">POKÉMON HUNTING PRIORITY</div>
+  </div>
+  <div class="priority-list">
+    <div class="prow" onclick="openCity('shanghai',event)"><div class="pc p-num p1">1</div><div class="pc p-city">Shanghai<span class="open-arrow">→</span></div><div class="pc p-note">Big haul — Pokémon Center + Nanjing Road + Xujiahui</div></div>
+    <div class="prow" onclick="openCity('hongkong',event)"><div class="pc p-num p2">2</div><div class="pc p-city">Hong Kong<span class="open-arrow">→</span></div><div class="pc p-note">Collector paradise — JP, EN & CN cards. Sino Centre essential.</div></div>
+    <div class="prow" onclick="openCity('chengdu',event)"><div class="pc p-num p3">3</div><div class="pc p-city">Chengdu<span class="open-arrow">→</span></div><div class="pc p-note">Official Gym + regional stores. Strong CN exclusive stock.</div></div>
+    <div class="prow" onclick="openCity('chongqing',event)"><div class="pc p-num p4">4</div><div class="pc p-city">Chongqing<span class="open-arrow">→</span></div><div class="pc p-note">Casual browse in Jiefangbei while exploring the 3D city.</div></div>
+    <div class="prow" onclick="openCity('yangshuo',event)"><div class="pc p-num p5">5</div><div class="pc p-city">Yangshuo<span class="open-arrow">→</span></div><div class="pc p-note">Minimal TCG. Browse only — save budget for HK.</div></div>
+    <div class="prow" onclick="openCity('zhangjiajie',event)"><div class="pc p-num p6">6</div><div class="pc p-city">Zhangjiajie<span class="open-arrow">→</span></div><div class="pc p-note">Skip TCG entirely. Save legs for the mountains.</div></div>
+  </div>
+
+  <footer>
+    <div class="fl">BRIEF v3.1 · AUG 2026 · MELBOURNE ORIGIN · EXIT BEFORE GOLDEN WEEK</div>
+    <div class="fr">CHINA 2026</div>
+  </footer>
+</div>
+
+<script>
+// ===== CATEGORY DEFINITIONS =====
+const CATS = [
+  { key:'food',     label:'🍜 Food',       color:'var(--cat-food)' },
+  { key:'pokemon',  label:'🎴 Pokémon',    color:'var(--cat-pokemon)' },
+  { key:'nightlife',label:'🌃 Nightlife',  color:'var(--cat-night)' },
+  { key:'arch',     label:'🏗 Architecture', color:'var(--cat-arch)' },
+  { key:'drone',    label:'🚁 Drone',      color:'var(--cat-drone)' },
+  { key:'day',      label:'📅 Itinerary',  color:'var(--cat-day)' },
+  { key:'hotel',    label:'🏨 Stay',       color:'var(--cat-hotel)' },
+];
+
+// ===== HUNT COUNTER (hoisted so onclick in HTML strings can call them) =====
+// huntUnits[id] = array of prices paid per sealed unit
+const huntUnits = {};
+// singleUnits[id] = array of prices paid per single card found
+const singleUnits = {};
+
+function singleToggle(id) {
+  // Toggle visual found state — separate from price logging
+  const el = document.getElementById('stgl-' + id);
+  if (!el) return;
+  const icon = el.querySelector('.stgl-icon');
+  const card = el.closest('.single-card');
+  if (el.classList.toggle('found-state')) {
+    if (icon) icon.textContent = '✓';
+    if (card) card.classList.add('found');
+  } else {
+    if (icon) icon.textContent = '○';
+    if (card) card.classList.remove('found');
+  }
+  updateHuntTotals();
+}
+
+function singleAddUnit(id) {
+  if (!singleUnits[id]) singleUnits[id] = [];
+  singleUnits[id].push(null);
+  renderSingleUnitList(id);
+  updateHuntTotals();
+}
+
+function singleUnitPrice(id, idx, val) {
+  if (!singleUnits[id]) return;
+  singleUnits[id][idx] = parseFloat(val) || null;
+  updateHuntTotals();
+}
+
+function renderSingleUnitList(id) {
+  const root = document.getElementById('hunt-overlay-content');
+  if (!root) return;
+  const card = root.querySelector('.single-card[data-single-id="' + id + '"]');
+  if (!card) return;
+  const list = card.querySelector('.hunt-unit-list');
+  if (!list) return;
+  list.innerHTML = '';
+  (singleUnits[id] || []).forEach((price, i) => {
+    const row = document.createElement('div');
+    row.className = 'hunt-unit-row';
+    const num = document.createElement('span');
+    num.className = 'hunt-unit-num';
+    num.textContent = (i + 1);
+    const inp = document.createElement('input');
+    inp.className = 'hunt-unit-input';
+    inp.type = 'number'; inp.min = '0'; inp.step = '1'; inp.placeholder = '$ AUD';
+    if (price !== null) inp.value = price;
+    inp.addEventListener('input', function() { singleUnitPrice(id, i, this.value); });
+    const lbl = document.createElement('span');
+    lbl.className = 'hunt-unit-label';
+    lbl.textContent = 'AUD';
+    row.appendChild(num); row.appendChild(inp); row.appendChild(lbl);
+    list.appendChild(row);
+  });
+  list.scrollTop = list.scrollHeight;
+}
+
+function huntChange(id, delta) {
+  if (!huntUnits[id]) huntUnits[id] = [];
+  if (delta > 0) {
+    huntUnits[id].push(null); // null = price not yet entered
+  } else if (delta < 0 && huntUnits[id].length > 0) {
+    huntUnits[id].pop();
+  }
+  renderUnitList(id);
+  updateHuntTotals();
+}
+
+function huntUnitPrice(id, idx, val) {
+  if (!huntUnits[id]) return;
+  huntUnits[id][idx] = parseFloat(val) || null;
+  updateHuntTotals();
+}
+
+function renderUnitList(id) {
+  const root = document.getElementById('hunt-overlay-content');
+  if (!root) return;
+  const card = root.querySelector('.hunt-card[data-id="' + id + '"]');
+  if (!card) return;
+  const list = card.querySelector('.hunt-unit-list');
+  const countEl = card.querySelector('.hunt-count');
+  const cnt = huntUnits[id] ? huntUnits[id].length : 0;
+
+  if (countEl) {
+    countEl.textContent = cnt;
+    countEl.classList.toggle('nonzero', cnt > 0);
+    card.classList.toggle('has-count', cnt > 0);
+  }
+  if (!list) return;
+  list.innerHTML = '';
+  (huntUnits[id] || []).forEach((price, i) => {
+    const row = document.createElement('div');
+    row.className = 'hunt-unit-row';
+    const num = document.createElement('span');
+    num.className = 'hunt-unit-num';
+    num.textContent = (i + 1);
+    const inp = document.createElement('input');
+    inp.className = 'hunt-unit-input';
+    inp.type = 'number';
+    inp.min = '0';
+    inp.step = '1';
+    inp.placeholder = '$ AUD';
+    if (price !== null) inp.value = price;
+    inp.addEventListener('input', function() { huntUnitPrice(id, i, this.value); });
+    const lbl = document.createElement('span');
+    lbl.className = 'hunt-unit-label';
+    lbl.textContent = 'AUD';
+    row.appendChild(num);
+    row.appendChild(inp);
+    row.appendChild(lbl);
+    list.appendChild(row);
+  });
+  // Scroll to bottom so newest entry is visible
+  list.scrollTop = list.scrollHeight;
+}
+
+function updateHuntTotals() {
+  let totalBoxes = 0, totalSingles = 0, totalLo = 0, totalHi = 0, totalPaid = 0;
+  const root = document.getElementById('hunt-overlay-content');
+  if (!root) return;
+  // Sealed products
+  root.querySelectorAll('.hunt-card').forEach(card => {
+    const id = card.dataset.id;
+    const units = huntUnits[id] || [];
+    const cnt = units.length;
+    totalBoxes += cnt;
+    totalLo += cnt * (parseFloat(card.dataset.priceLo) || 0);
+    totalHi += cnt * (parseFloat(card.dataset.priceHi) || 0);
+    units.forEach(p => { if (p !== null) totalPaid += p; });
+  });
+  // Singles
+  root.querySelectorAll('.single-card').forEach(card => {
+    const id = card.dataset.singleId;
+    const toggle = root.querySelector('#stgl-' + id);
+    const units = singleUnits[id] || [];
+    if (toggle && toggle.classList.contains('found-state')) totalSingles++;
+    const lo = parseFloat(card.dataset.audLo) || 0;
+    const hi = parseFloat(card.dataset.audHi) || 0;
+    if (units.length > 0) {
+      totalLo += lo; totalHi += hi;
+    }
+    units.forEach(p => { if (p !== null) totalPaid += p; });
+  });
+  const gt = document.getElementById('hunt-grand-total');
+  const gs = document.getElementById('hunt-singles-total');
+  const gc = document.getElementById('hunt-grand-cost');
+  const gp = document.getElementById('hunt-grand-paid');
+  if (gt) { gt.textContent = totalBoxes; gt.style.color = totalBoxes > 0 ? 'var(--cat-pokemon)' : 'var(--muted)'; }
+  if (gs) { gs.textContent = totalSingles; gs.style.color = totalSingles > 0 ? 'var(--magenta)' : 'var(--muted)'; }
+  if (gc) gc.textContent = (totalLo > 0 || totalHi > 0) ? '~$' + Math.round(totalLo) + '–$' + Math.round(totalHi) + ' AUD est.' : '~$0 AUD';
+  if (gp) { gp.textContent = totalPaid > 0 ? '$' + totalPaid.toFixed(0) + ' AUD paid' : ''; gp.style.color = 'var(--green)'; }
+}
+function imgError(el, fallback) {
+  if (el && el.parentNode) {
+    el.parentNode.innerHTML = '<div class="hunt-img-fallback">' + fallback + '</div>';
+  }
+}
+
+// ── CHASE CARD SYSTEM ──────────────────────────────────────────
+const CHASE_IMAGES = {
+  "pikachu-170": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/pikachu-170.png",
+  "pikachu-171": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/pikachu-171.png",
+  "pikachu-172": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/pikachu-172.png",
+  "pikachu-173": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/pikachu-173.png",
+  "mew-promo": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/mew-promo.png",
+  "umbreon-ir": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/umbreon-ir.png",
+  "leafeon-ir": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/leafeon-ir.png",
+  "sylveon-ir": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/sylveon-ir.png",
+  "eevee-ir": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/eevee-ir.png",
+  "captain-pikachu-ar": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/captain-pikachu-ar.png",
+  "gengar-ar-gem3": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gengar-ar-gem3.png",
+  "arcanine-sar": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/arcanine-sar.png",
+  "rika-sar": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/rika-sar.svg",
+  "ironhands-sar": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/ironhands-sar.svg",
+  "maushold-sar": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/maushold-sar.svg",
+  "cipher-sar": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/cipher-sar.svg",
+  "pikachu-vw": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/pikachu-vw.svg",
+  "pikachu-wcs2023": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/pikachu-wcs2023.svg",
+};
+
+const chaseFound = {};
+
+function loadChaseImages() {
+  document.querySelectorAll('.chase-card').forEach(card => {
+    const id = card.dataset.chaseId;
+    if (CHASE_IMAGES[id]) {
+      const wrap = card.querySelector('.chase-img-wrap');
+      if (wrap && !wrap.querySelector('img')) {
+        wrap.innerHTML = '<img src="' + CHASE_IMAGES[id] + '" style="width:100%;height:100%;object-fit:contain;" />';
+      }
+    }
+  });
+}
+
+function chaseToggle(id) {
+  chaseFound[id] = !chaseFound[id];
+  const toggle = document.getElementById('toggle-' + id);
+  const card = toggle ? toggle.closest('.chase-card') : null;
+  if (toggle) {
+    const icon = toggle.querySelector('.chase-toggle-icon');
+    if (chaseFound[id]) {
+      icon.textContent = '✓';
+      toggle.style.background = 'rgba(0,232,122,0.15)';
+      toggle.style.borderColor = 'var(--cat-pokemon)';
+      toggle.style.color = 'var(--cat-pokemon)';
+      if (card) card.style.opacity = '0.7';
+    } else {
+      icon.textContent = '○';
+      toggle.style.background = 'transparent';
+      toggle.style.borderColor = 'rgba(255,0,128,0.3)';
+      toggle.style.color = 'var(--magenta)';
+      if (card) card.style.opacity = '1';
+    }
+  }
+  updateChaseTotals();
+}
+function updateChaseTotals() {
+  let found = 0, audLo = 0, audHi = 0, rmbLo = 0, rmbHi = 0;
+  document.querySelectorAll('.chase-card').forEach(card => {
+    const id = card.dataset.chaseId;
+    if (chaseFound[id]) {
+      found++;
+      audLo += parseFloat(card.dataset.audLo) || 0;
+      audHi += parseFloat(card.dataset.audHi) || 0;
+    }
+  });
+  const total = document.querySelectorAll('.chase-card').length;
+  const fc = document.getElementById('chase-found-count');
+  const ft = fc ? fc.nextElementSibling : null;
+  const ev = document.getElementById('chase-est-value');
+  if (fc) { fc.textContent = found; fc.style.color = found > 0 ? 'var(--magenta)' : 'var(--muted)'; }
+  if (ft) ft.textContent = '/ ' + total;
+  if (ev) ev.textContent = found > 0 ? '~$' + Math.round(audLo) + '–$' + Math.round(audHi) + ' AUD resale est.' : '~¥0 · ~$0 AUD resale';
+}
+
+const BOX_SVGS = {};
+
+
+const REAL_IMAGES = {
+  "gift-bulbasaur": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gift-bulbasaur.png",
+  "gift-squirtle": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gift-squirtle.png",
+  "gift-charmander": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gift-charmander.png",
+  "cn-lost": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/cn-lost.png",
+  "cn-stellar": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/cn-stellar.png",
+  "cn-evolving": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/cn-evolving.png",
+  "cn-fusion": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/cn-fusion.png",
+  "gift-anniversary": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gift-anniversary.png",
+  "gem-eeveeheroes": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gem-eeveeheroes.png",
+  "gem-mew": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gem-mew.png",
+  "gem-vol3": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gem-vol3.png",
+  "gem-eevee": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gem-eevee.png",
+  "gem-pikachu": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/gem-pikachu.png",
+  "151-surprise": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/151-surprise.png",
+  "151-hope": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/151-hope.png",
+  "151-journey": "https://raw.githubusercontent.com/localauditpro/China-2026/main/assets/cards/151-journey.png",
+};
+
+function loadBoxImages() {
+  // Target any element with data-box-id inside hunt-img-wrap
+  document.querySelectorAll('.hunt-img-wrap [data-box-id], .hunt-img-wrap').forEach(el => {
+    const wrap = el.classList.contains('hunt-img-wrap') ? el : el.parentNode;
+    if (!wrap) return;
+    const boxId = el.dataset.boxId || wrap.closest('.hunt-card')?.dataset.id;
+    if (!boxId) return;
+    if (REAL_IMAGES[boxId]) {
+      wrap.innerHTML = '<img src="' + REAL_IMAGES[boxId] + '" style="width:100%;height:100%;object-fit:cover;" alt="' + boxId + '">';
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', loadBoxImages);
+
+
+
+
+// ===== CITY DATA =====
+const CITIES = {
+  shanghai: {
+    phase:'PHASE I', city:'SHANG<span>HAI</span>', days:'5 DAYS · DAYS 1–5 · AUG 20–24',
+    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    content: {
+      hotel: `
+        <div class="block">
+          <div class="block-title hotel">RECOMMENDED STAYS</div>
+          <div class="spot-list">
+            <div class="spot hotel-spot">
+              <div><div class="spot-name">EAST Shanghai (宜必思)</div><div class="spot-desc">Design-forward business hotel in Pudong. Clean, modern, excellent city views. ~180–250 AUD/night. 10 min metro to The Bund.</div></div>
+              <span class="spot-badge badge-good">DESIGN</span>
+            </div>
+            <div class="spot hotel-spot">
+              <div><div class="spot-name">The Lido (Jing'an)</div><div class="spot-desc">Mid-range boutique in Jing'an. Perfect central location — walking distance to Nanjing Road, metro, and French Concession. ~150–200 AUD/night.</div></div>
+              <span class="spot-badge badge-must">BEST LOCATION</span>
+            </div>
+            <div class="spot hotel-spot">
+              <div><div class="spot-name">French Concession Airbnb</div><div class="spot-desc">Lane house apartment in the FC for 2 is often cheaper and more atmospheric than hotels. Book early — fills up. ~120–160 AUD/night total.</div></div>
+              <span class="spot-badge badge-note">VALUE</span>
+            </div>
+          </div>
+          <div class="tip-box hotel-tip" style="margin-top:16px;"><strong>📍 BASE STRATEGY</strong>Stay in Jing'an or French Concession. Both have excellent metro access (Lines 1, 2, 10, 12). Avoid Pudong for your base — it's dead after hours.</div>
+        </div>`,
+      food: `
+        <div class="block">
+          <div class="block-title food">MUST EAT</div>
+          <div class="spot-list">
+            <div class="spot food-spot"><div><div class="spot-name">Yang's Dumplings (小杨生煎)</div><div class="spot-desc">Pan-fried pork soup dumplings (shengjianbao). Crispy base, explosive broth. Queue expected. ~8 RMB per order. Best on Wujiang Road.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Jia Jia Tang Bao</div><div class="spot-desc">Best xiao long bao in the city per locals. Pure, unfussy, legit. Arrive before open — queue starts early.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Lost Heaven (花马天堂)</div><div class="spot-desc">Yunnan cuisine in a gorgeous colonial building on the Bund. Upscale but worth it — try crossing bridge rice noodles.</div></div><span class="spot-badge badge-good">UPSCALE</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Ippudo (上海)</div><div class="spot-desc">Japanese ramen done properly. Strong tonkotsu. Good recovery meal after long days. Multiple branches.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Wujie (无界)</div><div class="spot-desc">Upscale vegetarian Buddhist cuisine near Jing'an Temple. Surprisingly excellent.</div></div><span class="spot-badge badge-extra">UNIQUE</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">85°C Bakery</div><div class="spot-desc">Sea salt coffee + fresh bread. Perfect cheap breakfast. Taiwanese chain, everywhere.</div></div><span class="spot-badge badge-note">CHEAP</span></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-title food">FOOD STREETS</div>
+          <div class="spot-list">
+            <div class="spot food-spot"><div><div class="spot-name">Wujiang Road Snack Street</div><div class="spot-desc">Dense local snack stalls. Quick cheap lunches. Yang's Dumplings is here.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Yongkang Road</div><div class="spot-desc">Outdoor seating, cold Tsingtao, cheap eats. Very local French Concession crowd. Day & night.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+          </div>
+        </div>`,
+      pokemon: `
+        <div class="alert-bar"><strong>⚡ TIER 1 CITY — MAJOR HAUL</strong>Shanghai is the #1 Pokémon TCG city in mainland China. Budget ½ to 1 full day. Do your biggest buy here.</div>
+
+        <div class="block">
+          <div class="block-title pokemon">STORE LOCATIONS</div>
+          <div class="spot-list">
+            <div class="spot pokemon-spot">
+              <div>
+                <div class="spot-name">Baimi Xiangxie Commercial Street <span style="font-size:11px;color:var(--muted);">百米香榭商业街</span></div>
+                <div class="spot-desc">Near People's Square. Best TCG hub in Shanghai — multiple small stores across several floors selling Pokémon, Yu-Gi-Oh, Digimon. Main place locals buy TCG. Cheapest prices in Shanghai. Sealed boxes, promo boxes, Gem Boxes, singles.</div>
+              </div>
+              <span class="spot-badge badge-tier1">CHEAPEST</span>
+            </div>
+            <div class="spot pokemon-spot">
+              <div>
+                <div class="spot-name">Pokémon TCG Official Gym — Zhongshan Park</div>
+                <div class="spot-desc">Inside Cloud Nine Shopping Mall. Official Pokémon card store — authentic sealed products, promos, TCG events. Prices are retail (not cheapest) but 100% authentic. Official booster packs, promo cards, Pokémon merch.</div>
+              </div>
+              <span class="spot-badge badge-tier1">OFFICIAL</span>
+            </div>
+            <div class="spot pokemon-spot">
+              <div>
+                <div class="spot-name">ZX Creation Mall <span style="font-size:11px;color:var(--muted);">ZX创趣场</span></div>
+                <div class="spot-desc">Nanjing East Road. 6-floor anime / hobby mall with multiple anime and card shops. Pokémon packs and merch across several floors. Strong hobby scene.</div>
+              </div>
+              <span class="spot-badge badge-good">GOOD</span>
+            </div>
+            <div class="spot pokemon-spot">
+              <div>
+                <div class="spot-name">Jing'an Joy City</div>
+                <div class="spot-desc">Anime and hobby mall with collectible stores. Pokémon packs, anime merchandise, occasional dedicated card stores. Good for a browse while in Jing'an.</div>
+              </div>
+              <span class="spot-badge badge-good">BROWSE</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-title pokemon">🎯 MASTER HUNT LIST</div>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:18px;font-family:'Share Tech Mono',monospace;letter-spacing:1px;">SINGLES: TAP ○ TO MARK FOUND + LOG PRICE PAID · SEALED / GIFT: USE + / − TO COUNT UNITS</p>
+
+          <!-- ══ GRAND TOTALS BAR ══ -->
+          <div style="display:flex;align-items:center;gap:16px;background:rgba(0,232,122,0.06);border:1px solid rgba(0,232,122,0.2);padding:12px 16px;margin-bottom:28px;flex-wrap:wrap;gap:12px 20px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">SEALED</span>
+              <span id="hunt-grand-total" style="font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--cat-pokemon);line-height:1;">0</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">SINGLES</span>
+              <span id="hunt-singles-total" style="font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--magenta);line-height:1;">0</span>
+            </div>
+            <span id="hunt-grand-cost" style="margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">~$0 AUD est.</span>
+            <span id="hunt-grand-paid" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--green);"></span>
+          </div>
+
+          <!-- ══════════════════════════════════════════
+               SECTION I — BLUE CHIP SINGLES
+          ══════════════════════════════════════════ -->
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(255,0,128,0.08);border-left:3px solid var(--magenta);margin-bottom:8px;">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--magenta);letter-spacing:2px;">💎 SECTION I</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white);letter-spacing:2px;">BLUE CHIP SINGLES</span>
+          </div>
+
+          <!-- S+ UMBREON -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--magenta);border-color:rgba(255,0,128,0.5);background:rgba(255,0,128,0.12);">🥇 S+ GRAIL</span>
+            <span class="hunt-tier-title">🌙 UMBREON — BUY EVERY TIME</span>
+            <span class="hunt-tier-meta">¥200–2000 · $42–420 AUD raw</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="single-card" data-single-id="s-umbreon-vmax-alt" data-aud-lo="315" data-aud-hi="420">
+              <div class="single-toggle" onclick="singleToggle('s-umbreon-vmax-alt')" id="stgl-s-umbreon-vmax-alt"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Umbreon VMAX <strong>Alt Art</strong></div>
+                <div class="hunt-chinese">月亮伊布VMAX（异画）· 182/SV-P</div>
+                <div class="hunt-notes">The grail. CN-only SV-P promo. Moonlit forest, fireflies. Does not exist in JP or EN. Most sought CN card globally. Auto-buy at any price under $420.</div>
+                <div class="hunt-price-row">
+                  <span class="hunt-price-tag">¥1500–2000</span>
+                  <span class="hunt-price-tag" style="color:var(--yellow);">$315–420 AUD</span>
+                  <span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $1100–1400</span>
+                </div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-umbreon-vmax-alt"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-umbreon-vmax-alt')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-umbreon-sir" data-aud-lo="42" data-aud-hi="84">
+              <div class="single-toggle" onclick="singleToggle('s-umbreon-sir')" id="stgl-s-umbreon-sir"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Umbreon <strong>SIR</strong></div>
+                <div class="hunt-chinese">月亮伊布（特别插画）· SV-P</div>
+                <div class="hunt-notes">Special Illustration Rare. CN exclusive SV-P. Full-art moonlit scene. Strong grading candidate — PSA10 target.</div>
+                <div class="hunt-price-row">
+                  <span class="hunt-price-tag">¥200–400</span>
+                  <span class="hunt-price-tag" style="color:var(--yellow);">$42–84 AUD</span>
+                  <span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $350–600</span>
+                </div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-umbreon-sir"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-umbreon-sir')">＋ LOG FIND</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- S+ PIKACHU -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--magenta);border-color:rgba(255,0,128,0.5);background:rgba(255,0,128,0.12);">🥇 S+ GRAIL</span>
+            <span class="hunt-tier-title">⚡ PIKACHU — BUY EVERY TIME</span>
+            <span class="hunt-tier-meta">¥200–1200 · $42–250 AUD raw</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="single-card" data-single-id="s-pikachu-masterball" data-aud-lo="200" data-aud-hi="250">
+              <div class="single-toggle" onclick="singleToggle('s-pikachu-masterball')" id="stgl-s-pikachu-masterball"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Pikachu <strong>Master Ball Holo</strong></div>
+                <div class="hunt-chinese">皮卡丘（大师球）· 025/151C</div>
+                <div class="hunt-notes">CN exclusive Master Ball treatment from 151 Hope. Iconic purple-black holo pattern. One of the most distinctive CN promos. PSA10 pipeline target.</div>
+                <div class="hunt-price-row">
+                  <span class="hunt-price-tag">¥950–1200</span>
+                  <span class="hunt-price-tag" style="color:var(--yellow);">$200–250 AUD</span>
+                  <span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $500–800</span>
+                </div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-pikachu-masterball"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-pikachu-masterball')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-pikachu-sir" data-aud-lo="42" data-aud-hi="74">
+              <div class="single-toggle" onclick="singleToggle('s-pikachu-sir')" id="stgl-s-pikachu-sir"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Pikachu ex <strong>SIR</strong></div>
+                <div class="hunt-chinese">皮卡丘ex（特别插画）· SV-P</div>
+                <div class="hunt-notes">Full-art Special Illustration Rare. CN-only SV-P promo. Pikachu ex in signature painterly full-art style. Grading candidate.</div>
+                <div class="hunt-price-row">
+                  <span class="hunt-price-tag">¥200–350</span>
+                  <span class="hunt-price-tag" style="color:var(--yellow);">$42–74 AUD</span>
+                  <span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $250–400</span>
+                </div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-pikachu-sir"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-pikachu-sir')">＋ LOG FIND</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TIER S CHARIZARD -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--orange);border-color:rgba(255,140,0,0.5);background:rgba(255,140,0,0.08);">🔥 TIER S</span>
+            <span class="hunt-tier-title">CHARIZARD — FULL ALT ART SYSTEM</span>
+            <span class="hunt-tier-meta">¥200–900 · $42–189 AUD raw · MEMORISE ALL 5</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="single-card" data-single-id="s-charizard-v-alt" data-aud-lo="84" data-aud-hi="147">
+              <div class="single-toggle" onclick="singleToggle('s-charizard-v-alt')" id="stgl-s-charizard-v-alt"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard V <strong>Alt Art</strong></div>
+                <div class="hunt-chinese">喷火龙V（异画）· SV4</div>
+                <div class="hunt-notes">CN-exclusive Alt Art. Charizard mid-flight in signature dramatic pose. SV4 set. Strong grading spread.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥400–700</span><span class="hunt-price-tag" style="color:var(--yellow);">$84–147 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $350–550</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-charizard-v-alt"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-charizard-v-alt')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-charizard-vstar-alt" data-aud-lo="74" data-aud-hi="126">
+              <div class="single-toggle" onclick="singleToggle('s-charizard-vstar-alt')" id="stgl-s-charizard-vstar-alt"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard VSTAR <strong>Alt Art</strong></div>
+                <div class="hunt-chinese">喷火龙VSTAR（异画）· SV5</div>
+                <div class="hunt-notes">CN-exclusive VSTAR Alt. Charizard with VSTAR universe energy burst background. SV5 set.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥350–600</span><span class="hunt-price-tag" style="color:var(--yellow);">$74–126 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $300–500</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-charizard-vstar-alt"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-charizard-vstar-alt')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-charizard-ex-sar-151" data-aud-lo="105" data-aud-hi="189">
+              <div class="single-toggle" onclick="singleToggle('s-charizard-ex-sar-151')" id="stgl-s-charizard-ex-sar-151"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard ex <strong>SAR (151)</strong></div>
+                <div class="hunt-chinese">喷火龙ex（特别插画）· 199/151C</div>
+                <div class="hunt-notes">Special Art Rare from Collect 151. CN-exclusive print. #1 PSA10 grading target in the 151 set. High demand from Western collectors.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥500–900</span><span class="hunt-price-tag" style="color:var(--yellow);">$105–189 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $450–700</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-charizard-ex-sar-151"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-charizard-ex-sar-151')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-charizard-ex-sar-sv7" data-aud-lo="105" data-aud-hi="189">
+              <div class="single-toggle" onclick="singleToggle('s-charizard-ex-sar-sv7')" id="stgl-s-charizard-ex-sar-sv7"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard ex <strong>SAR (SV7)</strong></div>
+                <div class="hunt-chinese">喷火龙ex（特别插画）· SV7</div>
+                <div class="hunt-notes">SAR from SV7 set. Different artwork to the 151 version — full-art tera energy scene. CN-exclusive. Same price tier.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥500–900</span><span class="hunt-price-tag" style="color:var(--yellow);">$105–189 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $450–700</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-charizard-ex-sar-sv7"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-charizard-ex-sar-sv7')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-charizard-promo-box" data-aud-lo="42" data-aud-hi="84">
+              <div class="single-toggle" onclick="singleToggle('s-charizard-promo-box')" id="stgl-s-charizard-promo-box"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Charizard <strong>Promo (Gift Box)</strong></div>
+                <div class="hunt-chinese">喷火龙礼盒限定 · BOX-P</div>
+                <div class="hunt-notes">Exclusive promo only available in CN Gift Boxes. Lower raw price but box-locked scarcity. Buy if seen loose.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥200–400</span><span class="hunt-price-tag" style="color:var(--yellow);">$42–84 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $250–400</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-charizard-promo-box"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-charizard-promo-box')">＋ LOG FIND</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TIER S MEW/MEWTWO -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--orange);border-color:rgba(255,140,0,0.5);background:rgba(255,140,0,0.08);">🔥 TIER S</span>
+            <span class="hunt-tier-title">🧠 MEW / MEWTWO SYSTEM</span>
+            <span class="hunt-tier-meta">¥150–600 · $32–126 AUD raw</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="single-card" data-single-id="s-mew-ex-sar-151" data-aud-lo="63" data-aud-hi="126">
+              <div class="single-toggle" onclick="singleToggle('s-mew-ex-sar-151')" id="stgl-s-mew-ex-sar-151"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Mew ex <strong>SAR (151)</strong></div>
+                <div class="hunt-chinese">梦幻ex（特别插画）· 205/151C</div>
+                <div class="hunt-notes">Full-art SAR from Collect 151. CN-only. Mew in psychic energy bloom scene. One of the best-looking cards in the 151 set.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥300–600</span><span class="hunt-price-tag" style="color:var(--yellow);">$63–126 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $300–500</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-mew-ex-sar-151"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-mew-ex-sar-151')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-mew-ex-sar-sv4" data-aud-lo="63" data-aud-hi="126">
+              <div class="single-toggle" onclick="singleToggle('s-mew-ex-sar-sv4')" id="stgl-s-mew-ex-sar-sv4"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Mew ex <strong>SAR (SV4)</strong></div>
+                <div class="hunt-chinese">梦幻ex（特别插画）· SV4</div>
+                <div class="hunt-notes">SAR from SV4 set — different art to the 151 version. CN-exclusive. Two separate collectibles despite same Pokémon.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥300–600</span><span class="hunt-price-tag" style="color:var(--yellow);">$63–126 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $300–500</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-mew-ex-sar-sv4"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-mew-ex-sar-sv4')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-mew-promo" data-aud-lo="32" data-aud-hi="63">
+              <div class="single-toggle" onclick="singleToggle('s-mew-promo')" id="stgl-s-mew-promo"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Mew <strong>Promo</strong></div>
+                <div class="hunt-chinese">梦幻促销卡 · SV-P</div>
+                <div class="hunt-notes">CN SV-P promo. Event or store exclusive distribution. Lower price point but scarce — buy if seen under $60.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥150–300</span><span class="hunt-price-tag" style="color:var(--yellow);">$32–63 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $200–350</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-mew-promo"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-mew-promo')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-mewtwo-ex-sar" data-aud-lo="53" data-aud-hi="105">
+              <div class="single-toggle" onclick="singleToggle('s-mewtwo-ex-sar')" id="stgl-s-mewtwo-ex-sar"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Mewtwo ex <strong>SAR</strong></div>
+                <div class="hunt-chinese">超梦ex（特别插画）· SV4</div>
+                <div class="hunt-notes">SV4 CN-exclusive SAR. Mewtwo in full psychic energy artwork. Pairs with Mew ex SAR as a display set.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥250–500</span><span class="hunt-price-tag" style="color:var(--yellow);">$53–105 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $280–450</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-mewtwo-ex-sar"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-mewtwo-ex-sar')">＋ LOG FIND</button>
+              </div>
+            </div>
+            <div class="single-card" data-single-id="s-mewtwo-mew-gx" data-aud-lo="42" data-aud-hi="84">
+              <div class="single-toggle" onclick="singleToggle('s-mewtwo-mew-gx')" id="stgl-s-mewtwo-mew-gx"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name">Mewtwo &amp; Mew <strong>GX</strong></div>
+                <div class="hunt-chinese">超梦&amp;梦幻GX · CSM2b</div>
+                <div class="hunt-notes">S&S era duo GX card. CSM2b CN exclusive. Older but still highly collectible. Tag Team GX format — double PSA10 value on mint copies.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥200–400</span><span class="hunt-price-tag" style="color:var(--yellow);">$42–84 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $250–450</span></div>
+              </div>
+              <div class="single-price-col">
+                <div class="hunt-unit-list" id="sunits-s-mewtwo-mew-gx"></div>
+                <button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-mewtwo-mew-gx')">＋ LOG FIND</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- EEVEE SYSTEM -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--orange);border-color:rgba(255,140,0,0.5);background:rgba(255,140,0,0.08);">🔥 TIER S</span>
+            <span class="hunt-tier-title">🐾 FULL EEVEE SYSTEM — ALL 9, NO SKIPS</span>
+            <span class="hunt-tier-meta">¥80–400 · $17–84 AUD raw · COMPLETE THE SET</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="single-card" data-single-id="s-eevee" data-aud-lo="17" data-aud-hi="32">
+              <div class="single-toggle" onclick="singleToggle('s-eevee')" id="stgl-s-eevee"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info">
+                <div class="hunt-name"><strong>Eevee</strong></div>
+                <div class="hunt-chinese">伊布 · SV-P</div>
+                <div class="hunt-notes">The anchor card. CN SV-P promo. Buy first — then hunt all 8 evolutions. Whole set displays best together.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥80–150</span><span class="hunt-price-tag" style="color:var(--yellow);">$17–32 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $220–380</span></div>
+              </div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-eevee"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-eevee')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-vaporeon" data-aud-lo="21" data-aud-hi="38">
+              <div class="single-toggle" onclick="singleToggle('s-vaporeon')" id="stgl-s-vaporeon"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Vaporeon</strong></div><div class="hunt-chinese">水伊布 · SV-P</div><div class="hunt-notes">Water-type Eeveelution. CN SV-P exclusive. Clean blue palette — one of the more common in the set.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥100–180</span><span class="hunt-price-tag" style="color:var(--yellow);">$21–38 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $180–300</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-vaporeon"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-vaporeon')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-jolteon" data-aud-lo="21" data-aud-hi="38">
+              <div class="single-toggle" onclick="singleToggle('s-jolteon')" id="stgl-s-jolteon"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Jolteon</strong></div><div class="hunt-chinese">雷伊布 · SV-P</div><div class="hunt-notes">Electric-type. CN SV-P. Yellow lightning palette. Similar rarity to Vaporeon in the set.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥100–180</span><span class="hunt-price-tag" style="color:var(--yellow);">$21–38 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $180–300</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-jolteon"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-jolteon')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-flareon" data-aud-lo="21" data-aud-hi="38">
+              <div class="single-toggle" onclick="singleToggle('s-flareon')" id="stgl-s-flareon"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Flareon</strong></div><div class="hunt-chinese">火伊布 · SV-P</div><div class="hunt-notes">Fire-type. CN SV-P. Orange flame artwork. Buy alongside Jolteon and Vaporeon — all three are the "entry tier" of the Eevee set.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥100–180</span><span class="hunt-price-tag" style="color:var(--yellow);">$21–38 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $180–300</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-flareon"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-flareon')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-espeon" data-aud-lo="32" data-aud-hi="53">
+              <div class="single-toggle" onclick="singleToggle('s-espeon')" id="stgl-s-espeon"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Espeon</strong></div><div class="hunt-chinese">太阳伊布 · SV-P</div><div class="hunt-notes">Psychic-type. CN SV-P. Purple palette, gem forehead detail. Mid-tier of the set in price and rarity.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥150–250</span><span class="hunt-price-tag" style="color:var(--yellow);">$32–53 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $220–400</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-espeon"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-espeon')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-umbreon-eevee" data-aud-lo="42" data-aud-hi="84">
+              <div class="single-toggle" onclick="singleToggle('s-umbreon-eevee')" id="stgl-s-umbreon-eevee"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Umbreon</strong> <span style="font-size:10px;color:var(--muted);">(Eevee System)</span></div><div class="hunt-chinese">月亮伊布 · SV-P</div><div class="hunt-notes">Highest-value in the Eevee set. Dark-type. Moonlit art. This is the Eevee system version — distinct from the VMAX Alt Art.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥200–400</span><span class="hunt-price-tag" style="color:var(--yellow);">$42–84 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $350–600</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-umbreon-eevee"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-umbreon-eevee')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-leafeon" data-aud-lo="25" data-aud-hi="42">
+              <div class="single-toggle" onclick="singleToggle('s-leafeon')" id="stgl-s-leafeon"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Leafeon</strong></div><div class="hunt-chinese">叶伊布 · SV-P</div><div class="hunt-notes">Grass-type. CN SV-P. Green leaf palette. Mid-tier. Often found alongside Glaceon in stores.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥120–200</span><span class="hunt-price-tag" style="color:var(--yellow);">$25–42 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $200–320</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-leafeon"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-leafeon')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-glaceon" data-aud-lo="25" data-aud-hi="42">
+              <div class="single-toggle" onclick="singleToggle('s-glaceon')" id="stgl-s-glaceon"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Glaceon</strong></div><div class="hunt-chinese">冰伊布 · SV-P</div><div class="hunt-notes">Ice-type. CN SV-P. Cool blue-white palette. Pairs with Leafeon — usually same price tier.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥120–200</span><span class="hunt-price-tag" style="color:var(--yellow);">$25–42 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $200–320</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-glaceon"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-glaceon')">＋ LOG FIND</button></div>
+            </div>
+            <div class="single-card" data-single-id="s-sylveon" data-aud-lo="32" data-aud-hi="53">
+              <div class="single-toggle" onclick="singleToggle('s-sylveon')" id="stgl-s-sylveon"><span class="stgl-icon">○</span></div>
+              <div class="hunt-info"><div class="hunt-name"><strong>Sylveon</strong></div><div class="hunt-chinese">仙子伊布 · SV-P</div><div class="hunt-notes">Fairy-type. CN SV-P. Pink ribbon palette. Mid-tier. One of the more popular Eeveelutions internationally.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥150–250</span><span class="hunt-price-tag" style="color:var(--yellow);">$32–53 AUD</span><span class="hunt-price-tag" style="color:var(--cyan);">PSA10: $220–400</span></div></div>
+              <div class="single-price-col"><div class="hunt-unit-list" id="sunits-s-sylveon"></div><button class="hunt-btn hunt-plus" style="width:100%;font-size:9px;letter-spacing:1px;" onclick="singleAddUnit('s-sylveon')">＋ LOG FIND</button></div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════
+               SECTION II — SEALED PRODUCTS
+          ══════════════════════════════════════════ -->
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(0,232,122,0.07);border-left:3px solid var(--cat-pokemon);margin:24px 0 8px;">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--cat-pokemon);letter-spacing:2px;">📦 SECTION II</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white);letter-spacing:2px;">SEALED PRODUCTS — COUNT AS YOU BUY</span>
+          </div>
+
+          <!-- 151 SERIES -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--cat-pokemon);border-color:rgba(0,232,122,0.5);background:rgba(0,232,122,0.08);">TOP PRIORITY</span>
+            <span class="hunt-tier-title">🧩 151 COMPLETE SYSTEM</span>
+            <span class="hunt-tier-meta">¥399–800 · $84–168 AUD</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="hunt-card" data-id="151-journey" data-price-lo="158" data-price-hi="158">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" data-box-id="151-journey" style="opacity:0.4;font-size:12px;">151A</div></div>
+              <div class="hunt-info">
+                <div class="hunt-name">151 Journey <strong>Booster Box</strong></div>
+                <div class="hunt-chinese">151：旅程 · 151A</div>
+                <div class="hunt-notes">Original Kanto 151 CN exclusive. Base set Pokémon in Chinese print. High Western demand. Contains Charizard ex SAR pull opportunity.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥750</span><span class="hunt-price-tag" style="color:var(--yellow);">$158 AUD</span></div>
+              </div>
+              <div class="hunt-counter-col">
+                <button class="hunt-btn hunt-plus" onclick="huntChange('151-journey',1)">＋</button>
+                <span class="hunt-count" id="cnt-151-journey">0</span>
+                <button class="hunt-btn hunt-minus" onclick="huntChange('151-journey',-1)">－</button>
+                <div class="hunt-unit-list" id="units-151-journey"></div>
+              </div>
+            </div>
+            <div class="hunt-card" data-id="151-surprise" data-price-lo="164" data-price-hi="164">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" data-box-id="151-surprise" style="opacity:0.4;font-size:12px;">151B</div></div>
+              <div class="hunt-info">
+                <div class="hunt-name">151 Surprise <strong>Booster Box</strong></div>
+                <div class="hunt-chinese">151：惊喜 · 151B</div>
+                <div class="hunt-notes">Surprise mechanic packs with randomised bonus inserts. Highest upside of the three. Buy multiple — best bang per CNY on pull value.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥780</span><span class="hunt-price-tag" style="color:var(--yellow);">$164 AUD</span></div>
+              </div>
+              <div class="hunt-counter-col">
+                <button class="hunt-btn hunt-plus" onclick="huntChange('151-surprise',1)">＋</button>
+                <span class="hunt-count" id="cnt-151-surprise">0</span>
+                <button class="hunt-btn hunt-minus" onclick="huntChange('151-surprise',-1)">－</button>
+                <div class="hunt-unit-list" id="units-151-surprise"></div>
+              </div>
+            </div>
+            <div class="hunt-card" data-id="151-hope" data-price-lo="168" data-price-hi="168">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" data-box-id="151-hope" style="opacity:0.4;font-size:12px;">151C</div></div>
+              <div class="hunt-info">
+                <div class="hunt-name">151 Hope <strong>Booster Box</strong></div>
+                <div class="hunt-chinese">151：希望 · 151C</div>
+                <div class="hunt-notes">Master Ball holos. Contains Pikachu Master Ball Holo pull opportunity. Highest price — best chase card potential. Worth the premium.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥800</span><span class="hunt-price-tag" style="color:var(--yellow);">$168 AUD</span></div>
+              </div>
+              <div class="hunt-counter-col">
+                <button class="hunt-btn hunt-plus" onclick="huntChange('151-hope',1)">＋</button>
+                <span class="hunt-count" id="cnt-151-hope">0</span>
+                <button class="hunt-btn hunt-minus" onclick="huntChange('151-hope',-1)">－</button>
+                <div class="hunt-unit-list" id="units-151-hope"></div>
+              </div>
+            </div>
+            <div class="hunt-card" data-id="151-box" data-price-lo="84" data-price-hi="84">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:13px;">151<br>GIFT</div></div>
+              <div class="hunt-info">
+                <div class="hunt-name">151 <strong>Collector Gift Box</strong></div>
+                <div class="hunt-chinese">151礼盒 · 151-BOX</div>
+                <div class="hunt-notes">Gift box version. Promo card + packs. Lower entry price. Good volume buy if budget-constrained — still has pull value.</div>
+                <div class="hunt-price-row"><span class="hunt-price-tag">¥399</span><span class="hunt-price-tag" style="color:var(--yellow);">$84 AUD</span></div>
+              </div>
+              <div class="hunt-counter-col">
+                <button class="hunt-btn hunt-plus" onclick="huntChange('151-box',1)">＋</button>
+                <span class="hunt-count" id="cnt-151-box">0</span>
+                <button class="hunt-btn hunt-minus" onclick="huntChange('151-box',-1)">－</button>
+                <div class="hunt-unit-list" id="units-151-box"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GEM PACKS -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--cyan);border-color:rgba(0,245,255,0.4);background:rgba(0,245,255,0.06);">💎 GEM SERIES</span>
+            <span class="hunt-tier-title">GEM PACK SERIES — ALL 5 VOLUMES</span>
+            <span class="hunt-tier-meta">¥180–230 · $38–48 AUD</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="hunt-card" data-id="gem-vol1" data-price-lo="38" data-price-hi="38">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:13px;">GEM<br>V1</div></div>
+              <div class="hunt-info"><div class="hunt-name">Gem Pack <strong>Vol. 1</strong></div><div class="hunt-chinese">宝石包 Vol.1 · GEM1</div><div class="hunt-notes">The original. Older stock — may be harder to find. If you see it, buy it.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥180</span><span class="hunt-price-tag" style="color:var(--yellow);">$38 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gem-vol1',1)">＋</button><span class="hunt-count" id="cnt-gem-vol1">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gem-vol1',-1)">－</button><div class="hunt-unit-list" id="units-gem-vol1"></div></div>
+            </div>
+            <div class="hunt-card" data-id="gem-vol2" data-price-lo="40" data-price-hi="40">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:13px;">GEM<br>V2</div></div>
+              <div class="hunt-info"><div class="hunt-name">Gem Pack <strong>Vol. 2</strong></div><div class="hunt-chinese">宝石包 Vol.2 · GEM2</div><div class="hunt-notes">Second volume. Eevee Heroes content — Umbreon/Sylveon/Leafeon pull pool. Strong chase.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥190</span><span class="hunt-price-tag" style="color:var(--yellow);">$40 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gem-vol2',1)">＋</button><span class="hunt-count" id="cnt-gem-vol2">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gem-vol2',-1)">－</button><div class="hunt-unit-list" id="units-gem-vol2"></div></div>
+            </div>
+            <div class="hunt-card" data-id="gem-vol3" data-price-lo="42" data-price-hi="42">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" data-box-id="gem-vol3" style="opacity:0.4;font-size:12px;">GEM3</div></div>
+              <div class="hunt-info"><div class="hunt-name">Gem Pack <strong>Vol. 3</strong></div><div class="hunt-chinese">宝石包 Vol.3 · GEM3</div><div class="hunt-notes">Gengar-themed. Ghost/Dark focus. Gengar AR is the flagship chase. 15 packs · 4 cards each.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥200</span><span class="hunt-price-tag" style="color:var(--yellow);">$42 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gem-vol3',1)">＋</button><span class="hunt-count" id="cnt-gem-vol3">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gem-vol3',-1)">－</button><div class="hunt-unit-list" id="units-gem-vol3"></div></div>
+            </div>
+            <div class="hunt-card" data-id="gem-vol4" data-price-lo="46" data-price-hi="46">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:13px;">GEM<br>V4</div></div>
+              <div class="hunt-info"><div class="hunt-name">Gem Pack <strong>Vol. 4</strong></div><div class="hunt-chinese">宝石包 Vol.4 · GEM4</div><div class="hunt-notes">Newest volume available. Check current pull pool before buying — newer often means more supply and better singles odds.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥220</span><span class="hunt-price-tag" style="color:var(--yellow);">$46 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gem-vol4',1)">＋</button><span class="hunt-count" id="cnt-gem-vol4">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gem-vol4',-1)">－</button><div class="hunt-unit-list" id="units-gem-vol4"></div></div>
+            </div>
+            <div class="hunt-card" data-id="gem-vol5" data-price-lo="48" data-price-hi="48">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:13px;">GEM<br>V5</div></div>
+              <div class="hunt-info"><div class="hunt-name">Gem Pack <strong>Vol. 5</strong></div><div class="hunt-chinese">宝石包 Vol.5 · GEM5</div><div class="hunt-notes">Latest release. Freshest stock — widest availability. Buy multiples if found cheap.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥230</span><span class="hunt-price-tag" style="color:var(--yellow);">$48 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gem-vol5',1)">＋</button><span class="hunt-count" id="cnt-gem-vol5">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gem-vol5',-1)">－</button><div class="hunt-unit-list" id="units-gem-vol5"></div></div>
+            </div>
+          </div>
+
+          <!-- STANDARD BOOSTER SETS -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--muted);border-color:rgba(74,96,128,0.5);background:rgba(74,96,128,0.06);">BOOSTER SETS</span>
+            <span class="hunt-tier-title">🟥 STANDARD CN BOOSTER SETS</span>
+            <span class="hunt-tier-meta">¥400–700 · $84–147 AUD</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="hunt-card" data-id="csv8-bright" data-price-lo="95" data-price-hi="95">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">CSV8<br>BRIGHT</div></div>
+              <div class="hunt-info"><div class="hunt-name">Bright Fantasy <strong>CSV8</strong></div><div class="hunt-chinese">璀璨奇想 · CSV8</div><div class="hunt-notes">Current CN SV rotation. Check pull list before buying — newer sets have more predictable chase pool.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥450</span><span class="hunt-price-tag" style="color:var(--yellow);">$95 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('csv8-bright',1)">＋</button><span class="hunt-count" id="cnt-csv8-bright">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('csv8-bright',-1)">－</button><div class="hunt-unit-list" id="units-csv8-bright"></div></div>
+            </div>
+            <div class="hunt-card" data-id="csv7-blade" data-price-lo="84" data-price-hi="84">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">CSV7<br>BLADE</div></div>
+              <div class="hunt-info"><div class="hunt-name">Blade Awakened <strong>CSV7</strong></div><div class="hunt-chinese">利刃猛醒 · CSV7</div><div class="hunt-notes">CN SV era set. Charizard ex SAR (SV7) pull target — this is the set to buy if hunting that specific card.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥400</span><span class="hunt-price-tag" style="color:var(--yellow);">$84 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('csv7-blade',1)">＋</button><span class="hunt-count" id="cnt-csv7-blade">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('csv7-blade',-1)">－</button><div class="hunt-unit-list" id="units-csv7-blade"></div></div>
+            </div>
+            <div class="hunt-card" data-id="m3f-nihil" data-price-lo="105" data-price-hi="105">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">M3F<br>NIHIL</div></div>
+              <div class="hunt-info"><div class="hunt-name">Nihil Zero <strong>M3F</strong></div><div class="hunt-chinese">虚空零点 · M3F</div><div class="hunt-notes">Premium CN set. Higher price = stronger chase pool. Iron Hands ex, Miraidon ex focus. Worth the premium over standard sets.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥500</span><span class="hunt-price-tag" style="color:var(--yellow);">$105 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('m3f-nihil',1)">＋</button><span class="hunt-count" id="cnt-m3f-nihil">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('m3f-nihil',-1)">－</button><div class="hunt-unit-list" id="units-m3f-nihil"></div></div>
+            </div>
+            <div class="hunt-card" data-id="cs4-nine" data-price-lo="147" data-price-hi="147">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" data-box-id="gem-eeveeheroes" style="opacity:0.4;font-size:12px;">CS4</div></div>
+              <div class="hunt-info"><div class="hunt-name">Nine Colors Gather <strong>CS4</strong></div><div class="hunt-chinese">九彩汇聚 · CS4</div><div class="hunt-notes">S&S era box containing Umbreon/Eevee Heroes content. Mew VMAX, Rayquaza VMAX alt art. High-value older set — buy if in stock.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥700</span><span class="hunt-price-tag" style="color:var(--yellow);">$147 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('cs4-nine',1)">＋</button><span class="hunt-count" id="cnt-cs4-nine">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('cs4-nine',-1)">－</button><div class="hunt-unit-list" id="units-cs4-nine"></div></div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════
+               SECTION III — GIFT BOXES
+          ══════════════════════════════════════════ -->
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(255,159,67,0.08);border-left:3px solid var(--cat-hotel);margin:24px 0 8px;">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--cat-hotel);letter-spacing:2px;">🎁 SECTION III</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white);letter-spacing:2px;">GIFT BOXES — HIGH MARGIN VISUALS</span>
+          </div>
+
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--yellow);border-color:rgba(255,229,0,0.4);background:rgba(255,229,0,0.06);">🥇 HIGH PRIORITY</span>
+            <span class="hunt-tier-title">TOP GIFT BOXES</span>
+            <span class="hunt-tier-meta">¥588–888 · $124–187 AUD</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="hunt-card" data-id="gift-eevee-box" data-price-lo="187" data-price-hi="187">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" data-box-id="gem-eevee" style="opacity:0.4;font-size:12px;">EEVEE</div></div>
+              <div class="hunt-info"><div class="hunt-name">Eevee <strong>Advanced Gift Box</strong></div><div class="hunt-chinese">伊布高级礼盒 · EEVEE-BOX</div><div class="hunt-notes">Premium Eevee box with exclusive promo, packs and accessories. CN-only. Strong resale as a sealed unit — buy multiples if available.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥888</span><span class="hunt-price-tag" style="color:var(--yellow);">$187 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gift-eevee-box',1)">＋</button><span class="hunt-count" id="cnt-gift-eevee-box">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gift-eevee-box',-1)">－</button><div class="hunt-unit-list" id="units-gift-eevee-box"></div></div>
+            </div>
+            <div class="hunt-card" data-id="gift-midautumn" data-price-lo="124" data-price-hi="124">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">MID<br>AUTUMN</div></div>
+              <div class="hunt-info"><div class="hunt-name">Mid-Autumn Festival <strong>Box</strong></div><div class="hunt-chinese">中秋节礼盒 · FEST-2026</div><div class="hunt-notes">2026 festival exclusive. Only available around Mid-Autumn Festival (Sep 2026 — perfect timing). Limited print. Buy immediately if seen.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥588</span><span class="hunt-price-tag" style="color:var(--yellow);">$124 AUD</span><span class="hunt-price-tag" style="color:var(--magenta);">SEPT TIMING ✓</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gift-midautumn',1)">＋</button><span class="hunt-count" id="cnt-gift-midautumn">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gift-midautumn',-1)">－</button><div class="hunt-unit-list" id="units-gift-midautumn"></div></div>
+            </div>
+          </div>
+
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--muted);border-color:rgba(74,96,128,0.5);background:rgba(74,96,128,0.06);">🥈 SECONDARY</span>
+            <span class="hunt-tier-title">SECONDARY GIFT BOXES</span>
+            <span class="hunt-tier-meta">¥350–450 · $74–95 AUD</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="hunt-card" data-id="gift-mewtwo151" data-price-lo="84" data-price-hi="84">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" data-box-id="gem-mew" style="opacity:0.4;font-size:12px;">MTW</div></div>
+              <div class="hunt-info"><div class="hunt-name">Mewtwo 151 <strong>Gift Box</strong></div><div class="hunt-chinese">超梦151礼盒 · 151-GIFT</div><div class="hunt-notes">Mewtwo promo card + 151 packs. Good volume buy. Contains Mewtwo ex SAR pull opportunity alongside box promo.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥399</span><span class="hunt-price-tag" style="color:var(--yellow);">$84 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gift-mewtwo151',1)">＋</button><span class="hunt-count" id="cnt-gift-mewtwo151">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gift-mewtwo151',-1)">－</button><div class="hunt-unit-list" id="units-gift-mewtwo151"></div></div>
+            </div>
+            <div class="hunt-card" data-id="gift-30th" data-price-lo="95" data-price-hi="95">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">30TH<br>ANNI</div></div>
+              <div class="hunt-info"><div class="hunt-name">30th Anniversary <strong>Box</strong></div><div class="hunt-chinese">最初伙伴系列 · 2026-BOX</div><div class="hunt-notes">2026 anniversary commemorative box. Starter trio theme. Limited run — grab if available.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥450</span><span class="hunt-price-tag" style="color:var(--yellow);">$95 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gift-30th',1)">＋</button><span class="hunt-count" id="cnt-gift-30th">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gift-30th',-1)">－</button><div class="hunt-unit-list" id="units-gift-30th"></div></div>
+            </div>
+            <div class="hunt-card" data-id="gift-lny" data-price-lo="74" data-price-hi="74">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">LNY<br>2026</div></div>
+              <div class="hunt-info"><div class="hunt-name">Lunar New Year <strong>Box</strong></div><div class="hunt-chinese">农历新年礼盒 · 2026-LNY</div><div class="hunt-notes">Chinese New Year 2026 exclusive. Festival-themed. Limited availability — may be hard to find in Sept but check anyway.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥350</span><span class="hunt-price-tag" style="color:var(--yellow);">$74 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('gift-lny',1)">＋</button><span class="hunt-count" id="cnt-gift-lny">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('gift-lny',-1)">－</button><div class="hunt-unit-list" id="units-gift-lny"></div></div>
+            </div>
+          </div>
+
+          <!-- STORE EXCLUSIVES -->
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--cyan);border-color:rgba(0,245,255,0.4);background:rgba(0,245,255,0.05);">🏪 STORE EXCLUSIVE</span>
+            <span class="hunt-tier-title">CARD MASTER / MAIDUIHUI EXCLUSIVES</span>
+            <span class="hunt-tier-meta">¥50–800 · $10–168 AUD · CHECK IN-STORE</span>
+          </div>
+          <div class="hunt-grid">
+            <div class="hunt-card" data-id="store-gift-box" data-price-lo="63" data-price-hi="168">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">STORE<br>GIFT</div></div>
+              <div class="hunt-info"><div class="hunt-name">Store Exclusive <strong>Gift Box</strong></div><div class="hunt-chinese">店铺限定礼盒</div><div class="hunt-notes">Variable — only available in-store at Card Master or Maiduihui. Can't be ordered online. Check on arrival — these sell out fast.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥300–800</span><span class="hunt-price-tag" style="color:var(--yellow);">$63–168 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('store-gift-box',1)">＋</button><span class="hunt-count" id="cnt-store-gift-box">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('store-gift-box',-1)">－</button><div class="hunt-unit-list" id="units-store-gift-box"></div></div>
+            </div>
+            <div class="hunt-card" data-id="store-event-box" data-price-lo="42" data-price-hi="126">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">EVENT<br>BOX</div></div>
+              <div class="hunt-info"><div class="hunt-name">Event Exclusive <strong>Box</strong></div><div class="hunt-chinese">活动限定礼盒</div><div class="hunt-notes">Tournament and event boxes. Shown only at in-store events. Ask staff about upcoming events when you visit.</div><div class="hunt-price-row"><span class="hunt-price-tag">¥200–600</span><span class="hunt-price-tag" style="color:var(--yellow);">$42–126 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('store-event-box',1)">＋</button><span class="hunt-count" id="cnt-store-event-box">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('store-event-box',-1)">－</button><div class="hunt-unit-list" id="units-store-event-box"></div></div>
+            </div>
+            <div class="hunt-card" data-id="store-promo-bundle" data-price-lo="10" data-price-hi="42">
+              <div class="hunt-img-wrap"><div class="hunt-img-fallback" style="opacity:0.5;font-size:11px;">PROMO<br>PACK</div></div>
+              <div class="hunt-info"><div class="hunt-name">Promo Pack <strong>Bundle</strong></div><div class="hunt-chinese">限定促销包</div><div class="hunt-notes">Store promo bundles — loose packs with exclusive promo inclusions (not the same as bulk loose packs — these are sealed store bundles).</div><div class="hunt-price-row"><span class="hunt-price-tag">¥50–200</span><span class="hunt-price-tag" style="color:var(--yellow);">$10–42 AUD</span></div></div>
+              <div class="hunt-counter-col"><button class="hunt-btn hunt-plus" onclick="huntChange('store-promo-bundle',1)">＋</button><span class="hunt-count" id="cnt-store-promo-bundle">0</span><button class="hunt-btn hunt-minus" onclick="huntChange('store-promo-bundle',-1)">－</button><div class="hunt-unit-list" id="units-store-promo-bundle"></div></div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════
+               SECTION IV — GRADED TARGETS
+          ══════════════════════════════════════════ -->
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(0,245,255,0.06);border-left:3px solid var(--cyan);margin:24px 0 8px;">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--cyan);letter-spacing:2px;">🧬 SECTION IV</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white);letter-spacing:2px;">GRADED TARGETS — PSA 10 PIPELINE</span>
+          </div>
+
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--cyan);border-color:rgba(0,245,255,0.5);background:rgba(0,245,255,0.08);">🥇 AUTO GRADE</span>
+            <span class="hunt-tier-title">PRIORITY 1 — GRADE EVERY COPY</span>
+            <span class="hunt-tier-meta">PSA10: $450–1400 AUD</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">
+              <div style="background:var(--card);padding:8px 10px;">CARD</div>
+              <div style="background:var(--card);padding:8px 10px;">CODE</div>
+              <div style="background:var(--card);padding:8px 10px;">RAW AUD</div>
+              <div style="background:var(--card);padding:8px 10px;color:var(--cyan);">PSA10 AUD</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Umbreon VMAX Alt Art <span style="display:block;font-size:10px;color:var(--muted);">月亮伊布VMAX</span></div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">182/SV-P</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$315–420</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);font-weight:700;">$1100–1400</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Charizard ex SAR (151) <span style="display:block;font-size:10px;color:var(--muted);">喷火龙ex</span></div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">199/151C</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$105–189</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);font-weight:700;">$450–700</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Pikachu Master Ball <span style="display:block;font-size:10px;color:var(--muted);">皮卡丘大师球</span></div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">025/151C</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$200–250</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);font-weight:700;">$500–800</div>
+            </div>
+          </div>
+
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--muted);border-color:rgba(74,96,128,0.4);background:rgba(74,96,128,0.06);">🥈 PRIORITY 2</span>
+            <span class="hunt-tier-title">GRADE IF MINT</span>
+            <span class="hunt-tier-meta">PSA10: $250–550 AUD</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">
+              <div style="background:var(--card);padding:8px 10px;">CARD</div><div style="background:var(--card);padding:8px 10px;">CODE</div><div style="background:var(--card);padding:8px 10px;">RAW AUD</div><div style="background:var(--card);padding:8px 10px;color:var(--cyan);">PSA10 AUD</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Charizard V Alt Art <span style="display:block;font-size:10px;color:var(--muted);">喷火龙V异画</span></div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">SV4</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$84–147</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$350–550</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Charizard VSTAR Alt <span style="display:block;font-size:10px;color:var(--muted);">喷火龙VSTAR异画</span></div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">SV5</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$74–126</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$300–500</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Mew ex SAR <span style="display:block;font-size:10px;color:var(--muted);">梦幻ex</span></div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">205/151C</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$63–126</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$300–500</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Mewtwo &amp; Mew GX <span style="display:block;font-size:10px;color:var(--muted);">超梦梦幻GX</span></div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cat-pokemon);">CSM2b</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--yellow);">$42–84</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$250–450</div>
+            </div>
+          </div>
+
+          <div class="hunt-tier-header">
+            <span class="hunt-tier-badge" style="color:var(--muted);border-color:rgba(74,96,128,0.4);background:rgba(74,96,128,0.06);">🥉 PRIORITY 3</span>
+            <span class="hunt-tier-title">BULK GRADE STACK</span>
+            <span class="hunt-tier-meta">PSA10: $120–400 AUD each</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:24px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">
+              <div style="background:var(--card);padding:8px 10px;">CARD</div><div style="background:var(--card);padding:8px 10px;">CHINESE</div><div style="background:var(--card);padding:8px 10px;color:var(--cyan);">PSA10 AUD</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Pikachu SIR</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">皮卡丘ex</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$250–400</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Eevee SIR</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">伊布ex</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$220–380</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card2);padding:10px;font-size:12px;color:var(--white);">Eeveelutions Set (×8)</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">伊布家族</div>
+              <div style="background:var(--card2);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);">$120–250 each</div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════
+               SECTION V — HARD AVOIDS
+          ══════════════════════════════════════════ -->
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(255,0,80,0.08);border-left:3px solid var(--magenta);margin:0 0 8px;">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--magenta);letter-spacing:2px;">🚫 SECTION V</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white);letter-spacing:2px;">HARD AVOIDS — DO NOT BUY</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:8px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:1px;background:var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;">
+              <div style="background:var(--card);padding:8px 10px;">ITEM</div>
+              <div style="background:var(--card);padding:8px 10px;">CHINESE</div>
+              <div style="background:var(--card);padding:8px 10px;color:var(--magenta);">REASON</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:1px;background:var(--border);">
+              <div style="background:rgba(255,0,80,0.05);padding:10px;font-size:12px;color:var(--white);">Loose packs</div>
+              <div style="background:rgba(255,0,80,0.05);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">散包</div>
+              <div style="background:rgba(255,0,80,0.05);padding:10px;font-size:11px;color:var(--magenta);">Tampering risk — packs may be weighed/searched</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Bulk inventory dumps</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">大量库存</div>
+              <div style="background:var(--card);padding:10px;font-size:11px;color:var(--magenta);">No scarcity = no arbitrage margin</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:1px;background:var(--border);">
+              <div style="background:rgba(255,0,80,0.05);padding:10px;font-size:12px;color:var(--white);">Common Pikachu</div>
+              <div style="background:rgba(255,0,80,0.05);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">普通皮卡丘</div>
+              <div style="background:rgba(255,0,80,0.05);padding:10px;font-size:11px;color:var(--magenta);">Oversupply — zero resale premium</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:1px;background:var(--border);">
+              <div style="background:var(--card);padding:10px;font-size:12px;color:var(--white);">Export stock</div>
+              <div style="background:var(--card);padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);">海外库存</div>
+              <div style="background:var(--card);padding:10px;font-size:11px;color:var(--magenta);">No arbitrage — same price as AU market</div>
+            </div>
+          </div>
+
+        </div>
+`,
+      nightlife: `
+        <div class="block">
+          <div class="block-title night">VENUES</div>
+          <div class="vibe-grid">
+            <div class="vibe-card v1"><div class="vibe-type">ROOFTOP</div><div class="vibe-name">Bar Rouge</div><div class="vibe-desc">Bund rooftop. Best view in Shanghai at night. Expensive but do it once. Smart casual.</div></div>
+            <div class="vibe-card v2"><div class="vibe-type">UNDERGROUND</div><div class="vibe-name">The Shelter</div><div class="vibe-desc">Converted bomb shelter. Techno venue. One of Asia's most unique clubs. Dark, loud, real.</div></div>
+            <div class="vibe-card v3"><div class="vibe-type">CRAFT BEER</div><div class="vibe-name">Jing'an Brewery</div><div class="vibe-desc">Local craft beer in an industrial space. Perfect starting point before heading deeper.</div></div>
+            <div class="vibe-card v4"><div class="vibe-type">LATE NIGHT</div><div class="vibe-name">Eddy's Bar</div><div class="vibe-desc">French Concession institution. Friendly crowd, cold beer, open till 4am. No pretense.</div></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-title night">BAR STREETS</div>
+          <div class="spot-list">
+            <div class="spot night-spot"><div><div class="spot-name">Yongkang Road</div><div class="spot-desc">Micro-bar street in the French Concession. Cold Tsingtao, local crowd, no tourist markup. Perfect first night.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot night-spot"><div><div class="spot-name">Xintiandi Bar Strip</div><div class="spot-desc">Premium lane-house bars. More expensive but high design quality.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot night-spot"><div><div class="spot-name">Julu Road</div><div class="spot-desc">Late-night street with a string of bars and live music. Best after midnight.</div></div><span class="spot-badge badge-extra">LATE</span></div>
+          </div>
+        </div>`,
+      arch: `
+        <div class="block">
+          <div class="block-title arch">ARCHITECTURAL HIGHLIGHTS</div>
+          <div class="spot-list">
+            <div class="spot arch-spot"><div><div class="spot-name">1933 Old Millfun (老场坊)</div><div class="spot-desc">Former slaughterhouse turned art space. Brutalist concrete labyrinth with spiral ramps and Escher-like geometry. Extraordinary interior. One of the best buildings in China.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Shanghai Tower</div><div class="spot-desc">632m twisted supertall. Observation deck at 120th floor. Best view of the Pudong skyline cluster.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Jin Mao Tower Atrium</div><div class="spot-desc">Art deco pagoda supertall. The 56-floor cylindrical atrium void from inside is extraordinary.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">The Bund Heritage Buildings</div><div class="spot-desc">52 European colonial buildings along the waterfront. Great for contrast shots against Pudong.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">M50 Art District</div><div class="spot-desc">Former mill converted to galleries. Industrial photography paradise.</div></div><span class="spot-badge badge-extra">EXTRA</span></div>
+          </div>
+        </div>`,
+      drone: `
+        <div class="alert-bar"><strong>⚠️ DRONE WARNING — READ FIRST</strong>Shanghai has strict no-fly zones. The Bund and entire Huangpu riverfront are prohibited. Violation risks confiscation.</div>
+        <div class="block">
+          <div class="block-title drone">DRONE INTEL</div>
+          <div class="spot-list">
+            <div class="spot drone-spot"><div><div class="spot-name">CAAC Registration</div><div class="spot-desc">Mandatory for drones >250g before any flight in China. Register via CAAC app before leaving Australia.</div></div><span class="spot-badge badge-warn">REQUIRED</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Flyable Areas</div><div class="spot-desc">Suburban parks outside the inner ring, Century Park (check app), some Pudong periphery. Always verify in the CAAC app before every flight.</div></div><span class="spot-badge badge-note">CHECK APP</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Hard No-Fly Zones</div><div class="spot-desc">The Bund, Yu Garden, Nanjing Road, all major landmarks, within 5km of airports.</div></div><span class="spot-badge badge-warn">AVOID</span></div>
+          </div>
+        </div>
+        <div class="tip-box"><strong>📱 REQUIRED APP</strong>Download "无人机飞行助手" (UAV Flight Assistant) — real-time NFZ overlays for all of China.</div>`,
+      day: `
+        <div class="block">
+          <div class="block-title day">4-DAY ITINERARY</div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 1 — ARRIVE & ORIENT</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">AFTERNOON</span>Check in Jing'an. Metro card + Alipay/WeChat activation.</div>
+              <div class="day-item"><span class="time">EVENING</span>Walk The Bund at dusk — Pudong skyline from the west bank.</div>
+              <div class="day-item"><span class="time">NIGHT</span>Yongkang Road for beers. Low key, jet lag management.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 2 — TCG + ARCHITECTURE</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Pokémon Center Shanghai — big haul day. Go early weekday.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>Xujiahui hobby stores + Yang's Dumplings lunch.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>1933 Old Millfun — spend 1.5–2hrs. Photography paradise.</div>
+              <div class="day-item"><span class="time">EVENING</span>Shanghai Tower observation deck at golden hour. Night shots.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 3 — FRENCH CONCESSION + NIGHTLIFE</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Slow morning. Breakfast at 85°C. Wukang Road wander.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Tianzifang + Xintiandi. Street photography. More TCG in Nanjing Road.</div>
+              <div class="day-item"><span class="time">NIGHT</span>Bar Rouge for one Bund rooftop drink → The Shelter for techno.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 5 — AUG 24 — DEPART TO CHENGDU</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>M50 Art District for industrial photography.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Massage recovery session. Pack. Final Jia Jia Tang Bao lunch.</div>
+              <div class="day-item"><span class="time">MORNING</span>HSR Shanghai Hongqiao → Chengdu East. ~11hrs, book first class.</div>
+            </div>
+          </div>
+        </div>`
+    }
+  },
+
+  chengdu: {
+    phase:'PHASE II', city:'CHENG<span>DU</span>', days:'4 DAYS · DAYS 6–9 · AUG 25–28',
+    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    content: {
+      hotel: `
+        <div class="block">
+          <div class="block-title hotel">RECOMMENDED STAYS</div>
+          <div class="spot-list">
+            <div class="spot hotel-spot"><div><div class="spot-name">Jinjiang District Hotels</div><div class="spot-desc">Central hub. Walking distance to Tianfu Square, Chunxi Road shopping, and great metro access. Mid-range picks: Jinjiang Hotel (historic), Holiday Inn Chengdu Xindu. ~150–220 AUD/night.</div></div><span class="spot-badge badge-must">BEST BASE</span></div>
+            <div class="spot hotel-spot"><div><div class="spot-name">Near Kuanzhai Alley (宽窄巷子)</div><div class="spot-desc">Boutique guesthouses in the historic lane area. Very atmospheric — traditional Sichuan courtyard architecture. ~120–180 AUD/night. Walk to best food and photography.</div></div><span class="spot-badge badge-good">ATMOSPHERE</span></div>
+            <div class="spot hotel-spot"><div><div class="spot-name">Kempinski Hotel Chengdu</div><div class="spot-desc">Premium option near Tianfu Square. Excellent service, rooftop views, great location. ~250–350 AUD/night. Worth it if budget allows.</div></div><span class="spot-badge badge-note">PREMIUM</span></div>
+          </div>
+          <div class="tip-box hotel-tip" style="margin-top:14px;"><strong>📍 TIP</strong>Stay near Tianfu Square or Chunxi Road for best metro access. Panda Base is 40 mins north — no need to stay near it.</div>
+        </div>`,
+      food: `
+        <div class="block">
+          <div class="block-title food">MUST EAT — CHENGDU</div>
+          <div class="spot-list">
+            <div class="spot food-spot"><div><div class="spot-name">Hotpot at Haidilao (海底捞)</div><div class="spot-desc">The original Haidilao is in Chengdu. Sichuan hotpot — numbing, spicy, addictive. The noodle-pulling performance is legendary. Book ahead or queue. ~100–150 RMB/person.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Mapo Tofu (麻婆豆腐)</div><div class="spot-desc">Chen Mapo Tofu restaurant — the original since 1862. Silky tofu in a fiery numbing sauce. Unmissable in the city that invented it.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Dan Dan Noodles (担担面)</div><div class="spot-desc">Chengdu street staple. Sesame paste, chili oil, minced pork, Sichuan pepper. ~8–15 RMB. Everywhere — pick the busiest stall.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Kuanzhai Alley Street Food</div><div class="spot-desc">Historic lane lined with Sichuan snacks — rabbit heads, spicy skewers, cold noodles, glutinous rice cakes. Best grazing street in Chengdu.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Long Chao Shou (龙抄手)</div><div class="spot-desc">Famous Chengdu wonton restaurant. Thin-skinned wontons in rich broth. Classic breakfast or light meal. ~20–30 RMB.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+          </div>
+        </div>
+        <div class="tip-box food-tip"><strong>🌶 HEAT WARNING</strong>Sichuan food uses Sichuan pepper (花椒) which causes mouth-numbing in addition to heat. Start with medium spice and build up. Your stomach will need 48hrs to adapt.</div>`,
+      pokemon: `
+        <div class="alert-bar"><strong>⚡ TIER 2 CITY — SOLID HAUL</strong>Chengdu has an official Pokémon TCG Gym and a strong local hobby scene. Budget a half day minimum.</div>
+        <div class="block">
+          <div class="block-title pokemon">STORE LOCATIONS</div>
+          <div class="spot-list">
+            <div class="spot pokemon-spot"><div><div class="spot-name">Pokémon TCG Official Gym — Chengdu</div><div class="spot-desc">Official store with authenticated sealed products, promos, and event packs. Inside a major shopping mall in Jinjiang District. 100% legit — retail prices but real products including CN exclusives.</div></div><span class="spot-badge badge-tier1">OFFICIAL</span></div>
+            <div class="spot pokemon-spot"><div><div class="spot-name">Chunxi Road Hobby Stores</div><div class="spot-desc">Chengdu's main retail strip has hobby and anime stores across multiple malls. Check IFS (国际金融中心) and Taikoo Li for dedicated card stores. Use Alipay 宝可梦卡牌 search.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot pokemon-spot"><div><div class="spot-name">Wangfujing Mall Hobby Floor</div><div class="spot-desc">Multi-floor mall with anime and collectible tenants. Good for singles and sealed CN product. More locals, fewer tourists — better prices.</div></div><span class="spot-badge badge-good">BROWSE</span></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-title pokemon">WHAT TO HUNT IN CHENGDU</div>
+          <div class="pill-row">
+            <div class="pill">CN Exclusive Sealed Boxes</div><div class="pill">Gem Series</div>
+            <div class="pill">Gift Box Sets</div><div class="pill">CN Promos</div>
+            <div class="pill">151 Series</div>
+          </div>
+        </div>`,
+      nightlife: `
+        <div class="block">
+          <div class="block-title night">CHENGDU AFTER DARK</div>
+          <div class="vibe-grid">
+            <div class="vibe-card v1"><div class="vibe-type">ROOFTOP BAR</div><div class="vibe-name">Vics on the Park</div><div class="vibe-desc">Rooftop terrace overlooking People's Park. Good cocktails, great city views. Very popular with locals and expats alike. Busy Thursday–Saturday.</div></div>
+            <div class="vibe-card v2"><div class="vibe-type">CRAFT BEER</div><div class="vibe-name">Jing'an Brewing Co.</div><div class="vibe-desc">Chengdu's best craft beer scene. Rotating taps, relaxed outdoor courtyard seating. Excellent post-hotpot recovery spot.</div></div>
+            <div class="vibe-card v3"><div class="vibe-type">NIGHT STREET</div><div class="vibe-name">Jiuyan Bridge Bar Street</div><div class="vibe-desc">The main nightlife corridor. Dozens of bars, live music venues, and late-night food stalls along the river. Starts buzzing after 10pm.</div></div>
+            <div class="vibe-card v4"><div class="vibe-type">NIGHT CULTURE</div><div class="vibe-name">Taikoo Li Night</div><div class="vibe-desc">Daci Temple lit up at night with the open-air mall humming. Best architectural photography of the trip for an urban night scene. Free to walk.</div></div>
+          </div>
+        </div>`,
+      drone: `
+        <div class="block">
+          <div class="block-title drone">DRONE INTEL — CHENGDU</div>
+          <div class="spot-list">
+            <div class="spot drone-spot"><div><div class="spot-name">Chengdu Tianfu New Area</div><div class="spot-desc">New CBD south of the city. Glass towers, wide boulevards, geometry from above. Fewer restrictions than the old city. Best at golden hour for tower shadows.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Panda Base Surrounds</div><div class="spot-desc">Green bamboo canopy from above. No-fly directly over the reserve but the surrounding parkland is fair game. Early morning mist gives incredible atmosphere.</div></div><span class="spot-badge badge-note">CHECK REGS</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Sanxingdui Museum Exterior</div><div class="spot-desc">Futuristic museum building ~40km from city. The roof geometry from above is extraordinary. Worth the trip if you have a free morning.</div></div><span class="spot-badge badge-good">WORTH IT</span></div>
+          </div>
+          <div class="tip-box drone-tip"><strong>⚠️ REGS</strong>CAAC registration required. Chengdu city centre is restricted airspace due to proximity to Shuangliu Airport. Fly in new south CBD or suburban parks only. Always check Aloft app before flying.</div>
+        </div>`,
+      arch: `
+        <div class="block">
+          <div class="block-title arch">ARCHITECTURAL HIGHLIGHTS</div>
+          <div class="spot-list">
+            <div class="spot arch-spot"><div><div class="spot-name">Kuanzhai Alley (宽窄巷子)</div><div class="spot-desc">Preserved Qing Dynasty lane houses — low grey-brick courtyard architecture contrasted against modern towers. Best at sunrise before crowds. Classic Chengdu architectural photography.</div></div><span class="spot-badge badge-must">MUST SHOOT</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Taikoo Li Chengdu</div><div class="spot-desc">Kengo Kuma-designed open-air mall wrapping around the ancient Daci Temple. Modern-traditional fusion. The temple courtyard at night with neon reflections is extraordinary.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Chengdu IFS (成都国际金融中心)</div><div class="spot-desc">The giant panda climbing the glass curtain wall facade. One of China's most photographed building details. Great geometry in the lobby.</div></div><span class="spot-badge badge-good">ICONIC</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Wenshu Monastery (文殊院)</div><div class="spot-desc">Tang Dynasty Buddhist monastery. Quiet courtyards, incense smoke, ancient timber architecture. Deeply atmospheric photography.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+          </div>
+        </div>`,
+      day: `
+        <div class="block">
+          <div class="block-title day">4-DAY ITINERARY</div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 6 — AUG 25 — ARRIVE + KUANZHAI</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>HSR from Shanghai. Check in Jinjiang District.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Kuanzhai Alley — architecture photography + Sichuan street food initiation.</div>
+              <div class="day-item"><span class="time">EVENING</span>Taikoo Li Chengdu at dusk — Daci Temple neon contrast shots.</div>
+              <div class="day-item"><span class="time">NIGHT</span>Dan Dan Noodles dinner. Foot massage. Recover from train.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 7 — AUG 26 — PANDA BASE + TCG</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">EARLY</span>Chengdu Research Base of Giant Panda Breeding — arrive 8am before heat. Pandas most active in morning.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>Return to city. Mapo Tofu lunch at Chen Mapo Tofu restaurant.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Pokémon TCG Official Gym + Chunxi Road hobby stores. Full TCG session.</div>
+              <div class="day-item"><span class="time">EVENING</span>Haidilao hotpot dinner. Book ahead.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 8 — AUG 27 — ARCHITECTURE DAY</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Wenshu Monastery — golden hour photography in the courtyards.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>IFS panda facade + shopping exploration.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Any remaining TCG browse. Wangfujing Mall.</div>
+              <div class="day-item"><span class="time">EVENING</span>Tianfu Square at night. Long exposure photography.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 9 — AUG 28 — DEPART TO CHONGQING</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Long Chao Shou wonton breakfast. Pack up.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>HSR Chengdu → Chongqing. Only 30 mins — world's fastest intercity link.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Arrive Chongqing. Check in Jiefangbei. First look at the vertical city.</div>
+            </div>
+          </div>
+        </div>`
+    }
+  },
+
+  zhangjiajie: {
+    phase:'PHASE IV', city:'ZHANG<span>JIAJIE</span>', days:'4 DAYS · DAYS 14–17 · SEP 2–5',
+    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    content: {
+      hotel: `
+        <div class="block">
+          <div class="block-title hotel">RECOMMENDED STAYS</div>
+          <div class="spot-list">
+            <div class="spot hotel-spot"><div><div class="spot-name">Wulingyuan Area Hotels</div><div class="spot-desc">Stay in Wulingyuan town — right at the park entrance. Walking distance to the main gates. Avoid staying in Zhangjiajie City itself (40 min away from the park). ~80–130 AUD/night for decent 3-star.</div></div><span class="spot-badge badge-must">BEST BASE</span></div>
+            <div class="spot hotel-spot"><div><div class="spot-name">Pullman Zhangjiajie</div><div class="spot-desc">Best quality hotel in the area. Pool and good breakfast. ~200 AUD/night. Justifiable given the physical demands.</div></div><span class="spot-badge badge-good">PREMIUM</span></div>
+          </div>
+          <div class="tip-box hotel-tip" style="margin-top:14px;"><strong>📍 TIP</strong>Book with free cancellation — weather determines your plans here. Mist can shut down key viewpoints for days. Flexibility is key.</div>
+        </div>`,
+      food: `
+        <div class="block">
+          <div class="block-title food">EATING IN ZHANGJIAJIE</div>
+          <div class="tip-box food-tip"><strong>NOTE</strong>Food is functional here, not a destination. Wulingyuan town has basic restaurants. Inside the park it's overpriced. Eat big breakfasts at the hotel.</div>
+          <div class="spot-list">
+            <div class="spot food-spot"><div><div class="spot-name">Tujia Cuisine (Local)</div><div class="spot-desc">Spicy preserved pork, sour fish, fermented vegetables. Unique to the Tujia minority. Any local restaurant in Wulingyuan town. ~60–80 RMB/person.</div></div><span class="spot-badge badge-good">TRY</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Xiaomi Hotpot (Wulingyuan)</div><div class="spot-desc">Multiple hotpot spots in town. Good group meal after a hard day of hiking.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+          </div>
+        </div>`,
+      drone: `
+        <div class="block">
+          <div class="block-title drone">DRONE OPPORTUNITY — HIGH POTENTIAL</div>
+          <div class="tip-box"><strong>🚁 BEST DRONE LOCATION ON THE TRIP</strong>More relaxed rules than cities but CAAC registration still required. The pillar formations from above are extraordinary.</div>
+          <div class="spot-list">
+            <div class="spot drone-spot"><div><div class="spot-name">Outside Park Boundaries</div><div class="spot-desc">Flying inside the national park is restricted. Areas just outside the perimeter — especially elevated viewpoints — may permit flight. Always check UAV Flight Assistant app first.</div></div><span class="spot-badge badge-note">CHECK APP</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Golden Whip Stream Valley</div><div class="spot-desc">Lower altitude valley with pillar formations. Early morning mist shots could be extraordinary. Check NFZ status.</div></div><span class="spot-badge badge-good">POTENTIAL</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Tianmen Mountain Surrounds</div><div class="spot-desc">Higher elevation. Check NFZ status carefully. Morning fog shots from elevated positions.</div></div><span class="spot-badge badge-extra">SCOUT</span></div>
+          </div>
+        </div>`,
+      day: `
+        <div class="block">
+          <div class="block-title day">4-DAY ITINERARY</div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 8 — ARRIVE + REST</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Arrive from night train. Check in Wulingyuan. Get park passes.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Light walk into forest park edge. Scout shots. Don't overdo Day 1.</div>
+              <div class="day-item"><span class="time">EVENING</span>Tujia dinner. Early foot massage. Sleep well.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 9 — NATIONAL FOREST PARK</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">EARLY</span>Enter park at opening. Avatar Hallelujah Mountain viewpoint before crowds.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>Tianzi Mountain summit cable car. Cloud-level views.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Fairy Trail boardwalk photography. Scout drone zones outside park.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 10 — TIANMEN MOUNTAIN</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>World's longest cable car to Tianmen Mountain top.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>Glass cliff walk + Heaven's Gate arch. Photography heavy.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Grand Canyon glass bridge. Drone session outside park if clear.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 11 — DEPART TO CHONGQING</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">DAWN</span>Sunrise attempt at Golden Whip Stream. Final drone session.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>HSR via Changsha → Chongqing.</div>
+            </div>
+          </div>
+        </div>`
+    }
+  },
+
+  chongqing: {
+    phase:'PHASE III', city:'CHONG<span>QING</span>', days:'4 DAYS · DAYS 10–13 · AUG 29–SEP 1',
+    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    content: {
+      hotel: `
+        <div class="block">
+          <div class="block-title hotel">RECOMMENDED STAYS</div>
+          <div class="spot-list">
+            <div class="spot hotel-spot"><div><div class="spot-name">Jiefangbei CBD Hotels</div><div class="spot-desc">Central to everything. Hyatt Regency Chongqing and Wyndham are solid mid-premium options. ~150–220 AUD/night. Walking distance to Hongya Cave and Raffles City.</div></div><span class="spot-badge badge-must">BEST BASE</span></div>
+            <div class="spot hotel-spot"><div><div class="spot-name">Nanshan District</div><div class="spot-desc">South of the river — stunning night views of the city skyline from your room. ~130–180 AUD/night. Taxi required to get around.</div></div><span class="spot-badge badge-good">VIEWS</span></div>
+          </div>
+          <div class="tip-box hotel-tip" style="margin-top:14px;"><strong>📍 TIP</strong>Chongqing's geography is insane. Confirm your hotel's actual floor-level entrance on Amap before arriving — the "ground floor" on your street might be floor 10 of the building.</div>
+        </div>`,
+      food: `
+        <div class="block">
+          <div class="block-title food">MUST EAT — CHONGQING</div>
+          <div class="spot-list">
+            <div class="spot food-spot"><div><div class="spot-name">Chongqing Hotpot</div><div class="spot-desc">Numbing-spicy beef tallow broth. This is the original Sichuan hotpot. Lao Tian'e and Zhu Laowu are top chains. 80–150 RMB/person. Order the fatty beef, tripe, and brain (if brave).</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Chongqing Noodles (小面)</div><div class="spot-desc">Spicy noodle broth, 10–15 RMB a bowl. Breakfast staple. Any tiny local shop — point at the bowl and nod.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Jiuzhaitang Hotpot Row</div><div class="spot-desc">The density of hotpot restaurants here is absurd. Empty stomach required. Order aggressively.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+          </div>
+        </div>`,
+      pokemon: `
+        <div class="block">
+          <div class="block-title pokemon">TCG INTEL — TIER 4 CITY</div>
+          <div class="spot-list">
+            <div class="spot pokemon-spot"><div><div class="spot-name">Jiefangbei Shopping Malls</div><div class="spot-desc">Multiple mall floors. Worth 1–2 hour browse. Casual hobby shops and some sealed packs. CN sets + occasional JP imports.</div></div><span class="spot-badge badge-note">BROWSE</span></div>
+            <div class="spot pokemon-spot"><div><div class="spot-name">StarLight 68 Mall</div><div class="spot-desc">Newer mall with anime/hobby mix. Use Alipay 宝可梦卡牌 search to find current shops — they rotate often.</div></div><span class="spot-badge badge-note">CHECK</span></div>
+          </div>
+        </div>
+        <div class="tip-box pokemon-tip"><strong>STRATEGY</strong>Budget 1–2 hours max. Bonus stop only — save serious money for Shanghai and HK.</div>`,
+      nightlife: `
+        <div class="block">
+          <div class="block-title night">UNDERGROUND NIGHTLIFE</div>
+          <div class="vibe-grid">
+            <div class="vibe-card v1"><div class="vibe-type">ROOFTOP</div><div class="vibe-name">Raffles City Sky Bridge</div><div class="vibe-desc">Two towers connected 250m up. Bar at the top. The city view at night is jaw-dropping.</div></div>
+            <div class="vibe-card v2"><div class="vibe-type">UNDERGROUND</div><div class="vibe-name">Cave Bar Tunnels</div><div class="vibe-desc">Converted WWII air-raid tunnels. Bars carved into rock. Extraordinarily atmospheric.</div></div>
+            <div class="vibe-card v3"><div class="vibe-type">NEON STREET</div><div class="vibe-name">Jiefangbei Night Strip</div><div class="vibe-desc">CBD fully lit neon. Packed bars and restaurants. Great street photography.</div></div>
+            <div class="vibe-card v4"><div class="vibe-type">RIVERSIDE</div><div class="vibe-name">Nanbin Road</div><div class="vibe-desc">South bank bar strip with views of the cliff-lit skyline. Good for a slower night.</div></div>
+          </div>
+        </div>`,
+      arch: `
+        <div class="block">
+          <div class="block-title arch">ARCHITECTURAL HIGHLIGHTS</div>
+          <div class="spot-list">
+            <div class="spot arch-spot"><div><div class="spot-name">Raffles City Chongqing</div><div class="spot-desc">Moshe Safdie's interconnected twin supertowers with a sky bridge at 250m. One of the most ambitious buildings built this century.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Liziba Building-Train (Line 2)</div><div class="spot-desc">The metro line that runs through floors 6–8 of a residential building. Photograph from Liziba Bridge at street level.</div></div><span class="spot-badge badge-must">ICONIC</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Hongya Cave (洪崖洞)</div><div class="spot-desc">Multi-tiered stilted building on a cliff face. Lit spectacularly at night. Looks exactly like Spirited Away.</div></div><span class="spot-badge badge-must">MUST AT NIGHT</span></div>
+          </div>
+        </div>`,
+      day: `
+        <div class="block">
+          <div class="block-title day">4-DAY ITINERARY</div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 12 — ARRIVE + LIZIBA + CAVES</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">AFTERNOON</span>Check in. Ride Line 2 through Liziba Building. Photo from outside.</div>
+              <div class="day-item"><span class="time">EVENING</span>Hongya Cave at night — photograph from bridge. Best after 7:30pm.</div>
+              <div class="day-item"><span class="time">NIGHT</span>Cave bar tunnels for drinks.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 13 — RAFFLES + HOTPOT</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Raffles City sky bridge — morning light on the skyline.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Jiefangbei TCG browse. 1–2 hours.</div>
+              <div class="day-item"><span class="time">EVENING</span>Chongqing hotpot dinner. Order aggressively.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 14 — NANSHAN + NIGHT PHOTOGRAPHY</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Chongqing noodles breakfast at a local shop.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Nanshan observation deck — panoramic city shots.</div>
+              <div class="day-item"><span class="time">EVENING</span>Nanbin Road riverside bars + long-exposure night photography.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 15 — DEPART TO YANGSHUO</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Final street photography — Chongqing is best in morning mist.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>HSR to Guilin → bus to Yangshuo (2.5 hrs).</div>
+            </div>
+          </div>
+        </div>`
+    }
+  },
+
+  yangshuo: {
+    phase:'PHASE V', city:'YANG<span>SHUO</span>', days:'4 DAYS · DAYS 18–21 · SEP 6–9',
+    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    content: {
+      hotel: `
+        <div class="block">
+          <div class="block-title hotel">RECOMMENDED STAYS</div>
+          <div class="spot-list">
+            <div class="spot hotel-spot"><div><div class="spot-name">Yangshuo Town Boutique Hotels</div><div class="spot-desc">Multiple solid mid-range options near West Street. YangShuo Mountain Retreat and Zen Garden Hotel are well regarded. ~120–170 AUD/night. Easy access to everything.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot hotel-spot"><div><div class="spot-name">Rural Li River Guesthouse</div><div class="spot-desc">Small guesthouses in the countryside near Xianggong Hill. Wake up inside the karst landscape. Cheap (~80 AUD/night) but requires transport. Great for drone base.</div></div><span class="spot-badge badge-extra">ATMOSPHERIC</span></div>
+          </div>
+          <div class="tip-box hotel-tip" style="margin-top:14px;"><strong>📍 TIP</strong>Rent an e-bike on arrival (~40 RMB/day). It's the best way to explore the countryside and essential for early morning Xianggong Hill runs.</div>
+        </div>`,
+      food: `
+        <div class="block">
+          <div class="block-title food">EATING IN YANGSHUO</div>
+          <div class="spot-list">
+            <div class="spot food-spot"><div><div class="spot-name">Beer Fish (啤酒鱼)</div><div class="spot-desc">Yangshuo's local dish — Li River carp cooked in beer and chili. Rich and hearty. Every restaurant on West Street does it. Old Place Restaurant is reliable.</div></div><span class="spot-badge badge-must">LOCAL DISH</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">West Street Side Alleys</div><div class="spot-desc">Touristy strip but the side streets have cheaper, more local options. Go one block off West Street.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Guilin Rice Noodles (桂林米粉)</div><div class="spot-desc">Everywhere in the area. Cheap and great for breakfast. ~10–15 RMB.</div></div><span class="spot-badge badge-note">BREAKFAST</span></div>
+          </div>
+        </div>`,
+      drone: `
+        <div class="block">
+          <div class="block-title drone">TOP DRONE DESTINATION — TRIP HIGHLIGHT</div>
+          <div class="tip-box"><strong>🚁 PRIME DRONE LOCATION</strong>Yangshuo has some of the most visually extraordinary drone footage available in China. Karst formations, river reflections, rice paddies, mist. Rules are more relaxed than cities but CAAC registration still required.</div>
+          <div class="spot-list">
+            <div class="spot drone-spot"><div><div class="spot-name">Li River Valley</div><div class="spot-desc">Fly low along the river in morning mist. Golden hour reflections of karst peaks. Most rural valley is flyable. Best 6–8am before boat traffic.</div></div><span class="spot-badge badge-must">PRIME</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Xianggong Hill Surrounds</div><div class="spot-desc">Elevated position with panoramic valley views. Fly from surrounding fields outside the viewing platform. Morning mist + karst = extraordinary footage.</div></div><span class="spot-badge badge-must">PRIORITY</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Longji Rice Terraces (side trip)</div><div class="spot-desc">90 min from Yangshuo. Terraced rice fields on steep karst slopes. Incredible aerial geometry.</div></div><span class="spot-badge badge-good">SIDE TRIP</span></div>
+          </div>
+        </div>`,
+      day: `
+        <div class="block">
+          <div class="block-title day">4-DAY ITINERARY</div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 16 — ARRIVE + ORIENT</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">AFTERNOON</span>Arrive from Chongqing. Rent e-bike. Scout Xianggong Hill route.</div>
+              <div class="day-item"><span class="time">EVENING</span>Beer Fish dinner. Early night — 5am alarm next morning.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 17 — XIANGGONG SUNRISE + DRONE</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">5:00 AM</span>Depart for Xianggong Hill. Enter by 5:30am.</div>
+              <div class="day-item"><span class="time">SUNRISE</span>Li River mist + karst peaks. Best photography of the entire trip.</div>
+              <div class="day-item"><span class="time">MORNING</span>Drone session in surrounding fields after sunrise.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Nap. Cooking class.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 18 — RIVER + MOON HILL</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Bamboo raft on the Li River. 90 mins floating through karst.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Moon Hill hike at sunset.</div>
+              <div class="day-item"><span class="time">EVENING</span>Massage + rest. Edit footage.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 19 — DEPART TO SHENZHEN</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">DAWN</span>Final drone session if weather good.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>HSR Guilin North → Shenzhen Futian → MTR into HK (4hrs total).</div>
+            </div>
+          </div>
+        </div>`
+    }
+  },
+
+  hongkong: {
+    phase:'PHASE VI — EXIT', city:'HONG<span>KONG</span>', days:'4 DAYS · DAYS 22–25 · EXIT SEPT 13',
+    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    content: {
+      hotel: `
+        <div class="block">
+          <div class="block-title hotel">RECOMMENDED STAYS</div>
+          <div class="alert-bar"><strong>⚠️ BOOK EARLY — EXIT DATE CRITICAL</strong>Sept 29 is your hard exit. Flights fill fast. Book hotel + flight well in advance.</div>
+          <div class="spot-list">
+            <div class="spot hotel-spot"><div><div class="spot-name">Mong Kok (Kowloon)</div><div class="spot-desc">Stay in Mong Kok for maximum TCG access. City View Hotel or Dorsett Mongkok are solid mid-range options. ~130–190 AUD/night. Walking distance to Sino Centre.</div></div><span class="spot-badge badge-must">BEST FOR TCG</span></div>
+            <div class="spot hotel-spot"><div><div class="spot-name">Tsim Sha Tsui (TST)</div><div class="spot-desc">More polished area with harbour views. Sheraton TST or Peninsula for premium. Easy ferry to HK Island. ~170–280 AUD/night.</div></div><span class="spot-badge badge-good">HARBOUR VIEWS</span></div>
+          </div>
+          <div class="tip-box hotel-tip" style="margin-top:14px;"><strong>📍 TIP</strong>Get an Octopus Card immediately on arrival. Works on MTR, buses, trams and for payments in 7-Eleven and many stores. No Alipay required here — cards work everywhere.</div>
+        </div>`,
+      food: `
+        <div class="block">
+          <div class="block-title food">MUST EAT — HONG KONG</div>
+          <div class="spot-list">
+            <div class="spot food-spot"><div><div class="spot-name">Tim Ho Wan (添好運)</div><div class="spot-desc">Michelin-starred dim sum at affordable prices. The baked BBQ pork buns are life-changing. Queue early or book ahead.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Yung Kee Restaurant (鏞記酒家)</div><div class="spot-desc">HK institution since 1942. Famous roast goose — crispy skin, rich meat. The char siu is equally extraordinary. Go for lunch.</div></div><span class="spot-badge badge-must">INSTITUTION</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Mak's Noodle (麥奀雲吞麵)</div><div class="spot-desc">Old-school wonton noodles. The gold standard for HK-style wonton soup. Very cheap, very good. Wellington Street, Central.</div></div><span class="spot-badge badge-must">CLASSIC</span></div>
+            <div class="spot food-spot"><div><div class="spot-name">Temple Street Night Market</div><div class="spot-desc">Open-air hawker stalls. Typhoon shelter crab, steamed seafood, cold Tsing Tao. Authentic HK night market experience.</div></div><span class="spot-badge badge-good">NIGHT MARKET</span></div>
+          </div>
+        </div>`,
+      pokemon: `
+        <div class="alert-bar"><strong>🏆 TIER 2 — COLLECTOR PARADISE</strong>Hong Kong is the only stop where Japanese, English AND Chinese cards are available together. Budget significant time.</div>
+        <div class="block">
+          <div class="block-title pokemon">PRIMARY DISTRICTS</div>
+          <div class="spot-list">
+            <div class="spot pokemon-spot"><div><div class="spot-name">Mong Kok (旺角)</div><div class="spot-desc">Dense cluster of anime stores, TCG shops, and hobby malls. Spend most of your HK TCG time here. Multiple buildings across a few blocks.</div></div><span class="spot-badge badge-tier1">PRIORITY DISTRICT</span></div>
+            <div class="spot pokemon-spot"><div><div class="spot-name">Sino Centre (新都城中心)</div><div class="spot-desc">Multiple floors of anime and card shops. Arguably the single best building for TCG in HK. Every floor has something relevant.</div></div><span class="spot-badge badge-tier1">MUST HIT</span></div>
+            <div class="spot pokemon-spot"><div><div class="spot-name">In's Point (始創中心)</div><div class="spot-desc">Adjacent to Sino Centre. More TCG and anime floors. Known for graded cards and rare singles.</div></div><span class="spot-badge badge-tier1">MUST HIT</span></div>
+            <div class="spot pokemon-spot"><div><div class="spot-name">Fa Yuen Street (花園街)</div><div class="spot-desc">"Sneaker Street" also has hobby shops. Good for Japanese imports and English product.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-title pokemon">WHAT TO HUNT IN HK</div>
+          <div class="pill-row">
+            <div class="pill">Japanese Promos</div><div class="pill">Graded Cards (PSA/BGS)</div>
+            <div class="pill">Rare Singles</div><div class="pill">English Sealed</div>
+            <div class="pill">Japanese Sealed</div><div class="pill">CN Exclusives</div>
+          </div>
+        </div>`,
+      nightlife: `
+        <div class="block">
+          <div class="block-title night">HK NIGHTLIFE — FINAL NIGHTS</div>
+          <div class="vibe-grid">
+            <div class="vibe-card v1"><div class="vibe-type">WORLD'S HIGHEST BAR</div><div class="vibe-name">OZONE at Ritz-Carlton</div><div class="vibe-desc">484m up in ICC tower. Insane views. One drink is expensive but the view is unmatched. Do it on the last night.</div></div>
+            <div class="vibe-card v2"><div class="vibe-type">CLASSIC BAR</div><div class="vibe-name">Wanch Bar (Wan Chai)</div><div class="vibe-desc">HK pub institution. Live music, cold beer, mixed crowd. Very relaxed final night session.</div></div>
+            <div class="vibe-card v3"><div class="vibe-type">FREE SHOW</div><div class="vibe-name">Symphony of Lights</div><div class="vibe-desc">Free nightly light show across the harbour skyline. Watch from TST promenade at 8pm. Photograph the spectacle.</div></div>
+            <div class="vibe-card v4"><div class="vibe-type">NIGHT MARKET</div><div class="vibe-name">Temple Street</div><div class="vibe-desc">Open-air hawker stalls, street food, fortune tellers. Best 8–11pm. Last night of the trip material.</div></div>
+          </div>
+        </div>`,
+      arch: `
+        <div class="block">
+          <div class="block-title arch">ARCHITECTURAL HIGHLIGHTS</div>
+          <div class="spot-list">
+            <div class="spot arch-spot"><div><div class="spot-name">HSBC Building (汇丰总行大厦)</div><div class="spot-desc">Norman Foster's 1985 masterpiece. Exposed structure, modular pods, mirror glass. The public plaza underneath is open — walk through the underbelly and look straight up. One of the great buildings of the 20th century.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Bank of China Tower (中银大厦)</div><div class="spot-desc">I.M. Pei's 1990 tower — triangulated glass geometry rising 367m. Best photographed from Cheung Kong Park looking up. The corner geometry at dusk is extraordinary.</div></div><span class="spot-badge badge-must">MUST</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">TST Promenade + Star Ferry</div><div class="spot-desc">The HK Island skyline from the Tsim Sha Tsui waterfront — one of the great urban panoramas. Best at blue hour. The Star Ferry crossing gives constantly changing angles on the skyline.</div></div><span class="spot-badge badge-must">HERO SHOT</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Central-Mid-Levels Escalator</div><div class="spot-desc">World's longest outdoor covered escalator system. The layered street life visible at each level — trams, taxis, wet markets, office towers — is unique to HK urbanism.</div></div><span class="spot-badge badge-good">UNIQUE</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Kowloon Walled City Park</div><div class="spot-desc">Where the infamous densest place on earth once stood. The park itself is beautiful, but the museum inside documents the architecture of the Walled City with incredible photography.</div></div><span class="spot-badge badge-good">HISTORY</span></div>
+          </div>
+        </div>`,
+      drone: `
+        <div class="block">
+          <div class="block-title drone">DRONE INTEL — HONG KONG</div>
+          <div class="alert-bar" style="margin-bottom:16px;"><strong>⚠️ HIGH RESTRICTION ZONE</strong>Hong Kong airspace is heavily restricted. Most of the urban core is no-fly. Research thoroughly before even unpacking the drone.</div>
+          <div class="spot-list">
+            <div class="spot drone-spot"><div><div class="spot-name">Lion Rock Country Park</div><div class="spot-desc">The ridgeline north of Kowloon. Fly from the country park trails — clear of controlled airspace. The city spread below the ridge is a unique perspective. Check CAAS HK app first.</div></div><span class="spot-badge badge-good">CHECK FIRST</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">Lantau Island (大屿山)</div><div class="spot-desc">Large areas of Lantau outside the airport restricted zone are permissible. The coastal cliffs and Big Buddha on Ngong Ping from above are extraordinary. Day trip from HK.</div></div><span class="spot-badge badge-good">GOOD</span></div>
+            <div class="spot drone-spot"><div><div class="spot-name">New Territories</div><div class="spot-desc">Rural areas north of Kowloon have more permissive airspace. Traditional walled villages and farmland from above — very different to urban HK. Easy MTR access.</div></div><span class="spot-badge badge-note">POSSIBLE</span></div>
+          </div>
+          <div class="tip-box drone-tip"><strong>REALITY CHECK</strong>HK has some of the strictest drone laws in Asia. Fines are severe. Use the Civil Aviation Department HK drone map before every flight. When in doubt, leave it packed and shoot on the camera instead — the HK skyline from ground level is world-class anyway.</div>
+        </div>`,
+      day: `
+        <div class="block">
+          <div class="block-title day">3-DAY ITINERARY</div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 22 — ARRIVE + KOWLOON</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">AFTERNOON</span>Clear Shenzhen border. MTR to Mong Kok. Octopus Card sorted at airport. Octopus Card sorted.</div>
+              <div class="day-item"><span class="time">EVENING</span>TST harbour promenade — HK Island skyline at dusk.</div>
+              <div class="day-item"><span class="time">8:00 PM</span>Symphony of Lights show from the promenade.</div>
+              <div class="day-item"><span class="time">NIGHT</span>Temple Street Night Market — typhoon shelter crab + cold Tsing Tao.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 23 — TCG PARADISE</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Tim Ho Wan dim sum. Queue early.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Full afternoon — Sino Centre → In's Point → Fa Yuen Street. Major final haul.</div>
+              <div class="day-item"><span class="time">EVENING</span>OZONE bar at ICC — one drink, extraordinary final night view.</div>
+            </div>
+          </div>
+          <div class="itinerary-day">
+            <div class="day-label">DAY 25 — SEPT 13 — DEPARTURE</div>
+            <div class="day-items">
+              <div class="day-item"><span class="time">MORNING</span>Mak's Noodle wonton breakfast. Final dim sum if time allows.</div>
+              <div class="day-item"><span class="time">MIDDAY</span>Airport Express from Kowloon Station. Check in opens 3hrs early.</div>
+              <div class="day-item"><span class="time">EVENING</span>Flight HK → Melbourne. Mission complete.</div>
+            </div>
+          </div>
+        </div>`
+    }
+  }
+};
+
+// ===== PANEL LOGIC =====
+let currentCity = null;
+let currentCat = null;
+
+function openCity(cityKey, evt) {
+  const city = CITIES[cityKey];
+  if (!city) return;
+  currentCity = cityKey;
+
+  document.getElementById('panel-phase').textContent = city.phase;
+  document.getElementById('panel-city').innerHTML = city.city;
+  document.getElementById('panel-days').textContent = city.days;
+
+  // Build category filter bar
+  const bar = document.getElementById('cat-filter-bar');
+  bar.innerHTML = '';
+  city.cats.forEach((catKey, i) => {
+    const catDef = CATS.find(c => c.key === catKey);
+    if (!catDef) return;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (i === 0 ? ' active' : '');
+    btn.dataset.cat = catKey;
+    btn.innerHTML = `<span class="cat-dot" style="background:${catDef.color}"></span>${catDef.label}`;
+    btn.onclick = () => switchCat(cityKey, catKey);
+    bar.appendChild(btn);
+  });
+
+  // Show first category
+  currentCat = city.cats[0];
+  renderCat(city, currentCat);
+
+  // Mark active row
+  document.querySelectorAll('.phase-row').forEach(r => r.classList.remove('active'));
+  if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+
+  document.getElementById('detail-overlay').classList.add('open');
+  document.getElementById('detail-panel').classList.add('open');
+  document.getElementById('detail-panel').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function switchCat(cityKey, catKey) {
+  currentCat = catKey;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector(`.cat-btn[data-cat="${catKey}"]`);
+  if (btn) btn.classList.add('active');
+  const cityObj = CITIES[cityKey];
+  if (!cityObj) return;
+  renderCat(cityObj, catKey);
+}
+
+function renderCat(city, catKey) {
+  if (!city || !city.content) return;
+  const content = city.content[catKey] || '<p style="color:var(--muted);padding:20px 0;font-size:13px;">No info available for this category.</p>';
+  const el = document.getElementById('cat-content');
+  el.innerHTML = `<div class="cat-pane active">${content}</div>`;
+  loadBoxImages();
+  loadChaseImages();
+}
+
+function closePanel() {
+  document.getElementById('detail-overlay').classList.remove('open');
+  document.getElementById('detail-panel').classList.remove('open');
+  document.body.style.overflow = '';
+  document.querySelectorAll('.phase-row').forEach(r => r.classList.remove('active'));
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+
+// ===== HUNT OVERLAY =====
+function openHuntOverlay() {
+  const overlay = document.getElementById('hunt-overlay');
+  overlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  // Populate if empty
+  const content = document.getElementById('hunt-overlay-content');
+  if (!content.innerHTML.trim()) {
+    // Render Shanghai pokemon tab content
+    renderCat(CITIES['shanghai'], 'pokemon');
+    const catContent = document.getElementById('cat-content');
+    if (catContent) {
+      content.innerHTML = catContent.innerHTML;
+      catContent.innerHTML = ''; // clear to prevent duplicate .hunt-card nodes in DOM
+      // Re-run image loaders and restore unit lists on the new DOM
+      setTimeout(() => {
+        loadBoxImagesIn(content);
+        loadChaseImagesIn(content);
+        // Restore any already-counted units into the freshly cloned DOM
+        Object.keys(huntUnits).forEach(id => renderUnitList(id));
+        Object.keys(singleUnits).forEach(id => renderSingleUnitList(id));
+      }, 50);
+    }
+  }
+  overlay.scrollTop = 0;
+}
+function closeHuntOverlay() {
+  document.getElementById('hunt-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function loadBoxImagesIn(root) {
+  root.querySelectorAll('[data-box-id]').forEach(el => {
+    const id = el.getAttribute('data-box-id');
+    if (REAL_IMAGES[id]) { el.src = REAL_IMAGES[id]; }
+    else if (BOX_SVGS[id]) {
+      const blob = new Blob([BOX_SVGS[id]], {type:'image/svg+xml'});
+      el.src = URL.createObjectURL(blob);
+    }
+  });
+}
+function loadChaseImagesIn(root) {
+  root.querySelectorAll('[data-chase-img]').forEach(el => {
+    const id = el.getAttribute('data-chase-img');
+    if (CHASE_IMAGES[id]) { el.src = CHASE_IMAGES[id]; }
+  });
+  // Re-attach toggle handlers
+  root.querySelectorAll('.chase-toggle-btn').forEach(btn => {
+    const id = btn.getAttribute('data-chase-id');
+    if (!id) return;
+    btn.onclick = () => chaseToggle(id);
+    if (chaseFound[id]) {
+      btn.textContent = '✓';
+      btn.style.color = '#00e87a';
+      btn.style.borderColor = '#00e87a';
+    }
+  });
+}
+// ESC to close hunt overlay
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeHuntOverlay();
+});
+
+</script>
+</body>
+</html>
