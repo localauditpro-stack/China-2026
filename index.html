@@ -825,7 +825,6 @@ footer .fr { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--bo
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:3px;margin:18px 0 8px;">📱 TECH & DRONE</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;">
         <label style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);padding:10px 14px;cursor:pointer;font-size:13px;"><input type="checkbox" data-id="tech-drone" style="width:16px;height:16px;accent-color:#10b981;flex-shrink:0;"><s>Drone</s> — STAYING HOME (Beijing ban, Jul 11 decision)</label>
-        <label style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);padding:10px 14px;cursor:pointer;font-size:13px;"><input type="checkbox" data-id="tech-serial" style="width:16px;height:16px;accent-color:#10b981;flex-shrink:0;">Drone serial number photographed (needed for UOM registration Day 1)</label>
         <label style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);padding:10px 14px;cursor:pointer;font-size:13px;"><input type="checkbox" data-id="tech-powerbank" style="width:16px;height:16px;accent-color:#10b981;flex-shrink:0;">Power banks ≤100Wh, max 2, carry-on only (China enforces hard — must show capacity marking)</label>
         <label style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);padding:10px 14px;cursor:pointer;font-size:13px;"><input type="checkbox" data-id="tech-adapter" style="width:16px;height:16px;accent-color:#10b981;flex-shrink:0;">Universal adapter (China Type A/I/C · HK Type G — different!)</label>
         <label style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);padding:10px 14px;cursor:pointer;font-size:13px;"><input type="checkbox" data-id="tech-camera" style="width:16px;height:16px;accent-color:#10b981;flex-shrink:0;">Camera + lenses + SD cards + chargers</label>
@@ -2422,7 +2421,7 @@ function kitTab(t){
     <div class="sec-title">THE RADAR</div>
   </div>
   <div class="radar-grid">
-    <div class="ri warn"><div class="rl">🚁 Drone</div><p><strong>LEFT AT HOME</strong> — decided Jul 11. Beijing banned all drone transport/flight (May 2026), killing the best sites. Ignore any drone intel below — kept for reference only.</p></div>
+    <div class="ri warn"><div class="rl">🚁 Drone</div><p><strong>LEFT AT HOME</strong> — decided Jul 11. Beijing banned all drone transport/flight (May 2026), killing the best sites. Drone tabs removed from the city intel panels.</p></div>
     <div class="ri info"><div class="rl">🗣 Language</div><p>Zero Mandarin. Rely on Baidu Translate + Amap. Younger locals in major cities understand basic English.</p></div>
     <div class="ri ok"><div class="rl">🎴 Pokémon TCG</div><p>Focus on Simplified Chinese (SC) Exclusive Sets. SEVEN official gyms on route: Beijing ×2, Xi'an, Chengdu, Chongqing, Shanghai ×2 — one promo card each.</p></div>
     <div class="ri caut"><div class="rl">🏋️ Fitness</div><p>High verticality in Zhangjiajie & Chongqing. Leg-day heavy. Frequent massage recovery strongly recommended.</p></div>
@@ -3793,7 +3792,6 @@ const CATS = [
   { key:'pokemon',  label:'🎴 Pokémon',    color:'var(--cat-pokemon)' },
   { key:'nightlife',label:'🌃 Nightlife',  color:'var(--cat-night)' },
   { key:'arch',     label:'🏗 Architecture', color:'var(--cat-arch)' },
-  { key:'drone',    label:'🚁 Drone',      color:'var(--cat-drone)' },
   { key:'day',      label:'📅 Itinerary',  color:'var(--cat-day)' },
   { key:'hotel',    label:'🏨 Stay',       color:'var(--cat-hotel)' },
 ];
@@ -4176,7 +4174,7 @@ document.addEventListener('DOMContentLoaded', loadBoxImages);
 const CITIES = {
   beijing: {
     phase:'PHASE I', city:'BEI<span>JING</span>', days:'3 DAYS · DAYS 1–3 · AUG 21–23',
-    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    cats: ['food','pokemon','nightlife','arch','day','hotel'],
     content: {
       hotel: `
 <div class="block">
@@ -4269,7 +4267,7 @@ const CITIES = {
 <div class="day-items">
 <div class="day-item"><span class="time">MORNING</span>Arrive Beijing (via Cathay MEL→HKG→SHA + domestic SHA→PEK). Taxi/metro to Dongcheng.</div>
 <div class="day-item"><span class="time">MIDDAY</span>Buy China Unicom SIM. Set up Alipay + WeChat Pay.</div>
-<div class="day-item"><span class="time">AFTERNOON</span>Register drone on UOM portal. Settle in, lunch, explore.</div>
+<div class="day-item"><span class="time">AFTERNOON</span>Settle in, lunch, explore the neighbourhood.</div>
 <div class="day-item"><span class="time">EVENING</span>Tiananmen Square at dusk. Hutong dinner. Early night.</div>
 </div>
 </div>
@@ -4279,7 +4277,7 @@ const CITIES = {
 <div class="day-item"><span class="time">5:30 AM</span>Wake up, light breakfast.</div>
 <div class="day-item"><span class="time">6:30 AM</span>Car to Jinshanling (~2.5 hrs). Morning light on the wall.</div>
 <div class="day-item"><span class="time">MORNING</span>THE WALK — Main Gate → East Gate, EASTWARD along the ridge (~7–8 km, 31 watchtowers, 3.5–4 hrs). Wild unrestored sections, uneven steps. Take water + sun cover; there is almost no shade. ⚠ The Jinshanling→Simatai through-hike is CLOSED (blocked + guarded) — do not attempt to cross.</div>
-<div class="day-item"><span class="time">MIDDAY</span>Drone session from cleared hilltop (check UOM zones).</div>
+<div class="day-item"><span class="time">MIDDAY</span>Long-lens session from a watchtower — the wall snaking to the horizon.</div>
 <div class="day-item"><span class="time">AFTERNOON</span>Finish the walk (4–5 hrs on the wall total). Cable car down if legs are gone — LAST RIDE ~16:30. Car back to Beijing (~2.5 hrs). Budget option instead of the private car: direct tourist bus from Wangjing West station (Line 14/15), ~08:00 out, ~¥80 return — but it departs back ~15:00–16:00, so it caps your time on the wall. Confirm the schedule at jinshanlingbus.com the week before; it shifts yearly.</div>
 <div class="day-item"><span class="time">EVENING</span>Dinner at Houhai Lake. Lakeside bars in the hutong district.</div>
 <div class="day-item"><span class="time">8:30 PM</span>🎴 GYM STOP #1 — Larvitar Gym, Zhongguancun. COMMITTED STOP: dinner at Houhai, then Line 4 from Ping'anli ~30 min direct. Gym open till 10pm — arrive by 8:45, promo + browse, back by 10:30. First gym promo of the trip banked on Day 2. (Emergency fallback only: Day 3 — Zhongguancun is on the Line 4→9 route to Beijing West, 30 min before the HSR.)</div>
@@ -4316,7 +4314,7 @@ const CITIES = {
 
   xian: {
     phase:'PHASE II', city:"XI<span>'AN</span>", days:'2 DAYS · DAYS 4–5 · AUG 24–25',
-    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    cats: ['food','pokemon','nightlife','arch','day','hotel'],
     content: {
       hotel: `
 <div class="block">
@@ -4398,7 +4396,7 @@ const CITIES = {
 <div class="day-item"><span class="time">MIDDAY</span>Lunch near the museum complex.</div>
 <div class="day-item"><span class="time">AFTERNOON</span>Return to Xi'an (~1 hr). Rest at hotel.</div>
 <div class="day-item"><span class="time">LATE PM</span>Cycle the Xi'an City Wall at sunset. Rent bikes at the South Gate (Yongning Gate). Full loop: 13.7 km, ~1.5 hours at a relaxed pace. Golden hour light on the watchtowers.</div>
-<div class="day-item"><span class="time">SUNSET</span>Drone session from just outside the city wall (if UOM approved). The rectangular fortress from above at golden hour.</div>
+<div class="day-item"><span class="time">SUNSET</span>Golden-hour photography from the wall — watchtowers and the city spreading below.</div>
 <div class="day-item"><span class="time">EVENING</span>Dinner in the Muslim Quarter. Biangbiang noodles — the widest hand-pulled noodles you'll ever eat.</div>
 </div>
 </div>
@@ -4433,7 +4431,7 @@ const CITIES = {
 
   shanghai: {
     phase:'PHASE VI', city:'SHANG<span>HAI</span>', days:'6 DAYS · DAYS 16–21 · SEP 5–10',
-    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    cats: ['food','pokemon','nightlife','arch','day','hotel'],
     content: {
       hotel: `
         <div class="block">
@@ -5336,7 +5334,7 @@ const CITIES = {
       <div class="day-item"><span class="time">MORNING</span>French Concession walk — tree-lined lanes, art deco facades, coffee at a local roaster. Fuxing Park for tai chi vibes.</div>
       <div class="day-item"><span class="time">MIDDAY</span>Lunch at Jian Guo 328 (Hong-shao rou, Shanghainese classics) or browse Tianzifang alleys for street food.</div>
       <div class="day-item"><span class="time">AFTERNOON</span>Yu Garden + City God Temple complex. Classic Ming-dynasty garden, zigzag bridge, and the surrounding bazaar. Touristy but essential. Grab xiaolongbao nearby at Nanxiang Steamed Bun Restaurant (the original).</div>
-      <div class="day-item"><span class="time">BLUE HOUR</span>Walk the Bund — second angle session if lighting differs from Day 16. Pudong skyline at dusk for drone/camera shots.</div>
+      <div class="day-item"><span class="time">BLUE HOUR</span>Walk the Bund — second angle session if lighting differs from Day 16. Pudong skyline at dusk.</div>
       <div class="day-item"><span class="time">EVENING</span>Chill night — local beer at a Concession bar or early rest before tomorrow's TCG marathon.</div>
     </div>
   </div>
@@ -5408,7 +5406,7 @@ const CITIES = {
 
   chengdu: {
     phase:'PHASE III', city:'CHENG<span>DU</span>', days:'3 DAYS · DAYS 6–8 · AUG 26–28',
-    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    cats: ['food','pokemon','nightlife','arch','day','hotel'],
     content: {
       hotel: `
         <div class="block">
@@ -5490,7 +5488,7 @@ const CITIES = {
             <div class="spot arch-spot"><div><div class="spot-name">Taikoo Li Chengdu</div><div class="spot-desc">Kengo Kuma-designed open-air mall wrapping around the ancient Daci Temple. Modern-traditional fusion. The temple courtyard at night with neon reflections is extraordinary.</div></div><span class="spot-badge badge-must">MUST</span></div>
             <div class="spot arch-spot"><div><div class="spot-name">Chengdu IFS (成都国际金融中心)</div><div class="spot-desc">The giant panda climbing the glass curtain wall facade. One of China's most photographed building details. Great geometry in the lobby.</div></div><span class="spot-badge badge-good">ICONIC</span></div>
             <div class="spot arch-spot"><div><div class="spot-name">Wenshu Monastery (文殊院)</div><div class="spot-desc">Tang Dynasty Buddhist monastery. Quiet courtyards, incense smoke, ancient timber architecture. Deeply atmospheric photography.</div></div><span class="spot-badge badge-good">GOOD</span></div>
-            <div class="spot arch-spot"><div><div class="spot-name">Luxe Lakes Eco-City (麓湖生态城)</div><div class="spot-desc">THE reason DK is going to Chengdu. A-list contemporary architecture — Alvaro Siza community centre, Jean Nouvel arts centre, plus work by Kengo Kuma and others. A masterplanned lakeside district 30 min south of the city. Plan a full half-day here. Drone-flyable (check UOM).</div></div><span class="spot-badge badge-must">MUST — DK PRIORITY</span></div>
+            <div class="spot arch-spot"><div><div class="spot-name">Luxe Lakes Eco-City (麓湖生态城)</div><div class="spot-desc">THE reason DK is going to Chengdu. A-list contemporary architecture — Alvaro Siza community centre, Jean Nouvel arts centre, plus work by Kengo Kuma and others. A masterplanned lakeside district 30 min south of the city. Plan a full half-day here.</div></div><span class="spot-badge badge-must">MUST — DK PRIORITY</span></div>
             <div class="spot arch-spot"><div><div class="spot-name">339 TV Tower (天府熊猫塔)</div><div class="spot-desc">339m concrete tower on the Jin River. The observation deck gives panoramic city views with mountains behind on clear days. Best at sunset. The eastern approach to the Tibetan Plateau is visible from elevated spots on clear days.</div></div><span class="spot-badge badge-good">VIEWPOINT</span></div>
             <div class="spot arch-spot"><div><div class="spot-name">Daci Temple Area (大慈寺)</div><div class="spot-desc">Ancient temple compound wrapped by Taikoo Li's modern architecture — the contrast between 1600-year-old timber halls and Kengo Kuma's glass-and-steel retail is the shot. Free to enter the temple grounds.</div></div><span class="spot-badge badge-good">CONTRAST</span></div>
           </div>
@@ -5565,7 +5563,7 @@ const CITIES = {
 
   zhangjiajie: {
     phase:'PHASE V', city:'ZHANG<span>JIAJIE</span>', days:'4 DAYS · DAYS 12–15 · SEP 1–4',
-    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    cats: ['food','pokemon','nightlife','arch','day','hotel'],
     content: {
       hotel: `
         <div class="block">
@@ -5582,7 +5580,7 @@ const CITIES = {
         <div class="block">
           <div class="block-title pokemon">TCG SCENE</div>
           <div class="spot-list">
-            <div class="spot pokemon-spot"><div><div class="spot-name">Nothing Here</div><div class="spot-desc">Wulingyuan town has basic tourist shops, restaurants, and hotels — no card stores. Zhangjiajie City (40 min away) might have something on Dianping but it's not worth the trip. Focus on hiking and drone shots.</div></div><span class="spot-badge badge-note">NONE</span></div>
+            <div class="spot pokemon-spot"><div><div class="spot-name">Nothing Here</div><div class="spot-desc">Wulingyuan town has basic tourist shops, restaurants, and hotels — no card stores. Zhangjiajie City (40 min away) might have something on Dianping but it's not worth the trip. Focus on hiking and photography.</div></div><span class="spot-badge badge-note">NONE</span></div>
           </div>
         </div>
         <div class="tip-box pokemon-tip"><strong>STRATEGY</strong> You just finished sourcing in Chengdu (Spinda Gym + Dark World Zero). Your next TCG stop is Shanghai on Day 17 — that's 5 days away. Enjoy the break from card hunting. Rest your wallet.</div>`,
@@ -5595,7 +5593,7 @@ const CITIES = {
 <div class="vibe-card v4"><div class="vibe-type">MEET TREKKERS</div><div class="vibe-name">Guesthouse / Hostel Bars</div><div class="vibe-desc">The only real "meet people" here is fellow hikers — beers in your guesthouse common area or a Wulingyuan hostel bar, swapping trail intel (which viewpoints were mist-free, Bailong elevator timing). Everyone's on the same 5am schedule, so it's early and friendly, not a party.</div></div>
 </div>
 </div>
-<div class="tip-box night-tip"><strong>HONEST ADVICE</strong> Every night in Zhangjiajie should be early to bed. You have 5am alarms for park entry, sunrise drone sessions, and full-day hikes. The best nightlife here is a foot massage and sleep. Chengdu Day 7 is the next planned big night — save it.</div>`,
+<div class="tip-box night-tip"><strong>HONEST ADVICE</strong> Every night in Zhangjiajie should be early to bed. You have 5am alarms for park entry, sunrise missions, and full-day hikes. The best nightlife here is a foot massage and sleep. Chengdu Day 7 is the next planned big night — save it.</div>`,
       arch: `
 <div class="block">
 <div class="block-title arch">ARCHITECTURE — NATURAL + UNUSUAL</div>
@@ -5647,7 +5645,7 @@ const CITIES = {
             <div class="day-items">
               <div class="day-item"><span class="time">EARLY</span>Enter park at opening. Avatar Hallelujah Mountain viewpoint before crowds.</div>
               <div class="day-item"><span class="time">MIDDAY</span>Tianzi Mountain summit cable car. Cloud-level views.</div>
-              <div class="day-item"><span class="time">AFTERNOON</span>Fairy Trail boardwalk photography. Scout drone zones outside park.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Fairy Trail boardwalk photography.</div>
             </div>
           </div>
           <div class="itinerary-day">
@@ -5655,13 +5653,13 @@ const CITIES = {
             <div class="day-items">
               <div class="day-item"><span class="time">MORNING</span>World's longest cable car to Tianmen Mountain top.</div>
               <div class="day-item"><span class="time">MIDDAY</span>Glass cliff walk + Heaven's Gate arch. Photography heavy.</div>
-              <div class="day-item"><span class="time">AFTERNOON</span>Grand Canyon glass bridge. Drone session outside park if clear.</div>
+              <div class="day-item"><span class="time">AFTERNOON</span>Grand Canyon glass bridge (+ zipline option — TikTok find).</div>
             </div>
           </div>
           <div class="itinerary-day">
             <div class="day-label">DAY 15 — SEP 4 — DEPART TO SHANGHAI</div>
             <div class="day-items">
-              <div class="day-item"><span class="time">DAWN</span>Sunrise attempt at Golden Whip Stream. Final drone session.</div>
+              <div class="day-item"><span class="time">DAWN</span>Sunrise attempt at Golden Whip Stream — last mountain shots.</div>
               <div class="day-item"><span class="time">MIDDAY</span>Flight Zhangjiajie (DYG) → Shanghai (SHA) (~2 hrs).</div>
             </div>
           </div>
@@ -5683,7 +5681,7 @@ const CITIES = {
 
   chongqing: {
     phase:'PHASE IV', city:'CHONG<span>QING</span>', days:'3 DAYS · DAYS 9–11 · AUG 29–31',
-    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    cats: ['food','pokemon','nightlife','arch','day','hotel'],
     content: {
       hotel: `
         <div class="block">
@@ -5785,7 +5783,7 @@ const CITIES = {
           <div class="itinerary-day">
             <div class="day-label">DAY 11 — AUG 31 — NANSHAN + DEPART</div>
             <div class="day-items">
-              <div class="day-item"><span class="time">MORNING</span>Nanshan viewpoint (南山一棵树) for panoramic skyline + river confluence. Drone attempt if UOM approved.</div>
+              <div class="day-item"><span class="time">MORNING</span>Nanshan viewpoint (南山一棵树) for panoramic skyline + river confluence.</div>
               <div class="day-item"><span class="time">MIDDAY</span>Final hotpot or xiaomian lunch. Pack up.</div>
               <div class="day-item"><span class="time">AFTERNOON</span>Depart to Zhangjiajie — HSR from Chongqing East → Zhangjiajie West (~2 hrs). Faster door-to-door than flying.</div>
             </div>
@@ -5808,7 +5806,7 @@ const CITIES = {
 
   hongkong: {
     phase:'PHASE VII — EXIT', city:'HONG<span>KONG</span>', days:'4 DAYS · DAYS 22–25 · EXIT SEPT 15',
-    cats: ['food','pokemon','nightlife','arch','drone','day','hotel'],
+    cats: ['food','pokemon','nightlife','arch','day','hotel'],
     content: {
       hotel: `
         <div class="block">
