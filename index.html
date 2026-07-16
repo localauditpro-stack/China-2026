@@ -702,6 +702,21 @@ footer .fr { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--bo
 .board-chip { display:inline-block; padding:1px 7px; border-radius:10px; color:#fff; font-family:'Share Tech Mono',monospace; font-size:10px; font-weight:700; margin:2px 3px 0 0; }
 @media(max-width:680px){ .board-grid{grid-template-columns:1fr;} .board-name{font-size:30px;} .board-cn{font-size:17px;} .board-photo{height:150px;} }
 
+/* ===== MOBILE POLISH (added 2026-07-12) ===== */
+@media(max-width:480px){
+  h1{font-size:54px;}
+  .days-big{font-size:40px;}
+  .header-meta{text-align:left;}
+  .tag-line{letter-spacing:1.5px;}
+  #ticket-modal > div, #budget-modal > div{margin:3vh 10px;padding:16px 14px;}
+  #booked-flights{padding:12px 12px;}
+  #live-itinerary table td{font-size:12.5px;}
+  .feature-pill-btn{min-width:120px;}
+  .cd-grid{gap:8px;}
+}
+.tx-card-badge{display:inline-block;}
+.tx-card-badge[style*="background"]{color:#fff;padding:2px 8px;border-radius:3px;}
+
 /* ===== PRINT ===== */
 @media print {
   * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
@@ -1345,7 +1360,7 @@ function kitTab(t){
           <span class="board-chip" style="background:#A21E22;">L1</span><span class="board-chip" style="background:#00549A;">L2</span><span class="board-chip" style="background:#008C95;">L4</span><span class="board-chip" style="background:#009544;">L8</span><span class="board-chip" style="background:#00A0C6;">L10</span>
         </span>
       </div>
-      <div class="board-why">Imperial heavyweight, the trip's best aerial shot, and your first gym promos. You land jet-lagged — pace it.</div>
+      <div class="board-why">Imperial heavyweight, the trip's best photography, and your first gym promos. You land jet-lagged — pace it.</div>
       <div class="board-grid">
         <div>
           <div class="board-sec-title">Top 3 Must-Dos</div>
