@@ -1620,6 +1620,10 @@ function kitTab(t){
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#059669;letter-spacing:3px;text-transform:uppercase;margin-bottom:5px;">📍 TODAY</div>
       <div style="font-size:12px;color:#059669;font-weight:700;letter-spacing:1px;">LIVE ITINERARY →</div>
     </div>
+    <div class="feature-pill-btn" onclick="document.getElementById('hotel-cards').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;border:1px solid rgba(202,138,4,0.4);background:rgba(202,138,4,0.06);transition:all 0.2s;padding:10px 18px;border-radius:6px;flex:1;min-width:140px;text-align:center;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:3px;text-transform:uppercase;margin-bottom:5px;">🏨 HOTELS</div>
+      <div style="font-size:12px;color:#854f0b;font-weight:700;letter-spacing:1px;">7/7 BOOKED · CHECK-IN CARDS →</div>
+    </div>
     <div class="feature-pill-btn" onclick="document.getElementById('countdown-dashboard').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;border:1px solid rgba(37,99,235,0.35);background:rgba(37,99,235,0.04);transition:all 0.2s;padding:10px 18px;border-radius:6px;flex:1;min-width:140px;text-align:center;" onmouseover="this.style.background='rgba(37,99,235,0.1)'" onmouseout="this.style.background='rgba(37,99,235,0.04)'">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:5px;">⏱ COUNTDOWN</div>
       <div style="font-size:12px;color:var(--cyan);font-weight:700;letter-spacing:1px;">TRIP STATUS →</div>
@@ -1746,6 +1750,76 @@ function kitTab(t){
 
 
 
+
+<!-- ============================================================
+     HOTELS — CHECK-IN CARDS (added 2026-07-19, all 7 booked)
+     ============================================================ -->
+<section id="hotel-cards" style="margin:0 0 28px 0;border:1px solid rgba(202,138,4,0.35);background:rgba(202,138,4,0.04);border-radius:6px;padding:16px 18px;">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:#854f0b;letter-spacing:3px;">🏨 HOTELS — ALL 7 BOOKED · 25 NIGHTS · A$4,249.38</div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;">PASSPORTS ×2 AT EVERY CHECK-IN · PINs IN TRIP.COM APP</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:10px;">
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">1 · BEIJING · FRI AUG 21 → MON AUG 24 · 3 NIGHTS</div>
+      <div style="font-size:15px;font-weight:700;color:#1e293b;">UrCove by Hyatt Beijing Forbidden City ★★★★</div>
+      <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">北京天安门逸扉酒店</div>
+      <div style="font-size:12px;color:#334155;">北京市东城区南河沿大街华龙街天安大厦A座</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213120128</strong> · ☎ +86-10-85110088<br>Smart Twin (2 singles, no window) · check-in from 2pm<br>PAID A$445.40 · no meals · free cancel til 6pm Aug 21</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">2 · XI'AN · MON AUG 24 → WED AUG 26 · 2 NIGHTS</div>
+      <div style="font-size:15px;font-weight:700;color:#1e293b;">UrCove by Hyatt Xi'an Bell Tower Huimin St ★★★★</div>
+      <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">西安钟楼回民街逸扉酒店</div>
+      <div style="font-size:12px;color:#334155;">西安市莲湖区北大街188号1层</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213150809</strong> · ☎ +86-29-87357777<br>Superior Twin (2 singles, no window) · check-in from 2pm · high floor requested<br>PAID A$134.88 · no meals · free cancel til 6pm Aug 24</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">3 · CHENGDU · WED AUG 26 → SAT AUG 29 · 3 NIGHTS</div>
+      <div style="font-size:15px;font-weight:700;color:#1e293b;">Holiday Inn Chengdu Oriental Plaza ★★★★</div>
+      <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">成都东方广场假日酒店（春熙路太古里店）</div>
+      <div style="font-size:12px;color:#334155;">成都市锦江区东大街芷泉段231号</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213162899</strong> · ☎ +86-28-61306688<br>Twin, city view, floors 6-7 · check-in from 2pm · <strong style="color:#d97706;">¥500 DEPOSIT at desk</strong><br>PAID A$284.06 · no meals · free cancel til 6pm Aug 26</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">4 · CHONGQING · SAT AUG 29 → TUE SEP 1 · 3 NIGHTS</div>
+      <div style="font-size:15px;font-weight:700;color:#1e293b;">Mercure Jiefangbei Hongya Cave ★★★★</div>
+      <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">重庆解放碑洪崖洞美居酒店</div>
+      <div style="font-size:12px;color:#334155;">重庆市渝中区民族路128-132号</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213171971</strong> · ☎ +86-23-63825555<br>Meiju Twin · check-in from 12pm · <strong style="color:#059669;">BREAKFAST ×2 ALL 3 MORNINGS</strong> · free minibar<br>PAID A$259.95 · free cancel til 6pm Aug 29</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">5 · ZHANGJIAJIE · TUE SEP 1 → FRI SEP 4 · 3 NIGHTS</div>
+      <div style="font-size:15px;font-weight:700;color:#1e293b;">Pullman Zhangjiajie ★★★★★</div>
+      <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">张家界京武雅高铂尔曼酒店</div>
+      <div style="font-size:12px;color:#334155;">湖南省张家界市武陵源区高云路188号</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213134186</strong> · ☎ +86-744-8888888<br>Deluxe 2-Bed (doubles), windows · check-in from 2pm · <strong style="color:#059669;">BREAKFAST ×2 ALL 3 MORNINGS</strong> · pool<br>PAID A$361.50 · non-refundable since Jul 18</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">6 · SHANGHAI · FRI SEP 4 → FRI SEP 11 · 7 NIGHTS · LONGEST STAY</div>
+      <div style="font-size:15px;font-weight:700;color:#1e293b;">HUALUXE Shanghai Twelve at Hengshan ★★★★★</div>
+      <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">上海衡山路十二号华邑酒店</div>
+      <div style="font-size:12px;color:#334155;">上海市徐汇区衡山路12号</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213222862</strong> · ☎ +86-21-33383888<br>2 Queen Premium, 54-58m², city view · check-in from 2pm · <strong style="color:#d97706;">¥1,000 DEPOSIT at desk</strong> · high floor requested<br>PAID A$1,726.20 · <strong style="color:#ef4444;">NON-REFUNDABLE</strong> · no meals</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">7 · HONG KONG · FRI SEP 11 → TUE SEP 15 · 4 NIGHTS · FINALE</div>
+      <div style="font-size:15px;font-weight:700;color:#1e293b;">Hopewell Hotel, Wan Chai ★★★★★</div>
+      <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">合和酒店</div>
+      <div style="font-size:12px;color:#334155;">香港灣仔堅尼地道15號 · 15 Kennedy Rd, Wan Chai</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213253479</strong> · ☎ +852-26203000<br>Deluxe Twin, 30m², mountain view, floors 24-55 · check-in from 3pm · <strong style="color:#d97706;">HK$1,000 DEPOSIT at desk</strong><br>PAID A$1,037.39 · <strong style="color:#ef4444;">NON-REFUNDABLE</strong> · landing 7:45pm Sep 11 — desk is 24h</div>
+    </div>
+
+  </div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:#854f0b;letter-spacing:1px;margin-top:10px;">💡 GRAB 2 BUSINESS CARDS AT EVERY FRONT DESK · TAXI CARDS WITH BIG CHINESE ADDRESSES ARE IN THE TRAVEL KIT</div>
+</section>
 
 <!-- ============================================================
      LIVE ITINERARY — TODAY VIEW (added 2026-07-11)
@@ -2367,7 +2441,7 @@ function kitTab(t){
       <div class="cell cell-days">3</div>
       <div class="cell"><div class="city-name">Beijing</div><div class="city-sub">Great Wall · Forbidden City · Aug 21–23</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
       <div class="cell" style="font-size:12px;">Great Wall hike · imperial palaces · hutong nights</div>
-      <div class="cell col-accom"><div class="accom-txt">Dongcheng /<br>Wangfujing</div></div>
+      <div class="cell col-accom"><div class="accom-txt">✅ UrCove by Hyatt<br>Forbidden City</div></div>
     </div>
 
     <div class="phase-row" onclick="openCity('xian',event)">
@@ -2375,7 +2449,7 @@ function kitTab(t){
       <div class="cell cell-days">2</div>
       <div class="cell"><div class="city-name">Xi'an</div><div class="city-sub">Terracotta Warriors · City Wall · Aug 24–25</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
       <div class="cell" style="font-size:12px;">Ancient warriors · Muslim Quarter · city wall cycling</div>
-      <div class="cell col-accom"><div class="accom-txt">Bell Tower /<br>Muslim Quarter</div></div>
+      <div class="cell col-accom"><div class="accom-txt">✅ UrCove by Hyatt<br>Bell Tower</div></div>
     </div>
 
     <div class="phase-row" onclick="openCity('chengdu',event)">
@@ -2383,7 +2457,7 @@ function kitTab(t){
       <div class="cell cell-days">3</div>
       <div class="cell"><div class="city-name">Chengdu</div><div class="city-sub">Cooking Class · Spicy Food Capital · Aug 26–28</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
       <div class="cell" style="font-size:12px;">Cooking class · Sichuan cuisine · TCG · Jiuyanqiao</div>
-      <div class="cell col-accom"><div class="accom-txt">Chunxi Rd /<br>Taikoo Li</div></div>
+      <div class="cell col-accom"><div class="accom-txt">✅ Holiday Inn<br>Oriental Plaza</div></div>
     </div>
 
     <div class="phase-row" onclick="openCity('chongqing',event)">
@@ -2391,7 +2465,7 @@ function kitTab(t){
       <div class="cell cell-days">3</div>
       <div class="cell"><div class="city-name">Chongqing</div><div class="city-sub">Mountain City · Hotpot Capital · Aug 29–31</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
       <div class="cell" style="font-size:12px;">Hotpot · Hongya Cave · mountain city skyline</div>
-      <div class="cell col-accom"><div class="accom-txt">Jiefangbei CBD<br>(Central)</div></div>
+      <div class="cell col-accom"><div class="accom-txt">✅ Mercure<br>Hongya Cave</div></div>
     </div>
 
     <div class="phase-row" onclick="openCity('zhangjiajie',event)">
@@ -2399,7 +2473,7 @@ function kitTab(t){
       <div class="cell cell-days">4</div>
       <div class="cell"><div class="city-name">Zhangjiajie</div><div class="city-sub">"Avatar" Mountains · HSR In · Sep 1–4</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
       <div class="cell" style="font-size:12px;">Avatar pillars · cable cars · vertical drama</div>
-      <div class="cell col-accom"><div class="accom-txt">Wulingyuan Town<br>(Park Gate)</div></div>
+      <div class="cell col-accom"><div class="accom-txt">✅ Pullman<br>Wulingyuan</div></div>
     </div>
 
     <div class="phase-row" onclick="openCity('shanghai',event)">
@@ -2407,7 +2481,7 @@ function kitTab(t){
       <div class="cell cell-days">6</div>
       <div class="cell"><div class="city-name">Shanghai</div><div class="city-sub">TCG Capital · Spa Reset · Sep 4–10</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
       <div class="cell" style="font-size:12px;">TCG hunting · 24hr spa · big night out</div>
-      <div class="cell col-accom"><div class="accom-txt">French Concession<br>(Atour — booking)</div></div>
+      <div class="cell col-accom"><div class="accom-txt">✅ HUALUXE Twelve<br>at Hengshan 5★</div></div>
     </div>
 
     <div class="phase-row" onclick="openCity('hongkong',event)">
@@ -2415,7 +2489,7 @@ function kitTab(t){
       <div class="cell cell-days">4</div>
       <div class="cell"><div class="city-name">Hong Kong</div><div class="city-sub">Final Shopping · Exit Point · Sep 11–14</div><div class="click-hint">▸ TAP FOR FULL INTEL</div></div>
       <div class="cell" style="font-size:12px;">TCG paradise · skyline · departure</div>
-      <div class="cell col-accom"><div class="accom-txt">Central /<br>Sheung Wan</div></div>
+      <div class="cell col-accom"><div class="accom-txt">✅ Hopewell Hotel<br>Wan Chai 5★</div></div>
     </div>
   </div>
 
