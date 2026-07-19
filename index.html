@@ -1483,7 +1483,7 @@ function kitTab(t){
         <img data-city="zhangjiajie" alt="Zhangjiajie">
         <div class="board-photo-cap">
           <div class="board-name">ZHANGJIAJIE <span class="board-cn">张家界</span></div>
-          <div class="board-meta">DAYS 12–15 · SEP 1–4 · 4 NIGHTS</div>
+          <div class="board-meta">DAYS 12–15 · SEP 1–4 · 3 NIGHTS · PULLMAN ✅</div>
         </div>
       </div>
       <div class="board-stats">
@@ -1513,7 +1513,7 @@ function kitTab(t){
         <img data-city="shanghai" alt="Shanghai">
         <div class="board-photo-cap">
           <div class="board-name">SHANGHAI <span class="board-cn">上海</span></div>
-          <div class="board-meta">DAYS 16–21 · SEP 5–10 · 6 NIGHTS · LONGEST STAY</div>
+          <div class="board-meta">DAYS 15–21 · SEP 4–11 · 7 NIGHTS · HUALUXE ✅ · LONGEST STAY</div>
         </div>
       </div>
       <div class="board-stats">
@@ -1545,7 +1545,7 @@ function kitTab(t){
         <img data-city="hongkong" alt="Hong Kong">
         <div class="board-photo-cap">
           <div class="board-name">HONG KONG <span class="board-cn">香港</span></div>
-          <div class="board-meta">DAYS 22–25 · SEP 11–14 · 4 NIGHTS · EXIT POINT</div>
+          <div class="board-meta">DAYS 22–25 · SEP 11–15 · 4 NIGHTS · HOPEWELL ✅ · EXIT POINT</div>
         </div>
       </div>
       <div class="board-stats">
@@ -1734,8 +1734,52 @@ function kitTab(t){
     document.getElementById('ticket-modal').style.display='none';
     document.body.style.overflow='';
   };
+
+  var HOTELS={
+    bj:{city:'BEIJING · STOP 1 OF 7',en:'UrCove by Hyatt Beijing Forbidden City ★★★★',cn:'北京天安门逸扉酒店',addr:'北京市东城区南河沿大街华龙街天安大厦A座',addrEn:'Tower A, Tian’an Building, Hualong St, Nanheyan St, Dongcheng',dates:'Fri Aug 21 (from 2pm) → Mon Aug 24 (by 12pm) · 3 nights',room:'Smart Twin — 2 singles, 25-28m², no window, floors 2-7',book:'1167731213120128',tel:'+86-10-85110088',paid:'A$445.40 total · A$222.70 pp',dep:'None listed',meals:'None — Gui Jie / hutong breakfasts nearby',cxl:'Free cancellation until 6pm Aug 21 (day of arrival)',go:'From PVG flight MU5161 → PEK: Airport Express + L1 to Tian’anmen East, or taxi ~45 min. Metro: Tian’anmen East (L1) ~10 min walk.',note:'8th-floor terrace overlooks the Forbidden City — go up on night 1.'},
+    xa:{city:'XI’AN · STOP 2 OF 7',en:'UrCove by Hyatt Xi’an Bell Tower Huimin Street ★★★★',cn:'西安钟楼回民街逸扉酒店',addr:'西安市莲湖区北大街188号1层',addrEn:'1st Floor, No. 188 North Street, Lianhu District',dates:'Mon Aug 24 (from 2pm) → Wed Aug 26 (by 12pm) · 2 nights',room:'Superior Twin — 2 singles, 28m², no window, high floor requested',book:'1167731213150809',tel:'+86-29-87357777',paid:'A$134.88 total · A$67.44 pp',dep:'None listed',meals:'None — Muslim Quarter is your breakfast, 5 min walk',cxl:'Free cancellation until 6pm Aug 24 (day of arrival)',go:'From Xi’an North HSR: Metro L2 direct to Bell Tower stn (~25 min), hotel 400m. Bell Tower + North St stations both ~400m.',note:'Defu Xiang bar street and the wall’s South Gate are walkable.'},
+    cd:{city:'CHENGDU · STOP 3 OF 7',en:'Holiday Inn Chengdu Oriental Plaza ★★★★',cn:'成都东方广场假日酒店（春熙路太古里店）',addr:'成都市锦江区东大街芷泉段231号',addrEn:'No. 231 Zhiquan Section, East Street, Jinjiang District',dates:'Wed Aug 26 (from 2pm) → Sat Aug 29 (by 12pm) · 3 nights',room:'Standard Twin — 2 singles, 30m², city view, floors 6-7, high floor requested',book:'1167731213162899',tel:'+86-28-61306688',paid:'A$284.06 total · A$142.03 pp',dep:'⚠ ¥500 (~A$105) card deposit at check-in, returned at checkout',meals:'None — Chunxi Rd 5 min away',cxl:'Free cancellation until 6pm Aug 26 (day of arrival)',go:'From Chengdu East HSR: Metro L2 toward Chunxi Rd (~20 min). Panda Base Day 8: taxi ~40 min at 7am.',note:'Pool on site. TCG runs and the Friday big night both start from here.'},
+    cq:{city:'CHONGQING · STOP 4 OF 7',en:'Mercure Jiefangbei Hongya Cave ★★★★',cn:'重庆解放碑洪崖洞美居酒店',addr:'重庆市渝中区民族路128-132号',addrEn:'No. 128-132 Minzu Road, Yuzhong District',dates:'Sat Aug 29 (from 12pm!) → Tue Sep 1 (by 12pm) · 3 nights',room:'Meiju Twin — 2 singles, 23-25m², some obstructed views, free minibar',book:'1167731213171971',tel:'+86-23-63825555',paid:'A$259.95 total · A$130.00 pp',dep:'None listed',meals:'✅ Breakfast for BOTH of you, all 3 mornings (Aug 30, 31, Sep 1)',cxl:'Free cancellation until 6pm Aug 29 (day of arrival)',go:'From Chongqing North HSR: Metro L1/L10 to Xiaoshizi (~25 min), short walk. Hongya Cave is 5 min on foot; Pokémon Centre at Raffles City ~10 min.',note:'Noon check-in is early — perfect off the morning train. Ask for a river-side room at the desk.'},
+    zjj:{city:'ZHANGJIAJIE · STOP 5 OF 7',en:'Pullman Zhangjiajie ★★★★★',cn:'张家界京武雅高铂尔曼酒店',addr:'湖南省张家界市武陵源区高云路188号',addrEn:'No. 188 Gaoyun Road, Wulingyuan District',dates:'Tue Sep 1 (from 2pm) → Fri Sep 4 (by 12pm) · 3 nights',room:'Deluxe 2-Bed — 2 doubles, 38-42m², windows',book:'1167731213134186',tel:'+86-744-8888888',paid:'A$361.50 total · A$180.75 pp',dep:'None listed',meals:'✅ Breakfast for BOTH of you, all 3 mornings — fuel for 7am park gates',cxl:'⚠ Non-refundable (window closed Jul 18)',go:'Day 12: HSR to ZJJ West → do Tianmen first (luggage storage at station) → taxi ~40 min to Wulingyuan in the evening. Park gate ~5-10 min from hotel.',note:'Outdoor pool (seasonal) + spa — use them, your legs will beg. Day 15: leave for DYG airport by 10:30am SHARP.'},
+    sh:{city:'SHANGHAI · STOP 6 OF 7 · LONGEST STAY',en:'HUALUXE Shanghai Twelve at Hengshan ★★★★★',cn:'上海衡山路十二号华邑酒店',addr:'上海市徐汇区衡山路12号',addrEn:'No. 12 Hengshan Road, Xuhui District',dates:'Fri Sep 4 (from 2pm) → Fri Sep 11 (by 12pm) · 7 nights',room:'2 Queen Beds Premium — 54-58m², city view, floors 3,5-6, high floor requested',book:'1167731213222862',tel:'+86-21-33383888',paid:'A$1,726.20 total · A$863.10 pp',dep:'⚠ ¥1,000 (~A$210) card deposit at check-in, returned at checkout',meals:'None — FFC brunch territory outside the door',cxl:'⚠ NON-REFUNDABLE · cannot be modified',go:'From PVG (FM7226 lands 3:10pm): taxi ~50 min or Metro L2→L1 to Hengshan Rd stn (5 min walk). Tailor, Speak Low, Flask all walkable.',note:'Your 5★ base for a full week. Spa night Sep 8: you keep this room — leave the card haul here.'},
+    hk:{city:'HONG KONG · STOP 7 OF 7 · FINALE',en:'Hopewell Hotel, Wan Chai ★★★★★',cn:'合和酒店',addr:'香港灣仔堅尼地道15號',addrEn:'15 Kennedy Road, Wan Chai',dates:'Fri Sep 11 (from 3pm) → Tue Sep 15 (by 12pm) · 4 nights',room:'Deluxe Twin — 2 singles, 30m², mountain view, floors 24-55, high floor requested',book:'1167731213253479',tel:'+852-26203000',paid:'A$1,037.39 total · A$518.70 pp',dep:'⚠ HK$1,000 (~A$200) card deposit at check-in, returned at checkout',meals:'None — Wan Chai dai pai dongs downhill',cxl:'⚠ NON-REFUNDABLE · cannot be modified',go:'From HKG (HX247 lands 7:45pm): Airport Express to HK Station then taxi ~10 min, or taxi all the way ~35 min. Wan Chai MTR ~8 min walk (Kennedy Rd is uphill — taxi home at night is HK$30 well spent).',note:'Checkout Sep 14 by noon BUT flight is 00:20 Sep 15 — drop bags at Airport Express in-town check-in (HK Station) in the afternoon, collect nothing, fly.'}
+  };
+  function hrow(l,v){return '<div style="display:flex;gap:12px;padding:5px 0;border-bottom:1px dashed #e2e8f0;"><span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);padding-top:2px;flex-shrink:0;width:86px;">'+l+'</span><span style="font-size:13px;color:#1e293b;flex:1;">'+v+'</span></div>';}
+  window.showHotel=function(k){
+    var h=HOTELS[k]; if(!h)return;
+    document.getElementById('hm-title').textContent=h.en;
+    var b='<div style="font-family:\'Share Tech Mono\',monospace;font-size:9px;letter-spacing:2px;color:#854f0b;margin-bottom:10px;">'+h.city+'</div>'
+      +'<div style="background:#fff;border:2px solid #ca8a04;border-radius:6px;padding:14px 16px;margin-bottom:14px;text-align:center;">'
+      +'<div style="font-size:13px;color:#64748b;margin-bottom:4px;">请带我去：</div>'
+      +'<div style="font-size:24px;font-weight:800;color:#0f172a;line-height:1.3;">'+h.cn+'</div>'
+      +'<div style="font-size:16px;color:#334155;margin-top:4px;">'+h.addr+'</div>'
+      +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:var(--muted);margin-top:6px;">SHOW THIS TO ANY DRIVER</div></div>'
+      +hrow('DATES',h.dates)+hrow('ROOM',h.room)+hrow('BOOKING №',h.book+' · PIN in Trip.com app')+hrow('PHONE',h.tel)
+      +hrow('PAID',h.paid)+hrow('DEPOSIT',h.dep)+hrow('MEALS',h.meals)+hrow('CANCEL',h.cxl)
+      +hrow('GETTING IN',h.go)+hrow('ADDRESS EN',h.addrEn)
+      +'<div style="background:#f0fdf4;border-left:3px solid #10b981;padding:9px 12px;margin-top:12px;font-size:12.5px;color:#166534;">'+h.note+'</div>'
+      +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:12px;">CHECK-IN NEEDS: BOTH PASSPORTS · THIS BOOKING № · DEPOSIT CARD · GRAB 2 BUSINESS CARDS ON THE WAY OUT</div>';
+    document.getElementById('hm-body').innerHTML=b;
+    document.getElementById('hotel-modal').style.display='block';
+    document.body.style.overflow='hidden';
+  };
+  window.closeHotel=function(){
+    document.getElementById('hotel-modal').style.display='none';
+    document.body.style.overflow='';
+  };
 })();
 </script>
+
+<!-- HOTEL DETAIL MODAL (added 2026-07-19) -->
+<div id="hotel-modal" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(15,23,42,0.55);overflow-y:auto;" onclick="if(event.target===this)closeHotel()">
+  <div style="max-width:600px;margin:5vh auto;background:#f8f9fb;border-radius:8px;border:1px solid var(--border);padding:22px 24px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px;">
+      <div id="hm-title" style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1.5px;color:#1e293b;line-height:1.1;"></div>
+      <button onclick="closeHotel()" style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.25);color:#ef4444;font-family:'Share Tech Mono',monospace;font-size:12px;padding:6px 14px;cursor:pointer;flex-shrink:0;">✕</button>
+    </div>
+    <div id="hm-body"></div>
+  </div>
+</div>
 <!-- BUDGET TRANSACTIONS MODAL (added 2026-07-11) -->
 <div id="budget-modal" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(15,23,42,0.55);overflow-y:auto;" onclick="if(event.target===this)closeBudgetDetail()">
   <div style="max-width:620px;margin:6vh auto;background:#f8f9fb;border-radius:8px;border:1px solid var(--border);padding:22px 24px;">
@@ -1761,7 +1805,7 @@ function kitTab(t){
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:10px;">
 
-    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+    <div onclick="showHotel('bj')" style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;cursor:pointer;" title="Tap for full check-in details">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">1 · BEIJING · FRI AUG 21 → MON AUG 24 · 3 NIGHTS</div>
       <div style="font-size:15px;font-weight:700;color:#1e293b;">UrCove by Hyatt Beijing Forbidden City ★★★★</div>
       <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">北京天安门逸扉酒店</div>
@@ -1769,7 +1813,7 @@ function kitTab(t){
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213120128</strong> · ☎ +86-10-85110088<br>Smart Twin (2 singles, no window) · check-in from 2pm<br>PAID A$445.40 · no meals · free cancel til 6pm Aug 21</div>
     </div>
 
-    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+    <div onclick="showHotel('xa')" style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;cursor:pointer;" title="Tap for full check-in details">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">2 · XI'AN · MON AUG 24 → WED AUG 26 · 2 NIGHTS</div>
       <div style="font-size:15px;font-weight:700;color:#1e293b;">UrCove by Hyatt Xi'an Bell Tower Huimin St ★★★★</div>
       <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">西安钟楼回民街逸扉酒店</div>
@@ -1777,7 +1821,7 @@ function kitTab(t){
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213150809</strong> · ☎ +86-29-87357777<br>Superior Twin (2 singles, no window) · check-in from 2pm · high floor requested<br>PAID A$134.88 · no meals · free cancel til 6pm Aug 24</div>
     </div>
 
-    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+    <div onclick="showHotel('cd')" style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;cursor:pointer;" title="Tap for full check-in details">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">3 · CHENGDU · WED AUG 26 → SAT AUG 29 · 3 NIGHTS</div>
       <div style="font-size:15px;font-weight:700;color:#1e293b;">Holiday Inn Chengdu Oriental Plaza ★★★★</div>
       <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">成都东方广场假日酒店（春熙路太古里店）</div>
@@ -1785,7 +1829,7 @@ function kitTab(t){
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213162899</strong> · ☎ +86-28-61306688<br>Twin, city view, floors 6-7 · check-in from 2pm · <strong style="color:#d97706;">¥500 DEPOSIT at desk</strong><br>PAID A$284.06 · no meals · free cancel til 6pm Aug 26</div>
     </div>
 
-    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+    <div onclick="showHotel('cq')" style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;cursor:pointer;" title="Tap for full check-in details">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">4 · CHONGQING · SAT AUG 29 → TUE SEP 1 · 3 NIGHTS</div>
       <div style="font-size:15px;font-weight:700;color:#1e293b;">Mercure Jiefangbei Hongya Cave ★★★★</div>
       <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">重庆解放碑洪崖洞美居酒店</div>
@@ -1793,7 +1837,7 @@ function kitTab(t){
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213171971</strong> · ☎ +86-23-63825555<br>Meiju Twin · check-in from 12pm · <strong style="color:#059669;">BREAKFAST ×2 ALL 3 MORNINGS</strong> · free minibar<br>PAID A$259.95 · free cancel til 6pm Aug 29</div>
     </div>
 
-    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+    <div onclick="showHotel('zjj')" style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;cursor:pointer;" title="Tap for full check-in details">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">5 · ZHANGJIAJIE · TUE SEP 1 → FRI SEP 4 · 3 NIGHTS</div>
       <div style="font-size:15px;font-weight:700;color:#1e293b;">Pullman Zhangjiajie ★★★★★</div>
       <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">张家界京武雅高铂尔曼酒店</div>
@@ -1801,7 +1845,7 @@ function kitTab(t){
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213134186</strong> · ☎ +86-744-8888888<br>Deluxe 2-Bed (doubles), windows · check-in from 2pm · <strong style="color:#059669;">BREAKFAST ×2 ALL 3 MORNINGS</strong> · pool<br>PAID A$361.50 · non-refundable since Jul 18</div>
     </div>
 
-    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+    <div onclick="showHotel('sh')" style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;cursor:pointer;" title="Tap for full check-in details">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">6 · SHANGHAI · FRI SEP 4 → FRI SEP 11 · 7 NIGHTS · LONGEST STAY</div>
       <div style="font-size:15px;font-weight:700;color:#1e293b;">HUALUXE Shanghai Twelve at Hengshan ★★★★★</div>
       <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">上海衡山路十二号华邑酒店</div>
@@ -1809,7 +1853,7 @@ function kitTab(t){
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.7;">BOOKING <strong style="color:#1e293b;">1167731213222862</strong> · ☎ +86-21-33383888<br>2 Queen Premium, 54-58m², city view · check-in from 2pm · <strong style="color:#d97706;">¥1,000 DEPOSIT at desk</strong> · high floor requested<br>PAID A$1,726.20 · <strong style="color:#ef4444;">NON-REFUNDABLE</strong> · no meals</div>
     </div>
 
-    <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;">
+    <div onclick="showHotel('hk')" style="background:var(--card);border:1px solid var(--border);border-left:3px solid #ca8a04;border-radius:4px;padding:12px 14px;cursor:pointer;" title="Tap for full check-in details">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#854f0b;letter-spacing:2px;margin-bottom:4px;">7 · HONG KONG · FRI SEP 11 → TUE SEP 15 · 4 NIGHTS · FINALE</div>
       <div style="font-size:15px;font-weight:700;color:#1e293b;">Hopewell Hotel, Wan Chai ★★★★★</div>
       <div style="font-size:16px;font-weight:700;color:#0f172a;margin:2px 0;">合和酒店</div>
@@ -1846,13 +1890,13 @@ function kitTab(t){
     {d:'2026-08-26',dow:'Wed',n:6,city:'Chengdu',title:'HSR + settle + open mic',blocks:[['09:00','HSR Xi’an North → Chengdu East (~3.5h)'],['13:00','Check in Holiday Inn, Chunxi Rd'],['16:00','Wide & Narrow Alleys — teahouse stop'],['18:30','Jinli Ancient Street — lanterns + dinner'],['21:30','Alley Tavern open-mic (Wednesday) — warm-up night']]},
     {d:'2026-08-27',dow:'Thu',n:7,city:'Chengdu',title:'Cooking class + TCG',blocks:[['09:30','Sichuan cooking class — market-to-table (BOOKED?)'],['15:30','Spinda Gym, Joy City LG — TCG sourcing'],['18:30','People’s Park teahouse or Chunxi Rd wander']]},
     {d:'2026-08-28',dow:'Fri',n:8,city:'Chengdu',title:'Architecture + BIG NIGHT',blocks:[['07:30','PANDA BASE at gates-open (restored — nobody regrets the pandas). Out by 10'],['12:00','Luxe Lakes Eco-city — Siza/Nouvel buildings (~3 hrs, drop if legs demand)'],['16:30','Recovery spa — Fufu Tang (18hr, ~A$70) or massage'],['19:00','Pre-game dinner Jinli/Chunxi'],['21:30','Bar Mu → Jiuyanqiao strip → T² (clubs close 2AM — start early)']]},
-    {d:'2026-08-29',dow:'Sat',n:9,city:'Chongqing',title:'Arrive + Jiujie Saturday',blocks:[['09:30','HSR Chengdu East → Chongqing North (~1.5h)'],['12:00','Check in Jiefangbei. Proper hotpot lunch'],['14:30','Liziba station shot + Jiefangbei wander'],['18:45','Hongya Cave at blue hour — THE shot'],['21:30','Jiujie: Helen’s → Space Club / NUTS (PASSPORTS at the door)']]},
+    {d:'2026-08-29',dow:'Sat',n:9,city:'Chongqing',title:'Arrive + Jiujie Saturday',blocks:[['09:30','HSR Chengdu East → Chongqing North (~1.5h)'],['12:00','Check in Mercure Hongya Cave (noon check-in works!). Proper hotpot lunch'],['14:30','Liziba station shot + Jiefangbei wander'],['18:45','Hongya Cave at blue hour — THE shot'],['21:30','Jiujie: Helen’s → Space Club / NUTS (PASSPORTS at the door)']]},
     {d:'2026-08-30',dow:'Sun',n:10,city:'Chongqing',title:'Mountain city day',blocks:[['10:30','Sleep in, brunch'],['12:30','Yangtze River Cableway'],['14:00','🃏 OFFICIAL POKÉMON CENTRE — Raffles City, Yuzhong (TikTok find)'],['15:30','Shancheng Alley trail + Eling Park'],['18:00','The Roof at Niccolo — sunset skyline'],['20:30','Nanbin Rd riverside bar (chill — prices are touristy, one drink)']]},
     {d:'2026-08-31',dow:'Mon',n:11,city:'Chongqing',title:'Flex + prep',blocks:[['10:00','Ciqikou Ancient Town or hotpot round 2'],['15:00','Recovery massage'],['19:00','Quiet dinner, pack'],['21:30','Early night — 6AM start tomorrow']]},
     {d:'2026-09-01',dow:'Tue',n:12,city:'Zhangjiajie',title:'HSR in + Tianmen Mountain',wake:'6:00 AM',blocks:[['07:00','HSR Chongqing North → ZJJ West (~4h)'],['11:30','Store luggage at station'],['12:30','Tianmen Mountain — cable car, glass walkway, Heaven’s Gate'],['18:00','Taxi to Wulingyuan (~40min), check in Pullman, buy park tickets']]},
     {d:'2026-09-02',dow:'Wed',n:13,city:'Zhangjiajie',title:'Avatar pillars (Yuanjiajie)',wake:'6:30 AM',blocks:[['07:00','Park gates — Bailong Elevator up'],['08:00','Yuanjiajie: Hallelujah Mountain, First Bridge — chase sea of clouds'],['14:00','Golden Whip Stream valley walk (7.5km)'],['19:00','Dinner in town, review photos']]},
     {d:'2026-09-03',dow:'Thu',n:14,city:'Zhangjiajie',title:'Tianzi Mountain + backup',wake:'6:30 AM',blocks:[['07:00','Tianzishan cable car up — Helong Park panoramas'],['11:00','Ten-Mile Gallery mini-train down'],['14:00','Weather backup: re-do Yuanjiajie OR Baofeng Lake'],['19:00','Dinner, rest legs, pack']]},
-    {d:'2026-09-04',dow:'Fri',n:15,city:'→ Shanghai',title:'Fly to Shanghai + Bund',blocks:[['08:30','Check out. 72 Strange Buildings if time (it’s en route)'],['10:30','LEAVE Wulingyuan — hard deadline'],['13:15','FM7226: Zhangjiajie Hehua (DYG) → Shanghai Pudong (PVG) — 1 bag pp!'],['15:10','Land. Check in Atour French Concession'],['18:30','Bund at blue hour — first big-city skyline in 2 weeks']]},
+    {d:'2026-09-04',dow:'Fri',n:15,city:'→ Shanghai',title:'Fly to Shanghai + Bund',blocks:[['08:30','Check out. 72 Strange Buildings if time (it’s en route)'],['10:30','LEAVE Wulingyuan — hard deadline'],['13:15','FM7226: Zhangjiajie Hehua (DYG) → Shanghai Pudong (PVG) — 1 bag pp!'],['15:10','Land. Check in HUALUXE Twelve at Hengshan (¥1,000 deposit)'],['18:30','Bund at blue hour — first big-city skyline in 2 weeks']]},
     {d:'2026-09-05',dow:'Sat',n:16,city:'Shanghai',title:'Bonus Saturday',blocks:[['10:30','Sleep in, FFC brunch'],['13:00','Tianzifang / M50 art district / TCG recon'],['18:30','Bund session round 2'],['22:00','KEV (Bund 18) if energy — else save it for Thursday']]},
     {d:'2026-09-06',dow:'Sun',n:17,city:'Shanghai',title:'Slow city day',blocks:[['10:30','FFC lanes, brunch like a local'],['13:30','South Bund Fabric Market — get MEASURED for tailored suits (~¥700-1,500). Fitting Tue, pickup Thu'],['15:30','East Nanjing Road wander'],['18:00','TALES rooftop sundowner (clubs dead Sundays)']]},
     {d:'2026-09-07',dow:'Mon',n:18,city:'Shanghai',title:'TCG sourcing day',blocks:[['10:00','Cramorant Gym — Cloud Nine Mall 3F'],['14:00','Cetoddle Gym — Wujiaochang Wanda B1'],['17:00','Order Taobao bubble wrap to hotel'],['19:00','Li Baixie 李百蟹 crab roe noodles — reserved Bund-window seat (TikTok find)'],['21:00','Speak Low → Flask (now Xiangyang Bei Lu) cocktail crawl']]},
@@ -4281,7 +4325,9 @@ const CITIES = {
     content: {
       hotel: `
 <div class="block">
-<div class="block-title hotel">RECOMMENDED STAYS — 3 NIGHTS (AUG 21–23)</div>
+<div class="block-title hotel">YOUR STAY — BOOKED ✅</div>
+<div class="spot hotel-spot" onclick="showHotel('bj')" style="cursor:pointer;border:2px solid #10b981;border-radius:6px;"><div><div class="spot-name">UrCove by Hyatt Beijing Forbidden City · 北京天安门逸扉酒店</div><div class="spot-desc">Fri Aug 21 → Mon Aug 24 · 3 nights · Smart Twin (no window) · Booking 1167731213120128 · A$445.40 paid · free cancel til 6pm Aug 21 · 8F terrace overlooks the Forbidden City. TAP for the full check-in card + taxi address.</div></div><span class="spot-badge badge-must">BOOKED</span></div>
+<div class="block-title hotel" style="margin-top:14px;">ORIGINAL SHORTLIST (SUPERSEDED)</div>
 <div class="spot-list">
 <div class="spot hotel-spot"><div><div class="spot-name">Sunworld Hotel Wangfujing</div><div class="spot-desc">Dongcheng district, 5 minutes walk to Wangfujing Street and near the Forbidden City. Reliable mid-range with great location. ~A$130–150/night.</div></div><span class="spot-badge badge-must">BEST VALUE</span></div>
 <div class="spot hotel-spot"><div><div class="spot-name">JianGuo Hidden Hotel (Tian'anmen)</div><div class="spot-desc">Boutique hutong vibe with modern comforts. Walking distance to Wangfujing. Atmospheric courtyard-style property. ~A$150–170/night.</div></div><span class="spot-badge badge-good">BOUTIQUE</span></div>
@@ -4421,7 +4467,9 @@ const CITIES = {
     content: {
       hotel: `
 <div class="block">
-<div class="block-title hotel">RECOMMENDED STAYS — 2 NIGHTS (AUG 24–25)</div>
+<div class="block-title hotel">YOUR STAY — BOOKED ✅</div>
+<div class="spot hotel-spot" onclick="showHotel('xa')" style="cursor:pointer;border:2px solid #10b981;border-radius:6px;"><div><div class="spot-name">UrCove by Hyatt Xi'an Bell Tower Huimin St · 西安钟楼回民街逸扉酒店</div><div class="spot-desc">Mon Aug 24 → Wed Aug 26 · 2 nights · Superior Twin · Booking 1167731213150809 · A$134.88 paid · free cancel til 6pm Aug 24 · Muslim Quarter + Defu Xiang walkable. TAP for the full check-in card + taxi address.</div></div><span class="spot-badge badge-must">BOOKED</span></div>
+<div class="block-title hotel" style="margin-top:14px;">ORIGINAL SHORTLIST (SUPERSEDED)</div>
 <div class="spot-list">
 <div class="spot hotel-spot"><div><div class="spot-name">Atour Hotel Bell & Drum Tower Square</div><div class="spot-desc">Steps from Zhonglou metro station, Muslim Quarter just 2 minutes walk. Modern Chinese boutique chain with excellent design. ~A$80–110/night.</div></div><span class="spot-badge badge-must">BEST VALUE</span></div>
 <div class="spot hotel-spot"><div><div class="spot-name">Four Points by Sheraton Bell Tower</div><div class="spot-desc">Reliable Marriott brand, walkable to the City Wall and Bell Tower. Good breakfast buffet. ~A$120–150/night.</div></div><span class="spot-badge badge-good">RELIABLE</span></div>
@@ -4538,7 +4586,9 @@ const CITIES = {
     content: {
       hotel: `
         <div class="block">
-          <div class="block-title hotel">RECOMMENDED STAYS — 6 NIGHTS (SEP 5–10)</div>
+          <div class="block-title hotel">YOUR STAY — BOOKED ✅</div>
+          <div class="spot hotel-spot" onclick="showHotel('sh')" style="cursor:pointer;border:2px solid #10b981;border-radius:6px;"><div><div class="spot-name">HUALUXE Shanghai Twelve at Hengshan 5★ · 上海衡山路十二号华邑酒店</div><div class="spot-desc">Fri Sep 4 → Fri Sep 11 · 7 nights · 2 Queen Premium 54-58m² · Booking 1167731213222862 · A$1,726.20 paid · NON-REFUNDABLE · ¥1,000 deposit at desk · Hengshan Rd stn 5 min, FFC bars walkable. TAP for the full check-in card + taxi address.</div></div><span class="spot-badge badge-must">BOOKED</span></div>
+          <div class="block-title hotel" style="margin-top:14px;">ORIGINAL SHORTLIST (SUPERSEDED)</div>
           <div class="spot-list">
             <div class="spot hotel-spot"><div><div class="spot-name">Campanile Hotel Jing'an Temple</div><div class="spot-desc">Edge of the French Concession with excellent metro access. Solid budget-friendly option for a longer stay. ~A$80–120/night.</div></div><span class="spot-badge badge-must">BEST VALUE</span></div>
             <div class="spot hotel-spot"><div><div class="spot-name">CitiGO Hotel Jing'an</div><div class="spot-desc">Near West Nanjing Road and the craft beer bar scene. Modern design hotel with good common areas. ~A$60–90/night.</div></div><span class="spot-badge badge-good">CHEAPEST</span></div>
@@ -5513,7 +5563,9 @@ const CITIES = {
     content: {
       hotel: `
         <div class="block">
-          <div class="block-title hotel">RECOMMENDED STAYS — 3 NIGHTS (AUG 26–28)</div>
+          <div class="block-title hotel">YOUR STAY — BOOKED ✅</div>
+          <div class="spot hotel-spot" onclick="showHotel('cd')" style="cursor:pointer;border:2px solid #10b981;border-radius:6px;"><div><div class="spot-name">Holiday Inn Chengdu Oriental Plaza · 成都东方广场假日酒店</div><div class="spot-desc">Wed Aug 26 → Sat Aug 29 · 3 nights · Twin, city view · Booking 1167731213162899 · A$284.06 paid · ¥500 deposit at desk · free cancel til 6pm Aug 26 · 5 min to Taikoo Li, pool on site. TAP for the full check-in card + taxi address.</div></div><span class="spot-badge badge-must">BOOKED</span></div>
+          <div class="block-title hotel" style="margin-top:14px;">ORIGINAL SHORTLIST (SUPERSEDED)</div>
           <div class="spot-list">
             <div class="spot hotel-spot"><div><div class="spot-name">Mercure Chunxi Taikoo Li</div><div class="spot-desc">Right next to Taikoo Li and IFS mall — Chengdu's best shopping and dining district. Solid Accor brand with modern rooms. ~A$100–130/night.</div></div><span class="spot-badge badge-must">BEST LOCATION</span></div>
             <div class="spot hotel-spot"><div><div class="spot-name">Atour Hotel Chunxi Road</div><div class="spot-desc">Behind IFS mall with easy access to Metro Lines 2 and 3. Modern Chinese boutique chain, excellent design and amenities. ~A$90–120/night.</div></div><span class="spot-badge badge-good">GOOD VALUE</span></div>
@@ -5670,7 +5722,9 @@ const CITIES = {
     content: {
       hotel: `
         <div class="block">
-          <div class="block-title hotel">RECOMMENDED STAYS — 4 NIGHTS (SEP 1–4)</div>
+          <div class="block-title hotel">YOUR STAY — BOOKED ✅</div>
+          <div class="spot hotel-spot" onclick="showHotel('zjj')" style="cursor:pointer;border:2px solid #10b981;border-radius:6px;"><div><div class="spot-name">Pullman Zhangjiajie 5★ · 张家界京武雅高铂尔曼酒店</div><div class="spot-desc">Tue Sep 1 → Fri Sep 4 · 3 nights · Deluxe 2-Bed · Booking 1167731213134186 · A$361.50 paid · BREAKFAST INCLUDED all 3 mornings · pool + spa · Wulingyuan, near the park gate. TAP for the full check-in card + taxi address.</div></div><span class="spot-badge badge-must">BOOKED</span></div>
+          <div class="block-title hotel" style="margin-top:14px;">ORIGINAL SHORTLIST (SUPERSEDED)</div>
           <div class="spot-list">
             <div class="spot hotel-spot"><div><div class="spot-name">Hilton Garden Inn Wulingyuan</div><div class="spot-desc">Opened 2025, modern international brand. 10 minutes from the park East Gate. Good breakfast buffet for pre-hike fuel. ~A$100–130/night.</div></div><span class="spot-badge badge-must">BEST PICK</span></div>
             <div class="spot hotel-spot"><div><div class="spot-name">Yunqi V Resort</div><div class="spot-desc">Rated 9.7/10 on Trip.com. Boutique resort feel at budget prices in Wulingyuan. Excellent value for money. ~A$60–80/night.</div></div><span class="spot-badge badge-good">TOP RATED</span></div>
@@ -5788,7 +5842,9 @@ const CITIES = {
     content: {
       hotel: `
         <div class="block">
-          <div class="block-title hotel">RECOMMENDED STAYS — 3 NIGHTS (AUG 29–31)</div>
+          <div class="block-title hotel">YOUR STAY — BOOKED ✅</div>
+          <div class="spot hotel-spot" onclick="showHotel('cq')" style="cursor:pointer;border:2px solid #10b981;border-radius:6px;"><div><div class="spot-name">Mercure Jiefangbei Hongya Cave · 重庆解放碑洪崖洞美居酒店</div><div class="spot-desc">Sat Aug 29 (noon check-in) → Tue Sep 1 · 3 nights · Meiju Twin · Booking 1167731213171971 · A$259.95 paid · BREAKFAST INCLUDED all 3 mornings + free minibar · Hongya Cave 5 min walk. TAP for the full check-in card + taxi address.</div></div><span class="spot-badge badge-must">BOOKED</span></div>
+          <div class="block-title hotel" style="margin-top:14px;">ORIGINAL SHORTLIST (SUPERSEDED)</div>
           <div class="spot-list">
             <div class="spot hotel-spot"><div><div class="spot-name">Holiday Inn Express Hongya Cave</div><div class="spot-desc">Literally inside the Hongya Cave complex — perfect for night photography. Step outside and you're in the Spirited Away light show. ~A$100–140/night.</div></div><span class="spot-badge badge-must">BEST LOCATION</span></div>
             <div class="spot hotel-spot"><div><div class="spot-name">Somerset Jiefangbei</div><div class="spot-desc">Serviced apartments with kitchenette — great for longer stays and doing laundry mid-trip. Central Jiefangbei location. ~A$120–150/night.</div></div><span class="spot-badge badge-good">APARTMENTS</span></div>
@@ -5913,7 +5969,9 @@ const CITIES = {
     content: {
       hotel: `
         <div class="block">
-          <div class="block-title hotel">RECOMMENDED STAYS — 4 NIGHTS (SEP 11–14)</div>
+          <div class="block-title hotel">YOUR STAY — BOOKED ✅</div>
+          <div class="spot hotel-spot" onclick="showHotel('hk')" style="cursor:pointer;border:2px solid #10b981;border-radius:6px;"><div><div class="spot-name">Hopewell Hotel, Wan Chai 5★ · 合和酒店</div><div class="spot-desc">Fri Sep 11 (from 3pm) → Tue Sep 15 · 4 nights · Deluxe Twin 30m², floors 24-55 · Booking 1167731213253479 · A$1,037.39 paid · NON-REFUNDABLE · HK$1,000 deposit · Wan Chai MTR 8 min. TAP for the full check-in card + taxi address.</div></div><span class="spot-badge badge-must">BOOKED</span></div>
+          <div class="block-title hotel" style="margin-top:14px;">ORIGINAL SHORTLIST (SUPERSEDED)</div>
           <div class="alert-bar"><strong>⚠️ BOOK EARLY — EXIT DATE CRITICAL</strong>Sept 15 is your hard exit (CX105 departs 12:20am). Flights fill fast. Book hotel + flight well in advance.</div>
           <div class="spot-list">
             <div class="spot hotel-spot"><div><div class="spot-name">Dorsett Mongkok</div><div class="spot-desc">Best base for TCG hunting — walking distance to Sino Centre and In's Point. Modern rooms, reliable quality. Mong Kok is the card collector hub. ~A$140–170/night.</div></div><span class="spot-badge badge-must">BEST FOR TCG</span></div>
